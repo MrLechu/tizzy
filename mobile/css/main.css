@@ -1394,6 +1394,20 @@ body.boys .modal-overlay {
   -webkit-background-size: cover;
   background-size: cover;
 }
+@media (min-height: 480px) {
+  .gif {
+    margin: auto;
+    display: block;
+    width: 196px;
+    height: 295px;
+    margin-left: auto;
+    margin-right: auto;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    -webkit-background-size: cover;
+    background-size: cover;
+  }
+}
 #girls .gif {
   background-image: url(../img/gif/girls/gif.jpg);
 }

@@ -179,14 +179,6 @@ TIZZY.slider = function () {
             // trzeba będzie ustawić domyślny produkt
             prizeValue.text(39);
 
-            $(window).resize(function () {
-                $(".model").each(function () {
-                    var thatModel = $(this);
-                    thatModel.animate({
-                        'height': footer.height()
-                    }, 100);
-                });
-            });
             function updateFn() {
                 gif.css('backgroundPosition', myObject.a + 'px 0px');
             }
