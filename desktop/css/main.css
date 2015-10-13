@@ -1,0 +1,742 @@
+/*! HTML5 Boilerplate v5.2.0 | MIT License | https://html5boilerplate.com/ */
+
+/*
+ * What follows is the result of much research on cross-browser styling.
+ * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
+ * Kroc Camen, and the H5BP dev community and team.
+ */
+
+/* ==========================================================================
+   Base styles: opinionated defaults
+   ========================================================================== */
+
+html {
+    color: #222;
+    font-size: 1em;
+    line-height: 1.4;
+}
+
+/*
+ * Remove text-shadow in selection highlight:
+ * https://twitter.com/miketaylr/status/12228805301
+ *
+ * These selection rule sets have to be separate.
+ * Customize the background color to match your design.
+ */
+
+::-moz-selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+::selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+/*
+ * A better looking default horizontal rule
+ */
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+
+/*
+ * Remove the gap between audio, canvas, iframes,
+ * images, videos and the bottom of their containers:
+ * https://github.com/h5bp/html5-boilerplate/issues/440
+ */
+
+audio,
+canvas,
+iframe,
+img,
+svg,
+video {
+    vertical-align: middle;
+}
+
+/*
+ * Remove default fieldset styles.
+ */
+
+fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+/*
+ * Allow only vertical resizing of textareas.
+ */
+
+textarea {
+    resize: vertical;
+}
+
+/* ==========================================================================
+   Browser Upgrade Prompt
+   ========================================================================== */
+
+.browserupgrade {
+    margin: 0.2em 0;
+    background: #ccc;
+    color: #000;
+    padding: 0.2em 0;
+}
+
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+  *,
+  *:before,
+  *:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+
+.ico, .shape {
+  display: inline-block;
+  vertical-align: middle;
+  width: 100%;
+  height: 100%;
+  text-indent: -999em;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+}
+.shape {
+  text-indent: 0;
+}
+.shape-star-red {
+  width: 72px;
+  height: 72px;
+  background-image: url(../img/shape-star-red.png);
+}
+.shape-star-white {
+  width: 72px;
+  height: 72px;
+  background-image: url(../img/shape-star-white.png);
+}
+.shape-cross-line {
+  background-image: url(../img/shape-cross-line.png);
+}
+.ico-arrow-bottom {
+  background-image: url(../img/ico-arrow-bottom.png);
+}
+.ico-arrow-top {
+  background-image: url(../img/ico-arrow-top.png);  
+}
+.ico-thisrt {
+  width: 59px;
+  height: 52px;
+  background-image: url(../img/ico-tshirt.png);
+}
+/**/
+.btn {
+  display: inline-block;
+  vertical-align: middle;
+  padding: 20px 30px;
+  font-family: Roboto, sans-serif;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 42px;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #fff;
+  background-color: #ee322d;
+  -webkit-transition: background-color 0.35s;
+  -o-transition: background-color 0.35s;
+  transition: background-color 0.35s;
+}
+.btn:hover {
+  background-color: #000;
+}
+
+
+/**/
+html {
+  height: 100%;
+}
+.container {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+}
+@media (max-width: 991px) {
+  .container {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+.container:before,
+.container:after {
+    content: "";
+    display: table;
+}
+.container:after {
+    clear: both;
+}
+@media (min-width: 1200px) {
+  .container {
+    width: 1200px;
+  }
+}
+.main-header {
+  padding: 15px 0 0;
+}
+
+/**/
+.logo {
+  display: block;
+  float: left;
+}
+@media (max-width: 768px) {
+  .logo img {
+    width: 88px;
+    height: 36px;
+  }
+}
+/**/
+.main-footer {
+  position: relative;
+  height: 115px;
+  padding: 145px 0 0;
+  border-top: 1px solid #a7a7ac;
+}
+@media (max-width: 767px) {
+  .main-footer {
+    padding: 30px 0 0;
+  }
+}
+@media (min-width: 768px) {
+  .main-footer .col {
+    float: left;
+    width: 20%;
+  }
+}
+
+/*rozmiary produktów*/
+.product__size {
+  position: relative;
+  width: 90px;
+  height: 60px;
+  font-family: Roboto, sans-serif;
+  font-weight: 700;
+  background-color: #ee322d;
+}
+@media (max-width: 767px) {
+  .product__size {
+    position: absolute;
+    left: 15px;
+    top: 100px;
+    height: 80px;
+  }
+}
+.product__size__item {
+  font-size: 27px;
+  line-height: 32px;
+  font-weight: 700;
+  color: #fff;
+}
+.product__size__trigger {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding-left: 15px;
+  color: #fff;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: url(../img/ico-arrow-bottom.png) no-repeat 70% 50%;
+  -webkit-transition: background-color 0.35s;
+  -o-transition: background-color 0.35s;
+  transition: background-color 0.35s;
+}
+.product__size__trigger.active,
+.product__size__trigger:hover {
+  color: #fff;
+  background-color: #000;
+}
+.product__size__trigger > span {
+  display: block;
+  font-size: 27px;
+  line-height: 60px;
+  font-weight: 700;
+  color: #fff;
+}
+.product__size__sizes {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background-color: #ee322d;
+  -webkit-transition: opacity 0.35s;
+  -o-transition: opacity 0.35s;
+  transition: opacity 0.35s;
+}
+.product__size__sizes input {
+  display: none;
+}
+.product__size__sizes.active {
+  z-index: 1;
+  opacity: 1;
+}
+.product__size__item {
+  cursor: pointer;
+  -webkit-transition: background-color 0.35s;
+  -o-transition: background-color 0.35s;
+  transition: background-color 0.35s;
+}
+.product__size__item:hover {
+  background-color: #000;
+}
+.product__discount-p .shape {
+  margin: 0 5px;
+  font-family: Roboto, sans-serif;
+  font-weight: 700;
+  font-size: 23px;
+  line-height: 72px;
+  font-weight: 700;
+  text-align: center;
+}
+@media (max-width: 767px) {
+  .product__discount-p .shape {
+    position: absolute;
+  }
+}
+.product__discount-p .shape-star-white {
+  color: #ee322d;
+}
+.product__discount-p .shape-star-red {
+  color: #fff;
+}
+@media (max-width: 767px) {
+  .product__discount-p .shape-star-red {
+    position: absolute;
+    right: 0;
+    top: -66px;
+  }
+}
+@media (max-width: 767px) {
+  .product__discount-p .shape-star-white {
+    left: 15px;
+    top: 0;
+  }
+}
+/**/
+.product__timer {
+  display: inline-block;
+  vertical-align: middle;
+  width: 100%;
+  font-family: Roboto, sans-serif;
+  font-weight: 700;
+  font-size: 87px;
+  line-height: 80px;
+  font-weight: 700;
+  text-align: center;
+  color: #000;
+}
+@media (max-width: 767px) {
+  .product__timer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+  }
+}
+
+/**/
+.product__discount-a > span {
+  display: block;
+  float: right;
+  clear: both;
+  font-family: Roboto, sans-serif;
+  font-weight: 900;
+  color: #ee322d;
+  text-align: right;
+}
+@media (max-width: 767px) {
+  .product__discount-a {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 180px;
+  }
+}
+.product__discount--before {
+  position: relative;
+  background: url(../img/shape-cross-line.png) no-repeat 50% 50%;
+  font-size: 25px;
+  line-height: 20px;
+}
+.product__discount--after {
+  font-size: 46px;
+  line-height: 60px;
+}
+
+.product__discount--before .shape-cross-line {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+/**/
+.product {
+  position: absolute;
+  left: 0;
+  width: 35%;
+  padding: 100px 0 0 15px;
+}
+@media (max-width: 767px) {
+  .product {
+    display: none;
+  }
+}
+.product__action {
+  text-align: right;
+}
+@media (max-width: 767px) {
+  .product__action {
+    position: absolute;
+    top: 100px;
+    left: 0;
+    right: 0; 
+    text-align: center;
+  }
+  .product__action .btn {
+    height: 80px;
+    text-align: center;
+  }
+}
+
+/**/
+.product__name {
+  text-transform: uppercase;
+  text-align: right;
+  color: #ee322d;
+}
+.product__name h1 {
+  margin: 0;
+  font-size: 36px;
+  line-height: 42px;
+}
+.product__name h1 span {
+  display: block;
+  font-family: Roboto, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+}
+.product__description {
+  font-size: 14px;
+  line-height: 18px;
+  text-align: right;
+  color: #787878;
+}
+.product__footer {
+  text-align: right;  
+}
+.product__footer a {
+  font-size: 12px;
+  line-height: 14px;
+  text-transform: uppercase;
+  color: #000;
+}
+
+/**/
+.model {
+  display: block;
+  margin: auto;
+  max-width: 100%;
+  height: auto;
+}
+/**/
+.menu {
+  float: right;
+  margin: 0 30px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.hamburger-icon {
+  position: absolute;
+  top: 0;
+  right: 15px;
+  display: block;
+  width: 53px;
+  height: 57px;
+}
+@media (max-width: 767px) {
+  .hamburger-icon {
+    width: 25px;
+    height: 27px;    
+  }
+}
+.hamburger-icon span {
+  display: block;
+  width: 100%;
+  height: 10px;
+  margin: 0 0 10px;
+  background-color: #000;
+}
+@media (max-width: 767px) {
+  .hamburger-icon span {
+    height: 5px;
+    margin-bottom: 5px;
+  }
+}
+
+@media (max-width: 991px) {
+  .menu {
+    display: none;    
+  }
+}
+.menu__item {
+  display: inline-block;
+}
+.menu__item a {
+  display: inline-block;
+  padding: 0 10px;
+  font-family: Roboto, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 58px;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #000;
+}
+.timer--small {
+  float: right;
+  margin-right: 150px;
+}
+@media (max-width: 991px) {
+  .timer--small {
+    margin-right: 40px;
+  }
+}
+.timer--time {
+  display: inline-block;
+  vertical-align: sub;
+  font-size: 21px;
+  color: #ee322d;  
+}
+
+/*product media*/
+.product__media {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 35%;
+  padding: 100px 15px 0 0;
+  text-align: left;
+}
+@media (max-width: 767px) {
+  .product__media {
+    display: none;
+  }
+}
+.product__media__thumbnail {
+  display: block;
+  margin-bottom: 20px;
+  border: 1px solid #a7a7ac;
+  -webkit-transition: border 0.35s;
+  -o-transition: border 0.35s;
+  transition: border 0.35s;
+}
+.product__media__thumbnail:hover {
+  border-color: #ee322d;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   Helper classes
+   ========================================================================== */
+
+/*
+ * Hide visually and from screen readers:
+ */
+
+.hidden {
+    display: none !important;
+}
+
+/*
+ * Hide only visually, but have it available for screen readers:
+ * http://snook.ca/archives/html_and_css/hiding-content-for-accessibility
+ */
+
+.visuallyhidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+/*
+ * Extends the .visuallyhidden class to allow the element
+ * to be focusable when navigated to via the keyboard:
+ * https://www.drupal.org/node/897638
+ */
+
+.visuallyhidden.focusable:active,
+.visuallyhidden.focusable:focus {
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: auto;
+}
+
+/*
+ * Hide visually and from screen readers, but maintain layout
+ */
+
+.invisible {
+    visibility: hidden;
+}
+
+/*
+ * Clearfix: contain floats
+ *
+ * For modern browsers
+ * 1. The space content is one way to avoid an Opera bug when the
+ *    `contenteditable` attribute is included anywhere else in the document.
+ *    Otherwise it causes space to appear at the top and bottom of elements
+ *    that receive the `clearfix` class.
+ * 2. The use of `table` rather than `block` is only necessary if using
+ *    `:before` to contain the top-margins of child elements.
+ */
+
+.clearfix:before,
+.clearfix:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+/* ==========================================================================
+   EXAMPLE Media Queries for Responsive Design.
+   These examples override the primary ('mobile first') styles.
+   Modify as content requires.
+   ========================================================================== */
+
+@media only screen and (min-width: 35em) {
+    /* Style adjustments for viewports that meet the condition */
+}
+
+@media print,
+       (-webkit-min-device-pixel-ratio: 1.25),
+       (min-resolution: 1.25dppx),
+       (min-resolution: 120dpi) {
+    /* Style adjustments for high resolution devices */
+}
+
+/* ==========================================================================
+   Print styles.
+   Inlined to avoid the additional HTTP request:
+   http://www.phpied.com/delay-loading-your-print-css/
+   ========================================================================== */
+
+@media print {
+    *,
+    *:before,
+    *:after {
+        background: transparent !important;
+        color: #000 !important; /* Black prints faster:
+                                   http://www.sanbeiji.com/archives/953 */
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+
+    a,
+    a:visited {
+        text-decoration: underline;
+    }
+
+    a[href]:after {
+        content: " (" attr(href) ")";
+    }
+
+    abbr[title]:after {
+        content: " (" attr(title) ")";
+    }
+
+    /*
+     * Don't show links that are fragment identifiers,
+     * or use the `javascript:` pseudo protocol
+     */
+
+    a[href^="#"]:after,
+    a[href^="javascript:"]:after {
+        content: "";
+    }
+
+    pre,
+    blockquote {
+        border: 1px solid #999;
+        page-break-inside: avoid;
+    }
+
+    /*
+     * Printing Tables:
+     * http://css-discuss.incutio.com/wiki/Printing_Tables
+     */
+
+    thead {
+        display: table-header-group;
+    }
+
+    tr,
+    img {
+        page-break-inside: avoid;
+    }
+
+    img {
+        max-width: 100% !important;
+    }
+
+    p,
+    h2,
+    h3 {
+        orphans: 3;
+        widows: 3;
+    }
+
+    h2,
+    h3 {
+        page-break-after: avoid;
+    }
+}
