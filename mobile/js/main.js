@@ -2,37 +2,46 @@
 /*globals TweenLite, ease, Power0, SteppedEase, MBP*/
 var TIZZY,
     wH,
-    doc = $('body'),
-    modal = $('.modal'),
-    modalOverlay = modal.find('.modal-overlay'),
+    doc = document.getElementsByTagName('body')[0],
+    modal = document.getElementsByClassName('modal'),
+    modalOverlay = document.querySelectorAll('.modal .modal-overlay'),
     product,
-    prizeValue = $('.prize-value'),
-    slideLeftElem = modal.find('.slide-left'),
-    modalfadeElem = modal.find('.fade'),
-    footerFadeElem = $('.main-footer').find('.fade'),
-    footerText = $('.main-footer').find('.text'),
+    prizeValue = document.getElementsByClassName('prize-value'),
+    slideLeftElem = document.querySelectorAll('.modal .slide-left'),
+    modalfadeElem = document.querySelectorAll('.modal .fade'),
+    footerFadeElem = document.querySelectorAll('.main-footer .fade'),
+    footerText = document.querySelectorAll('.main-footer .text'),
     animEase = Power0.easeNone;
 
 TIZZY = TIZZY || {};
 
 TIZZY.category = '';
 TIZZY.sliderIndex = 0;
-TIZZY.modalContent = $('.modal-content');
+TIZZY.modalContent = document.getElementsByClassName('modal-content');
 TIZZY.t = '';
 
+function setPrize(prize) {
+    var textNode = document.createTextNode(prize);
+    prizeValue[0].innerHTML = '';
+    prizeValue[0].appendChild(textNode);
+}
+
 TIZZY.startPage = function () {
-    var layer = $('.layer'),
-        layerGirls = $('#layer-girls'),
-        layerBoys = $('#layer-boys'),
-        girls = $('#girls'),
-        boys = $('#boys'),
-        girsLayerText = layerGirls.find('.layer-text'),
-        boysLayerText = layerBoys.find('.layer-text'),
-        boysWrap = boys.find('.wrap'),
-        girlsWrap = girls.find('.wrap');
+    var layer = document.querySelectorAll('.layer'),
+        layerGirls = document.getElementById('layer-girls'),
+        layerBoys = document.getElementById('layer-boys'),
+        girls = document.getElementById('girls'),
+        boys = document.getElementById('boys'),
+        girsLayerText = layerGirls.querySelectorAll('.layer-text'),
+        boysLayerText = layerBoys.querySelectorAll('.layer-text'),
+        boysWrap = boys.querySelectorAll('.wrap'),
+        girlsWrap = girls.querySelectorAll('.wrap'),
+        i = 0;
 
     function onOpacityComplete() {
-        layer.remove();
+        for (i; i < layer.length; i = i + 1) {
+            layer[i].parentNode.removeChild(layer[i]);
+        }
     }
 
     function onComplete() {
@@ -41,11 +50,10 @@ TIZZY.startPage = function () {
         TIZZY.t.play();
     }
 
-    layerGirls.click(function () {
-        doc.addClass('girls');
-        girls.css('zIndex', 2);
-        boys.css('zIndex', 1);
-
+    layerGirls.addEventListener("click", function () {
+        doc.setAttribute('class', 'girls');
+        girls.style.zIndex = 2;
+        boys.style.zIndex = 1;
         TweenLite.to(layerGirls, 1, {width: '100%', ease: animEase});
         TweenLite.to(layerBoys, 1, {right: '-50%', ease: animEase});
 
@@ -59,9 +67,9 @@ TIZZY.startPage = function () {
     });
 
     layerBoys.click(function () {
-        doc.addClass('boys');
-        boys.css('zIndex', 2);
-        girls.css('zIndex', 1);
+        doc.setAttribute('class', 'boys');
+        boys.style.zIndex = 2;
+        girls.style.zIndex = 1;
 
         TweenLite.to(layerBoys, 1, {width: '100%', ease: animEase});
         TweenLite.to(layerGirls, 1, {left: '-50%', ease: animEase});
@@ -75,22 +83,32 @@ TIZZY.startPage = function () {
     });
 };
 
-TIZZY.productSize = function () {
-    var $sizeTrigger = $('.product__size__trigger'),
-        $sizeContainer = $('.product__size__sizes');
 
-    $sizeTrigger.click(function (event) {
+function hasClass(elem, className) {
+    return new RegExp(' ' + className + ' ').test(' ' + elem.className + ' ');
+}
+function toggleClass(elem, className) {
+    var newClass = ' ' + elem.className.replace(/[\t\r\n]/g, ' ') + ' ';
+    if (hasClass(elem, className)) {
+        while (newClass.indexOf(' ' + className + ' ') >= 0 ) {
+            newClass = newClass.replace(' ' + className + ' ' , ' ');
+        }
+        elem.className = newClass.replace(/^\s+|\s+$/g, '');
+    } else {
+        elem.className += ' ' + className;
+    }
+}
+
+TIZZY.productSize = function () {
+    var sizeTrigger = document.getElementsByClassName('product__size__trigger')[0],
+        sizeContainer = document.getElementsByClassName('product__size__sizes')[0];
+
+    sizeTrigger.addEventListener("click", function (event) {
         event.preventDefault();
-        $sizeTrigger.toggleClass('active');
-        $sizeContainer.toggleClass('active');
+
+        toggleClass(sizeTrigger, 'active');
+        toggleClass(sizeContainer, 'active');
     });
-    // $(document).on('click', function (e) {
-    //     console.log(e.target)
-    //     // if (!$(e.target).hasClass('product__size__trigger')) {
-    //     //     console.log('sfdsd');
-    //     //     $sizeContainer.hide();
-    //     // }
-    // });
 };
 
 TIZZY.menu = function () {
@@ -157,6 +175,10 @@ TIZZY.timer = function () {
     $('#defaultCountdown').countdown({until: until, compact: false, padZeroes: true, format: 'HMS'});
 };
 
+
+
+
+
 TIZZY.slider = function () {
     var owlGirls = $("#girls-carousel");
 
@@ -176,8 +198,7 @@ TIZZY.slider = function () {
                 });
             });
 
-            // trzeba będzie ustawić domyślny produkt
-            prizeValue.text(39);
+            setPrize('36');
 
             function updateFn() {
                 gif.css('backgroundPosition', myObject.a + 'px 0px');
@@ -198,11 +219,11 @@ TIZZY.slider = function () {
         TIZZY.sliderIndex = itemIndex;
 
         if (itemIndex === 0) {
-            prizeValue.text('39');
+            setPrize('36');
         } else if (itemIndex === 1) {
-            prizeValue.text('45');
+            setPrize('45');
         } else {
-            prizeValue.text('90');
+            setPrize('90');
         }
 
         if (itemIndex !== 0) {
