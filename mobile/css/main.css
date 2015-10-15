@@ -357,6 +357,7 @@ th {
   /*  border: 1px solid #ccc;
   background-color: #eee;*/
   text-align: center;
+  padding-left: 7%;
 }
 .countdown-rtl {
   /*  direction: rtl;*/
@@ -880,7 +881,7 @@ th {
 }
 .main-footer .row {
   position: relative;
-  margin-bottom: 20px;
+  margin-bottom: 45px;
 }
 .main-footer .row:before,
 .main-footer .row:after {
@@ -954,8 +955,8 @@ th {
   background-color: #000;
 }
 .aloha-from-deer-logo {
-  max-width: 100%;
-  height: auto;
+  width: 49px;
+  height: 49px;
 }
 /*---------Procentowe obniżki---------------*/
 .shapes {
@@ -1169,7 +1170,7 @@ textarea {
   text-decoration: none;
   text-transform: uppercase;
   color: #fff;
-  background-color: #ee322d;
+  background-color: #ed322b;
   -webkit-transition: background-color 0.35s;
   -o-transition: background-color 0.35s;
   transition: background-color 0.35s;
@@ -1394,12 +1395,54 @@ body.boys .modal-overlay {
   -webkit-background-size: cover;
   background-size: cover;
 }
-@media (min-height: 480px) {
+@media (min-height: 500px) {
   .gif {
     margin: auto;
     display: block;
-    width: 196px;
-    height: 295px;
+    width: 183px;
+    height: 275px;
+    margin-left: auto;
+    margin-right: auto;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    -webkit-background-size: cover;
+    background-size: cover;
+  }
+}
+@media (min-height: 600px) {
+  .gif {
+    margin: auto;
+    display: block;
+    width: 210px;
+    height: 315px;
+    margin-left: auto;
+    margin-right: auto;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    -webkit-background-size: cover;
+    background-size: cover;
+  }
+}
+@media (min-height: 650px) {
+  .gif {
+    margin: auto;
+    display: block;
+    width: 230px;
+    height: 345px;
+    margin-left: auto;
+    margin-right: auto;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    -webkit-background-size: cover;
+    background-size: cover;
+  }
+}
+@media (min-height: 900px) {
+  .gif {
+    margin: auto;
+    display: block;
+    width: 390px;
+    height: 585px;
     margin-left: auto;
     margin-right: auto;
     background-repeat: no-repeat;

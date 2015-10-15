@@ -196,7 +196,7 @@
   }
   .row {
     position: relative;
-    margin-bottom: 20px;
+    margin-bottom: 45px;
     &:before,
     &:after {
       content: "";
@@ -272,8 +272,8 @@
   }
 }
 .aloha-from-deer-logo {
-  max-width: 100%;
-  height: auto;
+  width: 49px;
+  height: 49px;
 }
 
 
@@ -511,7 +511,7 @@ textarea {
   text-decoration: none;
   text-transform: uppercase;
   color: #fff;
-  background-color: #ee322d;
+  background-color: #ed322b;
   -webkit-transition: background-color 0.35s;
   -o-transition: background-color 0.35s;
   transition: background-color 0.35s;
@@ -755,17 +755,26 @@ body.boys .modal-overlay {
 .gif {
   .gif-set(@width: 143px; @height: 215px);
 } 
-@media (min-height: 480px) {
+@media (min-height: 500px) {
   .gif {
-    .gif-set(@width: 196px; @height: 295px);
-  }   
+    .gif-set(@width: 183px; @height: 275px);
+  } 
 }
-// @media (min-height: 568px) {
-//   .gif {
-//     .gif-set(@width: 256px; @height: 385px);
-//   }
-// }
-
+@media (min-height: 600px) {
+  .gif {
+    .gif-set(@width: 210px; @height: 315px);
+  } 
+}
+@media (min-height: 650px) {
+  .gif {
+    .gif-set(@width: 230px; @height: 345px);
+  } 
+}
+@media (min-height: 900px) {
+  .gif {
+    .gif-set(@width: 390px; @height: 585px);
+  } 
+}
 #girls .gif {
   background-image: url(../img/gif/girls/gif.jpg);
 }
