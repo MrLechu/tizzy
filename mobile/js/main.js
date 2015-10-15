@@ -133,8 +133,8 @@ TIZZY.productDetails.prototype.showContent = function (carousel, index) {
     slideLeftElem = modal.find('.slide-left');
     modalFadeElem = modal.find('.fade');
 
-    TweenLite.to(slideLeftElem, 0.3, {left: '0', ease: animEase});
-    TweenLite.fromTo(modalOverlay, 0.4, {opacity: 0}, {opacity: '1', ease: animEase, onStart: onStartFn});
+    TweenLite.to(slideLeftElem, 0.3, {x: '0', ease: animEase});
+    TweenLite.fromTo(modalOverlay, 0.4, {opacity: 0}, {opacity: 1, ease: animEase, onStart: onStartFn});
     TweenLite.fromTo(modalFadeElem, 0.5, {opacity: 0}, {opacity: 1, ease: animEase});
 };
 
@@ -147,7 +147,7 @@ TIZZY.productDetails.prototype.hideContent = function () {
     }
 
     TweenLite.to(modalFadeElem, 0.5, {opacity: 0, ease: animEase});
-    TweenLite.to(slideLeftElem, 0.3, {left: '-100%', ease: animEase});
+    TweenLite.to(slideLeftElem, 0.3, {x: '-100%', ease: animEase});
     TweenLite.to(modalOverlay, 0.4, {opacity: '0', ease: animEase, onComplete: onCompleteFn});
 };
 

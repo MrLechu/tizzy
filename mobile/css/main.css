@@ -853,7 +853,9 @@ th {
 }
 .slide-left {
   position: relative;
-  left: -100%;
+  -webkit-transform: translate(-100%, 0);
+  -ms-transform: translate(-100%, 0);
+  transform: translate(-100%, 0);
 }
 .model {
   display: block;
