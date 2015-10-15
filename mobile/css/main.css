@@ -957,11 +957,13 @@ th {
 .aloha-from-deer-logo {
   width: 49px;
   height: 49px;
+  margin-top: 3px;
 }
 /*---------Procentowe obniżki---------------*/
 .shapes {
   float: left;
   width: 20%;
+  text-align: center;
 }
 .shapes .absolute {
   position: absolute;
@@ -1427,8 +1429,8 @@ body.boys .modal-overlay {
   .gif {
     margin: auto;
     display: block;
-    width: 230px;
-    height: 345px;
+    width: 270px;
+    height: 405px;
     margin-left: auto;
     margin-right: auto;
     background-repeat: no-repeat;
