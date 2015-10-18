@@ -82,6 +82,7 @@
                             <span></span>
                         </span>
                     </a>
+                    <a href="#" class="modal-close"></a>
                 </nav>
             </div>
         </header>
@@ -95,7 +96,7 @@
                         <div class="owl-carousel" id="girls-carousel">
                             <div class="owl-item">
                                 <div class="model">
-                                    <div class="gif"></div>
+                                    <div class="gif gif1"></div>
                                 </div>
                                 <article class="product">
                                     <header class="product__name slide-left">
@@ -125,7 +126,7 @@
 
                             <div class="owl-item">
                                 <div class="model">
-                                    <div class="gif"></div>
+                                    <div class="gif gif2"></div>
                                 </div>
                                 <article class="product">
                                     <a href="#" class="trigger-hide-details"></a>
@@ -297,6 +298,36 @@
             </div>
         </div>
 
+        <div class="modal" id="sizesModal">
+            <div class="modal-content">
+                <div class="sizer">
+                    <ul class="sizer__sizes clearfix">
+                        <li class="sizer__size">
+                            <input type="radio" name="size" value="XS">
+                            <span>XS</span>
+                        </li>
+                        <li class="sizer__size">
+                            <input type="radio" name="size" value="S">
+                            <span>S</span>
+                        </li>
+                        <li class="sizer__size">
+                            <input type="radio" name="size" value="M">
+                            <span>M</span>
+                        </li>
+                        <li class="sizer__size">
+                            <input type="radio" name="size" value="L">
+                            <span>L</span>
+                        </li>
+                        <li class="sizer__size">
+                            <input type="radio" name="size" value="XL">
+                            <span>XL</span>
+                        </li>
+                    </ul>
+                    <a href="#" class="btn btn-white">Wybierz</a>
+                </div>
+            </div>
+        </div>
+
         <!-- footer -->
         <footer class="main-footer">
             <div class="container">
@@ -321,35 +352,9 @@
                 </div>
                 <div class="row">
                     <div class="product__size">
-                        <a href="#" class="product__size__trigger">
+                        <a href="#" class="sizer__trigger">
                             <span>XL</span>
                         </a>
-                        <ul class="product__size__sizes">
-                            <li class="product__size__item">
-                                <input type="radio" name="size" value="M">
-                                <span>M</span>
-                            </li>
-                            <li class="product__size__item">
-                                <input type="radio" name="size" value="S">
-                                <span>S</span>
-                            </li>
-                            <li class="product__size__item">
-                                <input type="radio" name="size" value="L">
-                                <span>L</span>
-                            </li>
-                            <li class="product__size__item">
-                                <input type="radio" name="size" value="XL">
-                                <span>XL</span>
-                            </li>
-                            <li class="product__size__item">
-                                <input type="radio" name="size" value="XXL">
-                                <span>XXL</span>
-                            </li>
-                            <li class="product__size__item">
-                                <input type="radio" name="size" value="XXXL">
-                                <span>XXXL</span>
-                            </li>
-                        </ul>
                     </div>
                     <a href="#" class="btn btn--buy">Kup</a>
                     <div class="discount">
@@ -379,9 +384,7 @@
         <!-- Add your site or application content here -->
 
         <script src="js/vendor/jquery-2.1.0.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/plugins/CSSPlugin.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/easing/EasePack.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenLite.min.js"></script>
+        <script src="js/TweenMax.min.js"></script>
     <!-- //-beg- concat_js -->
         <script src="js/helper.js"></script>
         <script src="js/jquery.plugin.min.js"></script>
