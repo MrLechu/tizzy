@@ -1,5 +1,5 @@
 /*jslint browser: true*/
-/*globals $, window, TweenLite, ease, Power0, SteppedEase, MBP*/
+/*globals $, window, alert, TweenLite, ease, Power0, SteppedEase, MBP*/
 var TIZZY,
     wH,
     prizeValue = $('.prize-value'),
@@ -158,34 +158,7 @@ TIZZY.productDetails.prototype.hideContent = function () {
 };
 
 
-TIZZY.Gif = function (gif) {
-    "use strict";
-    this.kurwamac = gif;
-    this.gifWidth = $(this.gif).css('width');
-    this.t = null;
-    this.myObject = {a: 0};
-};
 
-TIZZY.Gif.prototype.play = function () {
-    "use strict";
-
-    function updateFn() {
-        //this.gif.css('backgroundPosition', this.myObject.a + 'px 0px');
-    }
-    function repeatFn() {
-        this.t.restart();
-    }
-    
-    console.log(TIZZY.Gif.myObject);
-    // TIZZY.Gif.gifWidth = 2 * TIZZY.gif.gifWidth.replace('px', '');
-    // this.t = TweenLite.to(this.myObject, 2, {a: -this.gifWidth, ease: SteppedEase.config(2), onUpdate: updateFn, onComplete: repeatFn});
-};
-
-TIZZY.Gif.prototype.pause = function () {
-    "use strict";
-    //console.log(this.t);
-    //this.t.pause();
-};
 
 TIZZY.slider = function () {
     "use strict";
@@ -282,6 +255,103 @@ TIZZY.timer = function () {
     $('#defaultCountdown').countdown({until: until, compact: false, padZeroes: true, format: 'HMS'});
 };
 
+TIZZY.debug = function () {
+    "use strict";
+    $(".layer").hide();
+    $("body").addClass('girls');
+    $("#girls").css('left', 0);
+    $("#girls .wrap").css('right', 0);
+    $("#boys").css('right', '100%');
+};
+
+//tworzymy objekt
+
+//wersja z konstruktorem
+function Gif(what) {
+    "use strict";
+    this.gif = what;
+    this.tl = null;
+    this.gW = 0;
+    this.play = function () {
+        this.gW = 2 * $(this.gif).width();
+        this.gif = what;
+        
+        function onCompleteFn() {
+            this.restart();
+        } 
+        var gf = $(this.gif);
+
+        this.tl = TweenLite.to(gf, 3, {backgroundPosition: -(this.gW) + "px 0px", ease: SteppedEase.config(2), onComplete: onCompleteFn});
+
+
+    };
+    this.repeat = function () {
+        this.restart();
+    };
+    this.pause = function () {
+        this.tl.pause();
+    };
+}
+
+var gif1 = new Gif('.gif1');
+gif1.play();
+//gif1.pause();
+
+// TIZZY.Gif = function (gif) {
+//     "use strict";
+//     this.name = gif;
+//     this.tl = null;
+//     this.myObject = {a: 0};
+// };
+
+// TIZZY.Gif.prototype.play = function () {
+//     "use strict";
+
+//     var gifWidth = 0;
+//     var myObject = this.myObject;
+
+//     this.tl;
+
+//     function updateFn() {
+//         $(this.name).css('backgroundPosition', myObject.a + 'px 0px');
+//     }
+//     function repeatFn() {
+//         console.log(TIZZY.Gif.call(this.name));
+//         //this.tl.restart();
+//     }
+
+//     gifWidth = 2 * $(this.name).width();
+
+//     this.tl = TweenLite.to(myObject, 2, {a: -gifWidth, ease: SteppedEase.config(2), onUpdate: updateFn, onComplete: repeatFn});
+// };
+
+// TIZZY.Gif.prototype.pause = function () {
+//     "use strict";
+//     //var tl = this.tl;
+//     //tl.pause();
+//     alert(this.tl)
+// };
+
+// //wersja literal
+// var GifL = {
+//     gif: '.gif1',
+//     play: function () {
+//         alert('play: ' + this.gif);
+//     },
+//     pause: function () {
+//         alert('pause: ' + this.gif);
+//     }
+// }
+
+//wywołujemy metodę
+
+//GifL.play();
+//var myGif = new GifC('dupa huj kurwa cipa');
+//myGif.play('z leszkiem');
+
+
+
+
 $(function () {
     "use strict";
     wH = $(window).height();
@@ -293,4 +363,6 @@ $(function () {
     TIZZY.menu();
     TIZZY.timer();
     MBP.preventScrolling();
+    TIZZY.debug();
+
 });
