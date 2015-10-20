@@ -718,36 +718,65 @@ th {
 }
 .menu {
   position: fixed;
-  top: 50px;
-  right: -200px;
-  margin-bottom: 10px;
+  top: 0;
+  right: -100%;
   z-index: 200;
   clear: both;
-  width: 200px;
-  padding: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding-top: 100px;
+  padding-left: 27px;
   list-style: none;
   background-color: #000;
   -webkit-transition: all 0.5s;
   -o-transition: all 0.5s;
   transition: all 0.5s;
 }
-.menu.is-active {
-  right: 0;
-}
 .menu__item {
   display: block;
-  text-align: center;
 }
 .menu__item a {
   display: inline-block;
   padding: 10px 0;
   font-family: Roboto, sans-serif;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 16px;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
   text-transform: uppercase;
   text-decoration: none;
   color: #fff;
+}
+.menu-active .logo {
+  display: none;
+}
+.menu-active .logo-white {
+  display: block;
+  z-index: 1;
+}
+.menu-active .menu {
+  right: 0;
+  z-index: 3;
+}
+.menu-active .mobilemenu-trigger {
+  z-index: 1;
+}
+.menu-active .hamburger-icon span {
+  background-color: #fff;
+}
+.menu-active .main-header {
+  position: relative;
+  padding-bottom: 15px;
+}
+.menu-active .main-header:after {
+  content: "";
+  position: absolute;
+  left: 7%;
+  right: 7%;
+  bottom: 0;
+  height: 1px;
+  background-color: #fff;
+  width: 86%;
 }
 .mobilemenu-trigger {
   position: absolute;
@@ -1489,11 +1518,11 @@ body.boys .modal-overlay {
     background-size: cover;
   }
 }
+#girls .gif0 {
+  background-image: url(../img/gif/girls/gif0.jpg);
+}
 #girls .gif1 {
   background-image: url(../img/gif/girls/gif1.jpg);
-}
-#girls .gif2 {
-  background-image: url(../img/gif/girls/gif2.jpg);
 }
 #boys .gif {
   background-image: url(../img/gif/boys/gif.jpg);

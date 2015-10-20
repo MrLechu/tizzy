@@ -16,8 +16,38 @@ TIZZY = {
     modalOverlay: $('.modal').find('.modal-overlay'),
     category: '',
     sliderIndex: 0,
-    modalContent: $('.modal').find('.modal-content')
+    modalContent: $('.modal').find('.modal-content'),
+    gifGirl_0: null,
+    gifGirl_1: null
 };
+
+//wersja z konstruktorem
+function Gif(what) {
+    "use strict";
+    this.gif = what;
+    this.tl = null;
+    this.gW = 0;
+    this.speed = 3;
+    this.play = function (speed) {
+        this.gW = 2 * $(this.gif).width();
+        this.gif = what;
+
+        if (speed) {
+            this.speed = speed;
+        }
+        function onCompleteFn() {
+            this.restart();
+        }
+        var gf = $(this.gif);
+        this.tl = TweenLite.to(gf, this.speed, {backgroundPosition: -(this.gW) + "px 0px", ease: SteppedEase.config(2), onComplete: onCompleteFn});
+    };
+    this.repeat = function () {
+        this.restart();
+    };
+    this.pause = function () {
+        this.tl.pause();
+    };
+}
 
 TIZZY.startPage = function () {
     "use strict";
@@ -38,11 +68,20 @@ TIZZY.startPage = function () {
     function onComplete() {
         TweenLite.fromTo(layer, 0.7, {opacity: 1}, {opacity: 0, ease: animEase, onComplete: onOpacityComplete});
         TIZZY.productDetails();
-        // TIZZY.t.play();
+
+        TIZZY.gifGirl_0.play();
+
+        if (TIZZY.category === "girls") {
+            $("#boys").remove();
+        }
+        if (TIZZY.category === "boys") {
+            $("#girls").remove();
+        }
     }
 
-    layerGirls.click(function () {
+    layerGirls.on("click swiperight", function () {
         TIZZY.doc.addClass('girls');
+
         girls.css('zIndex', 2);
         boys.css('zIndex', 1);
 
@@ -58,7 +97,7 @@ TIZZY.startPage = function () {
         TIZZY.category = 'girls';
     });
 
-    layerBoys.click(function () {
+    layerBoys.on("click swipeleft", function () {
         TIZZY.doc.addClass('boys');
         boys.css('zIndex', 2);
         girls.css('zIndex', 1);
@@ -75,6 +114,99 @@ TIZZY.startPage = function () {
     });
 };
 
+TIZZY.slider = function () {
+    "use strict";
+    var owlGirls = $("#girls-carousel"),
+        footer = $('.main-footer');
+
+    owlGirls.owlCarousel({
+        items: 1,
+        dots: false,
+        onInitialized: function () {
+            var gifGirlImg_0 = $('#girls-carousel').find('.owl-item').eq(0).find('.gif0'),
+                gifGirlImg_1 = $('#girls-carousel').find('.owl-item').eq(1).find('.gif1');
+
+            TIZZY.gifGirl_0 = new Gif('.gif0');
+            TIZZY.gifGirl_1 = new Gif('.gif1');
+
+            $(".model").each(function () {
+                var thatModel = $(this);
+                thatModel.css({
+                    bottom: footer.height()
+                });
+            });
+            // trzeba będzie ustawić domyślny produkt
+            prizeValue.text(39);
+        }
+    });
+
+    owlGirls.on('translated.owl.carousel', function (event) {
+        var itemIndex = event.item.index;
+        TIZZY.sliderIndex = itemIndex;
+
+        if (itemIndex === 0) {
+            //cena po obniżce
+            prizeValue.text('39');
+
+            //uruchomienie danego gifa
+            TIZZY.gifGirl_0.play();
+
+            //zatrzymanie pozostałych gifów
+            TIZZY.gifGirl_1.pause();
+            
+        } else if (itemIndex === 1) {
+            prizeValue.text('45');
+            TIZZY.gifGirl_0.pause();
+            TIZZY.gifGirl_1.play();
+        } else if (itemIndex === 2) {
+            prizeValue.text('90');
+            TIZZY.gifGirl_0.pause();
+            TIZZY.gifGirl_1.pause();
+        }
+
+        /*zmiana stopki*/
+        if (itemIndex === 0) {
+            TweenLite.to(footerText, 0.5, {opacity: 0});
+            TweenLite.to(footerFadeElem, 0.5, {opacity: 1});
+        } else {
+            TweenLite.to(footerText, 0.5, {opacity: 1});
+            TweenLite.to(footerFadeElem, 0.5, {opacity: 0});
+        }
+    });
+
+    var owlBoys = $("#boys-carousel");
+
+    owlBoys.owlCarousel({
+        items: 1,
+        dots: false
+    //     ,
+    //     onInitialized: function () {
+    //         var footer = $('.main-footer');
+
+    //         $(".model").each(function () {
+    //             var thatModel = $(this);
+    //             thatModel.css({
+    //                 bottom: footer.height()
+    //             });
+    //         });
+
+    //         $(window).resize(function () {
+    //             $(".model").each(function () {
+    //                 var thatModel = $(this);
+    //                 thatModel.css({
+    //                     bottom: footer.height()
+    //                 });
+    //             });
+    //         });
+    //     }
+    });
+
+    owlBoys.on('translated.owl.carousel', function (event) {
+        var itemIndex = event.item.index;
+        TIZZY.sliderIndex = itemIndex;
+    });
+};
+
 TIZZY.productSize = function () {
     "use strict";
     var $sizeTrigger = $('.sizer__trigger');
@@ -88,16 +220,9 @@ TIZZY.productSize = function () {
     $('.modal-close').click(function (e) {
         e.preventDefault();
         TIZZY.doc.removeClass('modal-active modal-sizes');
-        //TIZZY.t.play();
     });
 };
 
-TIZZY.menu = function () {
-    "use strict";
-    $('.mobilemenu-trigger').click(function () {
-        $('.menu').toggleClass('is-active');
-    });
-};
 
 TIZZY.productDetails = function () {
     "use strict";
@@ -113,7 +238,7 @@ TIZZY.productDetails = function () {
 
     $hideDetails.on('click', function () {
         TIZZY.productDetails.prototype.hideContent();
-        TIZZY.t.play();
+        //TIZZY.t.play();
     });
 };
 
@@ -125,7 +250,6 @@ TIZZY.productDetails.prototype.showContent = function (carousel, index) {
         .find('.product')
         .clone()
         .appendTo(TIZZY.modalContent);
-
 
     function onStartFn() {
         TIZZY.doc.addClass('modal-active modal-description');
@@ -159,92 +283,11 @@ TIZZY.productDetails.prototype.hideContent = function () {
 
 
 
-
-TIZZY.slider = function () {
+TIZZY.menu = function () {
     "use strict";
-    var owlGirls = $("#girls-carousel");
-
-    owlGirls.owlCarousel({
-        items: 1,
-        dots: false,
-
-        onInitialized: function () {
-            var footer = $('.main-footer');
-
-            //gif1 = $('#girls-carousel').find('.owl-item').eq(0).find('.gif');
-
-            $(".model").each(function () {
-                var thatModel = $(this);
-                thatModel.css({
-                    bottom: footer.height()
-                });
-            });
-
-            // trzeba będzie ustawić domyślny produkt
-            prizeValue.text(39);
-            // console.log(gif);
-            // gif.pause();
-
-            //gifff
-        }
-    });
-
-    owlGirls.on('translated.owl.carousel', function (event) {
-        var itemIndex = event.item.index;
-        TIZZY.sliderIndex = itemIndex;
-
-        if (itemIndex === 0) {
-            prizeValue.text('39');
-        } else if (itemIndex === 1) {
-            prizeValue.text('45');
-
-        } else {
-            prizeValue.text('90');
-        }
-
-        if (itemIndex !== 0) {
-            TweenLite.to(footerText, 0.5, {opacity: 1});
-            TweenLite.to(footerFadeElem, 0.5, {opacity: 0});
-            //TIZZY.t.pause();
-        } else {
-            TweenLite.to(footerText, 0.5, {opacity: 0});
-            TweenLite.to(footerFadeElem, 0.5, {opacity: 1});
-            //TIZZY.t.play();
-        }
-    });
-
-    var owlBoys = $("#boys-carousel");
-
-    owlBoys.owlCarousel({
-        items: 1,
-        dots: false,
-
-        onInitialized: function () {
-            var footer = $('.main-footer');
-
-            $(".model").each(function () {
-                var thatModel = $(this);
-                thatModel.css({
-                    bottom: footer.height()
-                });
-            });
-
-            $(window).resize(function () {
-                $(".model").each(function () {
-                    var thatModel = $(this);
-                    thatModel.css({
-                        bottom: footer.height()
-                    });
-                });
-            });
-        }
-    });
-
-    owlBoys.on('translated.owl.carousel', function (event) {
-        var itemIndex = event.item.index;
-        TIZZY.sliderIndex = itemIndex;
-
-
+    $('.mobilemenu-trigger').click(function () {
+        $('.menu').toggleClass('is-active');
+        $("body").toggleClass('menu-active');
     });
 };
 
@@ -264,93 +307,6 @@ TIZZY.debug = function () {
     $("#boys").css('right', '100%');
 };
 
-//tworzymy objekt
-
-//wersja z konstruktorem
-function Gif(what) {
-    "use strict";
-    this.gif = what;
-    this.tl = null;
-    this.gW = 0;
-    this.play = function () {
-        this.gW = 2 * $(this.gif).width();
-        this.gif = what;
-        
-        function onCompleteFn() {
-            this.restart();
-        } 
-        var gf = $(this.gif);
-
-        this.tl = TweenLite.to(gf, 3, {backgroundPosition: -(this.gW) + "px 0px", ease: SteppedEase.config(2), onComplete: onCompleteFn});
-
-
-    };
-    this.repeat = function () {
-        this.restart();
-    };
-    this.pause = function () {
-        this.tl.pause();
-    };
-}
-
-var gif1 = new Gif('.gif1');
-gif1.play();
-//gif1.pause();
-
-// TIZZY.Gif = function (gif) {
-//     "use strict";
-//     this.name = gif;
-//     this.tl = null;
-//     this.myObject = {a: 0};
-// };
-
-// TIZZY.Gif.prototype.play = function () {
-//     "use strict";
-
-//     var gifWidth = 0;
-//     var myObject = this.myObject;
-
-//     this.tl;
-
-//     function updateFn() {
-//         $(this.name).css('backgroundPosition', myObject.a + 'px 0px');
-//     }
-//     function repeatFn() {
-//         console.log(TIZZY.Gif.call(this.name));
-//         //this.tl.restart();
-//     }
-
-//     gifWidth = 2 * $(this.name).width();
-
-//     this.tl = TweenLite.to(myObject, 2, {a: -gifWidth, ease: SteppedEase.config(2), onUpdate: updateFn, onComplete: repeatFn});
-// };
-
-// TIZZY.Gif.prototype.pause = function () {
-//     "use strict";
-//     //var tl = this.tl;
-//     //tl.pause();
-//     alert(this.tl)
-// };
-
-// //wersja literal
-// var GifL = {
-//     gif: '.gif1',
-//     play: function () {
-//         alert('play: ' + this.gif);
-//     },
-//     pause: function () {
-//         alert('pause: ' + this.gif);
-//     }
-// }
-
-//wywołujemy metodę
-
-//GifL.play();
-//var myGif = new GifC('dupa huj kurwa cipa');
-//myGif.play('z leszkiem');
-
-
-
 
 $(function () {
     "use strict";
@@ -363,6 +319,6 @@ $(function () {
     TIZZY.menu();
     TIZZY.timer();
     MBP.preventScrolling();
-    TIZZY.debug();
+    //TIZZY.debug();
 
 });
