@@ -25,24 +25,30 @@ TIZZY = {
 function Gif(what) {
     "use strict";
     this.gif = what;
-    this.tl = null;
     this.gW = 0;
     this.speed = 3;
+    this.tl = null;
     this.play = function (speed) {
-        this.gW = 2 * $(this.gif).width();
-        this.gif = what;
+        var myObject = {a: 0},
+            gifWidth = $(this.gif).css('width'),
+            gif = this.gif;
+
+        //this.gif = what;
 
         if (speed) {
             this.speed = speed;
         }
-        function onCompleteFn() {
+        function updateFn() {
+            $(gif).css("backgroundPosition", myObject.a + "px 0px");
+        }
+        function repeatFn() {
             this.restart();
         }
-        var gf = $(this.gif);
-        this.tl = TweenLite.to(gf, this.speed, {backgroundPosition: -(this.gW) + "px 0px", ease: SteppedEase.config(2), onComplete: onCompleteFn});
-    };
-    this.repeat = function () {
-        this.restart();
+
+        gifWidth = 2 * gifWidth.replace("px", "");
+
+        this.tl = TweenLite.to(myObject, this.speed, {a: -gifWidth, ease: SteppedEase.config(2), onUpdate: updateFn, onComplete: repeatFn});
+
     };
     this.pause = function () {
         this.tl.pause();
@@ -123,8 +129,8 @@ TIZZY.slider = function () {
         items: 1,
         dots: false,
         onInitialized: function () {
-            var gifGirlImg_0 = $('#girls-carousel').find('.owl-item').eq(0).find('.gif0'),
-                gifGirlImg_1 = $('#girls-carousel').find('.owl-item').eq(1).find('.gif1');
+            // var gifGirlImg_0 = $('#girls-carousel').find('.owl-item').eq(0).find('.gif0'),
+            //     gifGirlImg_1 = $('#girls-carousel').find('.owl-item').eq(1).find('.gif1');
 
             TIZZY.gifGirl_0 = new Gif('.gif0');
             TIZZY.gifGirl_1 = new Gif('.gif1');
@@ -153,7 +159,7 @@ TIZZY.slider = function () {
 
             //zatrzymanie pozostałych gifów
             TIZZY.gifGirl_1.pause();
-            
+
         } else if (itemIndex === 1) {
             prizeValue.text('45');
             TIZZY.gifGirl_0.pause();
@@ -280,8 +286,6 @@ TIZZY.productDetails.prototype.hideContent = function () {
     TweenLite.to(slideLeftElem, 0.3, {x: '-100%', ease: animEase});
     TweenLite.to(TIZZY.modalOverlay, 0.4, {opacity: '0', ease: animEase, onComplete: onCompleteFn});
 };
-
-
 
 TIZZY.menu = function () {
     "use strict";
