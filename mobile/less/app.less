@@ -76,7 +76,7 @@
     background-color: #fff;
   }
   .main-header {
-    position: relative;
+    position: absolute;
     padding-bottom: 15px;
     &:after {
       content: "";
@@ -118,7 +118,7 @@
   display: inline-block;
   vertical-align: -2px;
   font-size: 8px;
-  color: #ee322d;  
+  color: #ee322d;
 }
 
 
@@ -202,7 +202,7 @@
   .container {
     margin-left: 6.8%;
     margin-right: 6.8%;
-    padding-top: 4%;    
+    padding-top: 4%;
   }
   .container .row:first-child {
     margin-bottom: 2.5%;
@@ -257,9 +257,6 @@
   margin: 0 0 10px;
   padding: 0;
   list-style: none;
-  -webkit-transition: opacity 0.35s;
-  -o-transition: opacity 0.35s;
-  transition: opacity 0.35s;
   input {
     display: none;
   }
@@ -336,7 +333,7 @@
     font-size: 12px;
     top: -0.9em;
     vertical-align: super;
-  }  
+  }
 }
 .discount--before {
   display: block;
@@ -477,15 +474,15 @@ textarea {
   height: 72px;*/
   width: 45px;
   height: 45px;
-  
+
   font-family: Roboto, sans-serif;
   font-size: 14px;
   line-height: 45px;
   font-weight: 700;
-  
+
   text-indent: 0;
   text-align: center;
-  
+
   -webkit-background-size: 45px 45px;
   background-size: 45px 45px;
 }
@@ -505,7 +502,7 @@ textarea {
   background-image: url(../img/ico-arrow-bottom.png);
 }
 .ico-arrow-top {
-  background-image: url(../img/ico-arrow-top.png);  
+  background-image: url(../img/ico-arrow-top.png);
 }
 .ico-thisrt {
   width: 35px;
@@ -551,11 +548,11 @@ body {
 }
 html {
   overflow: hidden;
-  height: 100%; 
+  height: 100%;
 }
 .container {
   position: relative;
-  
+
 }
 .main-body,
 div[class^="owl"] {
@@ -643,10 +640,11 @@ div[class^="owl"] {
 #boys .wrap {
   position: absolute;
   width: 100%;
-  height: 100%;  
+  height: 100%;
 }
 .main-body {
   position: relative;
+  z-index: 1;
   height: 100%;
   overflow: hidden;
 }
@@ -715,6 +713,27 @@ div[class^="owl"] {
   display: none;
 }
 
+//popup - rozmiarowka
+#sizesModal {
+  -webkit-transition: all 0.35s ease-in-out;
+       -o-transition: all 0.35s ease-in-out;
+          transition: all 0.35s ease-in-out;
+  img {
+    display: block;
+    margin: 100px auto 0;
+    max-width: 90%;
+    height: auto;
+  }
+  .modal-overlay {
+      background-color: #ff0028;
+      -webkit-background-size: 88% auto;
+      background-size: 88% auto;
+      -webkit-transition: all 0.35s ease-in-out;
+       -o-transition: all 0.35s ease-in-out;
+          transition: all 0.35s ease-in-out;
+  }
+}
+
 .modal-active {
   /*default*/
   .modal {
@@ -733,7 +752,7 @@ div[class^="owl"] {
   &.modal-description {
     #productModal {
       opacity: 1;
-      z-index: 3;    
+      z-index: 3;
     }
     .shapes .shape {
       display: none;
@@ -741,7 +760,7 @@ div[class^="owl"] {
     .modal {
       .show-details {
         display: none;
-      }    
+      }
     }
     .mobilemenu-trigger {
       z-index: 5;
@@ -752,15 +771,10 @@ div[class^="owl"] {
   }
   &.modal-sizes {
     #sizesModal {
-      z-index: 3;    
+      visibility: visible;
+      z-index: 3;
       opacity: 1;
-      background: url(../img/bg-sizes.jpg) no-repeat 50% 30% #ff0028;
-      -webkit-background-size: 88% auto;
-      background-size: 88% auto;
-      -webkit-transition: background-color 0.35s;
-      -o-transition: background-color 0.35s;
-      transition: background-color 0.35s;
-    } 
+    }
     .mobilemenu-trigger {
       display: none;
     }
@@ -774,12 +788,14 @@ div[class^="owl"] {
       -webkit-background-size: 20px 20px;
       background-size: 20px 20px;
     }
-    
+
   }
 }
 
+
+
 body.girls .modal-overlay {
-  background-color: rgba(34, 2, 18, 0.8);  
+  background-color: rgba(34, 2, 18, 0.8);
 }
 body.boys .modal-overlay {
   background-color: rgba(5, 10, 38, 0.8);
@@ -820,7 +836,7 @@ body.boys .modal-overlay {
   left: 0;
   top: auto;
   width: 100%;
-  bottom: 0;  
+  bottom: 0;
 }
 .gif-set (@width; @height) {
   margin: auto;
@@ -838,26 +854,26 @@ body.boys .modal-overlay {
 
 .gif {
   .gif-set(@width: 143px; @height: 215px);
-} 
+}
 @media (min-height: 500px) {
   .gif {
     .gif-set(@width: 203px; @height: 305px);
-  } 
+  }
 }
 @media (min-height: 600px) {
   .gif {
     .gif-set(@width: 210px; @height: 315px);
-  } 
+  }
 }
 @media (min-height: 650px) {
   .gif {
     .gif-set(@width: 270px; @height: 405px);
-  } 
+  }
 }
 @media (min-height: 900px) {
   .gif {
     .gif-set(@width: 390px; @height: 585px);
-  } 
+  }
 }
 #girls  {
   .gif0 {
@@ -886,7 +902,7 @@ body.boys .modal-overlay {
 }
 @media (orientation: landscape) {
   .to-portrait-info {
-    display: block;    
+    display: block;
   }
 }
 

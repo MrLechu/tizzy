@@ -1,5 +1,5 @@
 /*jslint browser: true*/
-/*globals $, window, alert, TweenLite, ease, Power0, SteppedEase, MBP*/
+/*globals $, window, alert, TweenLite, ease, Power0, SteppedEase, MBP, Hammer*/
 var TIZZY,
     wH,
     prizeValue = $('.prize-value'),
@@ -13,15 +13,15 @@ TIZZY = TIZZY || {};
 TIZZY = {
     doc: $('body'),
     modal: $('.modal'),
-    modalOverlay: $('.modal').find('.modal-overlay'),
+    modalOverlay: $('#productModal').find('.modal-overlay'),
     category: '',
     sliderIndex: 0,
-    modalContent: $('.modal').find('.modal-content'),
+    modalContent: $('#productModal').find('.modal-content'),
     gifGirl_0: null,
     gifGirl_1: null
 };
-
 //wersja z konstruktorem
+
 function Gif(what) {
     "use strict";
     this.gif = what;
@@ -85,7 +85,7 @@ TIZZY.startPage = function () {
         }
     }
 
-    layerGirls.on("click swiperight", function () {
+    layerGirls.hammer().bind("swpieright click", function () {
         TIZZY.doc.addClass('girls');
 
         girls.css('zIndex', 2);
@@ -103,7 +103,7 @@ TIZZY.startPage = function () {
         TIZZY.category = 'girls';
     });
 
-    layerBoys.on("click swipeleft", function () {
+    layerBoys.hammer().bind("swpieleft click", function () {
         TIZZY.doc.addClass('boys');
         boys.css('zIndex', 2);
         girls.css('zIndex', 1);
@@ -145,12 +145,13 @@ TIZZY.slider = function () {
             prizeValue.text(39);
         }
     });
-
+    owlGirls.on('translate.owl.carousel', function () {
+        TweenLite.to($('.show-details'), 0.1, {opacity: 0});
+    });
     owlGirls.on('translated.owl.carousel', function (event) {
-        var itemIndex = event.item.index;
-        TIZZY.sliderIndex = itemIndex;
-
-        if (itemIndex === 0) {
+        TIZZY.sliderIndex = event.item.index;
+        TweenLite.to($('.show-details'), 0.1, {opacity: 1});
+        if (TIZZY.sliderIndex === 0) {
             //cena po obniżce
             prizeValue.text('39');
 
@@ -160,18 +161,18 @@ TIZZY.slider = function () {
             //zatrzymanie pozostałych gifów
             TIZZY.gifGirl_1.pause();
 
-        } else if (itemIndex === 1) {
+        } else if (TIZZY.sliderIndex === 1) {
             prizeValue.text('45');
             TIZZY.gifGirl_0.pause();
             TIZZY.gifGirl_1.play();
-        } else if (itemIndex === 2) {
+        } else if (TIZZY.sliderIndex === 2) {
             prizeValue.text('90');
             TIZZY.gifGirl_0.pause();
             TIZZY.gifGirl_1.pause();
         }
 
         /*zmiana stopki*/
-        if (itemIndex === 0) {
+        if (TIZZY.sliderIndex === 0) {
             TweenLite.to(footerText, 0.5, {opacity: 0});
             TweenLite.to(footerFadeElem, 0.5, {opacity: 1});
         } else {
@@ -220,12 +221,23 @@ TIZZY.productSize = function () {
     $sizeTrigger.click(function (event) {
         event.preventDefault();
         TIZZY.doc.addClass('modal-active modal-sizes');
-        TIZZY.t.pause();
+        if (TIZZY.sliderIndex === 0) {
+            TIZZY.gifGirl_0.pause();
+        }
+        if (TIZZY.sliderIndex === 1) {
+            TIZZY.gifGirl_1.pause();
+        }
     });
 
     $('.modal-close').click(function (e) {
         e.preventDefault();
         TIZZY.doc.removeClass('modal-active modal-sizes');
+        if (TIZZY.sliderIndex === 0) {
+            TIZZY.gifGirl_0.play();
+        }
+        if (TIZZY.sliderIndex === 1) {
+            TIZZY.gifGirl_1.play();
+        }
     });
 };
 
@@ -259,7 +271,12 @@ TIZZY.productDetails.prototype.showContent = function (carousel, index) {
 
     function onStartFn() {
         TIZZY.doc.addClass('modal-active modal-description');
-        //TIZZY.t.pause();
+        if (TIZZY.sliderIndex === 0) {
+            TIZZY.gifGirl_0.pause();
+        }
+        if (TIZZY.sliderIndex === 1) {
+            TIZZY.gifGirl_1.pause();
+        }
     }
 
     var slideLeftElem = $('.modal').find('.slide-left'),
@@ -277,6 +294,12 @@ TIZZY.productDetails.prototype.hideContent = function () {
     function onCompleteFn() {
         $('#productModal').find('.product').remove();
         TIZZY.doc.removeClass('modal-active modal-description');
+        if (TIZZY.sliderIndex === 0) {
+            TIZZY.gifGirl_0.play();
+        }
+        if (TIZZY.sliderIndex === 1) {
+            TIZZY.gifGirl_1.play();
+        }
     }
 
     var slideLeftElem = $('.modal').find('.slide-left'),

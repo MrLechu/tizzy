@@ -765,7 +765,7 @@ th {
   background-color: #fff;
 }
 .menu-active .main-header {
-  position: relative;
+  position: absolute;
   padding-bottom: 15px;
 }
 .menu-active .main-header:after {
@@ -936,9 +936,6 @@ th {
   margin: 0 0 10px;
   padding: 0;
   list-style: none;
-  -webkit-transition: opacity 0.35s;
-  -o-transition: opacity 0.35s;
-  transition: opacity 0.35s;
 }
 .sizer__sizes input {
   display: none;
@@ -1293,6 +1290,7 @@ div[class^="owl"] {
 }
 .main-body {
   position: relative;
+  z-index: 1;
   height: 100%;
   overflow: hidden;
 }
@@ -1357,6 +1355,25 @@ div[class^="owl"] {
 .modal-close {
   display: none;
 }
+#sizesModal {
+  -webkit-transition: all 0.35s ease-in-out;
+  -o-transition: all 0.35s ease-in-out;
+  transition: all 0.35s ease-in-out;
+}
+#sizesModal img {
+  display: block;
+  margin: 100px auto 0;
+  max-width: 90%;
+  height: auto;
+}
+#sizesModal .modal-overlay {
+  background-color: #ff0028;
+  -webkit-background-size: 88% auto;
+  background-size: 88% auto;
+  -webkit-transition: all 0.35s ease-in-out;
+  -o-transition: all 0.35s ease-in-out;
+  transition: all 0.35s ease-in-out;
+}
 .modal-active {
   /*default*/
 }
@@ -1387,14 +1404,9 @@ div[class^="owl"] {
   background-color: #fff;
 }
 .modal-active.modal-sizes #sizesModal {
+  visibility: visible;
   z-index: 3;
   opacity: 1;
-  background: url(../img/bg-sizes.jpg) no-repeat 50% 30% #ff0028;
-  -webkit-background-size: 88% auto;
-  background-size: 88% auto;
-  -webkit-transition: background-color 0.35s;
-  -o-transition: background-color 0.35s;
-  transition: background-color 0.35s;
 }
 .modal-active.modal-sizes .mobilemenu-trigger {
   display: none;
