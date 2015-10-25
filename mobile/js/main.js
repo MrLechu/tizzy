@@ -249,7 +249,7 @@ TIZZY.productSize = function () {
 
     $('.modal-close').click(function (e) {
         e.preventDefault();
-        TIZZY.doc.removeClass('modal-active modal-sizes');
+
         if (TIZZY.sliderIndex === 0) {
             TIZZY.gifGirl_0.play();
         }
@@ -345,10 +345,10 @@ TIZZY.timer = function () {
 
 TIZZY.form = function () {
     "use strict";
-    $('input:checkbox').checkbox({
+    $('.form input:checkbox').checkbox({
         empty: media_url + 'img/empty.png'
     });
-    $('input:radio').checkbox({
+    $('.form input:radio').checkbox({
         empty: media_url + 'img/empty.png'
     });
     $('.btn--buy').click(function (ev) {
@@ -361,8 +361,15 @@ TIZZY.form = function () {
             TIZZY.gifGirl_1.pause();
         }
     });
+
 };
 
+
+$(".modal-close").click(function (ev) {
+    "use strict";
+    ev.preventDefault();
+    TIZZY.doc.removeClass('modal-active modal-sizes modal-form');
+});
 
 
 TIZZY.debug = function () {
@@ -386,7 +393,7 @@ $(function () {
     TIZZY.menu();
     TIZZY.timer();
     TIZZY.form();
-    MBP.preventScrolling();
+    //MBP.preventScrolling();
     //TIZZY.debug();
 
 });

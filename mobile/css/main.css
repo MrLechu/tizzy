@@ -1414,11 +1414,6 @@ div[class^="owl"] {
   padding-bottom: 22px;
   overflow: auto;
 }
-#formModal .checkbox label {
-  border-color: #a1a1a1;
-  border-width: 0 0 1px;
-  border-style: solid;
-}
 .modal-active {
   /*default*/
 }
@@ -1544,6 +1539,9 @@ div[class^="owl"] {
 .form .inline .form-control:nth-child(2) {
   width: 55%;
 }
+.form .form-label a {
+  color: #5d5d5d;
+}
 .form .checkbox {
   margin-bottom: 50px;
   padding-left: 10px;
@@ -1552,7 +1550,8 @@ div[class^="owl"] {
   float: left;
 }
 .form .checkbox .form-label {
-  float: left;
+  display: block;
+  overflow: hidden;
 }
 .form .checkbox .jquery-checkbox img {
   width: 23px;
@@ -1587,6 +1586,8 @@ div[class^="owl"] {
 .form .cod label span {
   color: #b6b6b6;
 }
+.form .form-group:before,
+.form .form-group:after,
 .form .checkbox:before,
 .form .checkbox:after,
 .form .radio:before,
@@ -1594,6 +1595,7 @@ div[class^="owl"] {
   content: "";
   display: table;
 }
+.form .form-group:after,
 .form .checkbox:after,
 .form .radio:after {
   clear: both;
@@ -1624,7 +1626,8 @@ div[class^="owl"] {
 }
 .purchase {
   display: none;
-  margin-bottom: 10px;
+  padding-bottom: 2%;
+  min-height: 61px;
 }
 .purchase .v-center {
   display: table;
@@ -1639,20 +1642,38 @@ div[class^="owl"] {
 .purchese-thumb {
   display: block;
   float: left;
-  max-width: 100%;
+  max-width: 15%;
   height: auto;
+}
+@media (min-width: 320px) {
+  .purchese-thumb {
+    max-width: 100%;
+  }
 }
 .purchese-details {
   display: block;
   overflow: hidden;
-  padding-left: 20px;
+  padding-left: 10px;
+  padding-right: 30px;
   color: #fff;
+}
+@media (min-width: 480px) {
+  .purchese-details {
+    padding-left: 20px;
+    padding-right: 0;
+  }
 }
 .purchese-details h2 {
   margin-top: 7px;
   margin-bottom: 0;
-  font-size: 20px;
-  line-height: 24px;
+  font-size: 16px;
+  line-height: 18px;
+}
+@media (min-width: 480px) {
+  .purchese-details h2 {
+    font-size: 20px;
+    line-height: 24px;
+  }
 }
 .purchese-details a {
   display: inline-block;
