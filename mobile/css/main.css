@@ -693,6 +693,23 @@ th {
   position: relative;
   z-index: 1;
 }
+.jquery-checkbox {
+  display: block;
+  float: left;
+  margin-right: 15px;
+  font-size: 20px;
+  line-height: 20px;
+  cursor: pointer;
+}
+.jquery-checkbox .mark {
+  display: inline;
+}
+.jquery-checkbox img {
+  vertical-align: middle;
+}
+.jquery-checkbox img {
+  background-position: 0px 0px;
+}
 /**/
 .main-header {
   position: absolute;
@@ -831,7 +848,7 @@ th {
 .product__footer img {
   display: block;
   margin: auto;
-  max-width: 100%;
+  max-width: 60%;
   height: auto;
 }
 .product__name h1 {
@@ -1009,13 +1026,13 @@ th {
   display: block;
   color: #000;
   overflow: hidden;
-  background: url(../img/shape-cross-line.png) no-repeat -7px 50%;
   background-size: contain;
 }
 .discount--before .shape-cross-line {
-  position: absolute;
-  left: 0;
-  top: 0;
+  display: inline-block;
+  vertical-align: text-bottom;
+  line-height: 1;
+  background: url(../img/shape-cross-line.png) no-repeat;
 }
 .discount--after {
   position: relative;
@@ -1176,10 +1193,14 @@ textarea {
   text-decoration: none;
   text-transform: uppercase;
   color: #fff;
+  border: 0;
   background-color: #ff0028;
   -webkit-transition: background-color 0.35s;
   -o-transition: background-color 0.35s;
   transition: background-color 0.35s;
+}
+.btn-red {
+  background-color: #ff0028;
 }
 .btn-white {
   color: #ff0028;
@@ -1362,7 +1383,7 @@ div[class^="owl"] {
 }
 #sizesModal img {
   display: block;
-  margin: 100px auto 0;
+  margin: 130px auto 0;
   max-width: 90%;
   height: auto;
 }
@@ -1373,6 +1394,30 @@ div[class^="owl"] {
   -webkit-transition: all 0.35s ease-in-out;
   -o-transition: all 0.35s ease-in-out;
   transition: all 0.35s ease-in-out;
+}
+#formModal {
+  -webkit-transition: all 0.35s ease-in-out;
+  -o-transition: all 0.35s ease-in-out;
+  transition: all 0.35s ease-in-out;
+}
+#formModal .modal-overlay {
+  background-color: #fff;
+  -webkit-background-size: 88% auto;
+  background-size: 88% auto;
+  -webkit-transition: all 0.35s ease-in-out;
+  -o-transition: all 0.35s ease-in-out;
+  transition: all 0.35s ease-in-out;
+}
+#formModal .modal-content {
+  padding-left: 6%;
+  padding-right: 6.8%;
+  padding-bottom: 22px;
+  overflow: auto;
+}
+#formModal .checkbox label {
+  border-color: #a1a1a1;
+  border-width: 0 0 1px;
+  border-style: solid;
 }
 .modal-active {
   /*default*/
@@ -1420,6 +1465,201 @@ div[class^="owl"] {
   height: 20px;
   -webkit-background-size: 20px 20px;
   background-size: 20px 20px;
+}
+.modal-active.modal-form .main-header {
+  background-color: #ff0028;
+}
+.modal-active.modal-form h1 {
+  display: none;
+}
+.modal-active.modal-form #formModal {
+  visibility: visible;
+  z-index: 3;
+  opacity: 1;
+}
+.modal-active.modal-form .mobilemenu-trigger {
+  display: none;
+}
+.modal-active.modal-form .modal-close {
+  right: 6.8%;
+  display: block;
+  top: 20px;
+  background: url(../img/modal-close.png) no-repeat 0 0;
+  width: 20px;
+  height: 20px;
+  -webkit-background-size: 20px 20px;
+  background-size: 20px 20px;
+}
+.modal-active.modal-form .purchase {
+  display: block;
+}
+.form-group {
+  margin-bottom: 20px;
+}
+.form-control {
+  width: 100%;
+  height: 57px;
+  padding-left: 10px;
+  font-family: Robot, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  color: #5d5d5d;
+  border-color: #a1a1a1;
+  border-width: 0 0 1px;
+  border-style: solid;
+}
+::-webkit-input-placeholder {
+  color: #5d5d5d;
+}
+:-moz-placeholder {
+  opacity: 1;
+  color: #5d5d5d;
+}
+::-moz-placeholder {
+  opacity: 1;
+  color: #5d5d5d;
+}
+:-ms-input-placeholder {
+  color: #5d5d5d;
+}
+.form-label {
+  display: inline-block;
+  color: #5d5d5d;
+}
+.form-label span {
+  color: #b6b6b6;
+}
+.form {
+  padding-top: 90px;
+}
+.form .inline .form-control {
+  float: left;
+  width: auto;
+}
+.form .inline .form-control:nth-child(1) {
+  width: 40%;
+  margin-right: 5%;
+}
+.form .inline .form-control:nth-child(2) {
+  width: 55%;
+}
+.form .checkbox {
+  margin-bottom: 50px;
+  padding-left: 10px;
+}
+.form .checkbox input[type="checkbox"] {
+  float: left;
+}
+.form .checkbox .form-label {
+  float: left;
+}
+.form .checkbox .jquery-checkbox img {
+  width: 23px;
+  height: 23px;
+  background: transparent url(../img/input-checkbox.png) no-repeat;
+}
+.form .checkbox .jquery-checkbox-checked img {
+  background-position: 0 -23px;
+}
+.form .radio {
+  margin-bottom: 20px;
+  padding-left: 10px;
+}
+.form .radio input[type="radio"] {
+  float: left;
+}
+.form .radio .form-label {
+  display: block;
+  overflow: hidden;
+}
+.form .radio .jquery-checkbox img {
+  width: 23px;
+  height: 23px;
+  background: transparent url(../img/input-radio.png) no-repeat;
+}
+.form .radio .jquery-checkbox-checked img {
+  background-position: 0 -23px;
+}
+.form .payu label span {
+  color: #ff0028;
+}
+.form .cod label span {
+  color: #b6b6b6;
+}
+.form .checkbox:before,
+.form .checkbox:after,
+.form .radio:before,
+.form .radio:after {
+  content: "";
+  display: table;
+}
+.form .checkbox:after,
+.form .radio:after {
+  clear: both;
+}
+.form .btn {
+  display: block;
+  margin-top: 50px;
+  width: 100%;
+  height: 57px;
+  font-size: 20px;
+  line-height: 57px;
+}
+.form .btn b {
+  display: inline-block;
+  vertical-align: top;
+}
+.form .btn span {
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 10px;
+  font-size: 28px;
+}
+.form .btn sup {
+  display: inline-block;
+  vertical-align: 0.5em;
+  font-size: 12px;
+  text-transform: none;
+}
+.purchase {
+  display: none;
+  margin-bottom: 10px;
+}
+.purchase .v-center {
+  display: table;
+  width: 100%;
+  height: 100%;
+}
+.purchase .v-center-inner {
+  display: table-cell;
+  height: 54px;
+  vertical-align: middle;
+}
+.purchese-thumb {
+  display: block;
+  float: left;
+  max-width: 100%;
+  height: auto;
+}
+.purchese-details {
+  display: block;
+  overflow: hidden;
+  padding-left: 20px;
+  color: #fff;
+}
+.purchese-details h2 {
+  margin-top: 7px;
+  margin-bottom: 0;
+  font-size: 20px;
+  line-height: 24px;
+}
+.purchese-details a {
+  display: inline-block;
+  margin-right: 10px;
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #fff;
 }
 body.girls .modal-overlay {
   background-color: rgba(34, 2, 18, 0.8);

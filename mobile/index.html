@@ -41,6 +41,9 @@
         <!--
         <script>(function(a,b,c){if(c in b&&b[c]){var d,e=a.location,f=/^(a|html)$/i;a.addEventListener("click",function(a){d=a.target;while(!f.test(d.nodeName))d=d.parentNode;"href"in d&&(d.href.indexOf("http")||~d.href.indexOf(e.host))&&(a.preventDefault(),e.href=d.href)},!1)}})(document,window.navigator,"standalone")</script>
         -->
+        <script>
+            var media_url = './';
+        </script>
         <script type="text/javascript">
           WebFontConfig = {
             google: { families: [ 'Roboto:400,500,700,900:latin,latin-ext' ] }
@@ -84,8 +87,20 @@
                         <span></span>
                     </span>
                 </a>
-                <a href="#" class="modal-close"></a>
+                <div class="purchase">
+                    <img class="purchese-thumb" src="img/thumb.jpg" alt="Evil Cat Hoody (75zł)" width="54" height="54">
+                    <div class="purchese-details">
+                        <div class="v-center">
+                            <div class="v-center-inner">
+                                <h2>Evil Cat Hoody (75zł)</h2>
+                                <a href="#">Rozmiar L</a>
+                                <a href="#">Zasady dostawy</a>
+                            </div>
+                        </div>
+                    </div>
 
+                </div>
+                <a href="#" class="modal-close"></a>
             </div>
         </header>
 
@@ -119,7 +134,7 @@
                                     <footer class="product__footer fade">
                                         <div class="t">
                                             <div class="tc">
-                                                <img src="img/online-store-logo.jpg" width="134" height="134" alt="">
+                                                <img src="img/online-store-logo.jpg" width="250" height="95" alt="">
                                             </div>
                                         </div>
                                     </footer>
@@ -150,7 +165,7 @@
                                     <footer class="product__footer fade">
                                         <div class="t">
                                             <div class="tc">
-                                                <img src="img/online-store-logo.jpg" width="134" height="134" alt="">
+                                                <img src="img/online-store-logo.jpg" width="250" height="95" alt="">
                                             </div>
                                         </div>
                                     </footer>
@@ -181,7 +196,7 @@
                                     <footer class="product__footer fade">
                                         <div class="t">
                                             <div class="tc">
-                                                <img src="img/online-store-logo.jpg" width="134" height="134" alt="">
+                                                <img src="img/online-store-logo.jpg" width="250" height="95" alt="">
                                             </div>
                                         </div>
                                     </footer>
@@ -218,7 +233,7 @@
                                     <footer class="product__footer fade">
                                         <div class="t">
                                             <div class="tc">
-                                                <img src="img/online-store-logo.jpg" width="134" height="134" alt="">
+                                                <img src="img/online-store-logo.jpg" width="250" height="95" alt="">
                                             </div>
                                         </div>
                                     </footer>
@@ -249,7 +264,7 @@
                                     <footer class="product__footer fade">
                                         <div class="t">
                                             <div class="tc">
-                                                <img src="img/online-store-logo.jpg" width="134" height="134" alt="">
+                                                <img src="img/online-store-logo.jpg" width="250" height="95" alt="">
                                             </div>
                                         </div>
                                     </footer>
@@ -281,7 +296,7 @@
                                     <footer class="product__footer fade">
                                         <div class="t">
                                             <div class="tc">
-                                                <img src="img/online-store-logo.jpg" width="134" height="134" alt="">
+                                                <img src="img/online-store-logo.jpg" width="250" height="95" alt="">
                                             </div>
                                         </div>
                                     </footer>
@@ -332,6 +347,45 @@
             </div>
         </div>
 
+        <div class="modal" id="formModal">
+            <div class="modal-overlay"></div>
+            <div class="modal-content">
+                <form action="" class="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Imie i Nazwisko">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Ulica i Numer Domu">
+                    </div>
+                    <div class="form-group inline">
+                        <input type="text" class="form-control" placeholder="Kod pocztowy">
+                        <input type="text" class="form-control" placeholder="Miasto">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Telefon (opacjonalnie)">
+                    </div>
+                    <div class="form-group checkbox">
+                        <input type="checkbox" id="checkbox">
+                        <label class="form-label" for="checkbox">dane zamawiającego inne niż dostawy</label>
+                    </div>
+                    <div class="form-group radio payu">
+                        <input type="radio" id="payu">
+                        <label class="form-label" for="payu" >PayU - przelew lub karta <span>(przesyłka UPS 16zł)</span></label>
+                    </div>
+                    <div class="form-group radio cod">
+                        <input type="radio" id="zapobraniem">
+                        <label class="form-label" for="zapobraniem">Za pobraniem <span>(przesyłka UPS 19zł)</span></label>
+                    </div>
+                    <button type="submit" class="btn btn-red">
+                        <b>Przejdź do płatności</b>
+                        <span>81<sup>zł</sup></span></a>
+                </form>
+            </div>
+        </div>
+
         <!-- footer -->
         <footer class="main-footer">
             <div class="container">
@@ -350,7 +404,7 @@
                     </div>
                     <div class="discount fade">
                         <span class="discount--before">
-                            100<sup>zł</sup>
+                            <span class="shape-cross-line">100</span><sup>zł</sup>
                         </span>
                     </div>
                 </div>
@@ -393,6 +447,7 @@
     <!-- //-beg- concat_js -->
         <script src="js/TweenMax.min.js"></script>
         <script src="js/helper.js"></script>
+        <script src="js/jquery.checkbox.min.js"></script>
         <script src="js/jquery.plugin.min.js"></script>
         <script src="js/jquery.countdown.min.js"></script>
         <script src="js/owl.carousel.min.js"></script>
