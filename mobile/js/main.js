@@ -339,7 +339,7 @@ TIZZY.menu = function () {
 
 TIZZY.timer = function () {
     "use strict";
-    var until = new Date(2015, 10 - 1, 30);
+    var until = new Date(2015, 10 - 1, 31);
 
     $('#defaultCountdown').countdown({until: until, compact: false, padZeroes: true, format: 'HMS'});
 };
