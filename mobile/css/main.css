@@ -710,34 +710,42 @@ th {
 .jquery-checkbox img {
   background-position: 0px 0px;
 }
+h1 {
+  margin: 0;
+  padding: 0;
+}
 /**/
 .main-header {
   position: absolute;
-  top: 0;
+  top: 4.6%;
   left: 0;
-  z-index: 3;
+  z-index: 4;
   width: 100%;
-}
-.main-header .container {
-  padding-left: 6%;
-  padding-right: 6.8%;
-  margin-top: 2%;
+  height: 48px;
 }
 .logo {
-  position: relative;
+  position: absolute;
+  left: 6%;
   display: block;
-  float: left;
   max-width: 82px;
   height: auto;
+  -webkit-transition: all 0.8s;
+  -o-transition: all 0.8s;
+  transition: all 0.8s;
+}
+.logo-black {
+  opacity: 1;
+  z-index: 1;
 }
 .logo-white {
-  display: none;
+  opacity: 0;
+  z-index: 0;
 }
 .menu {
   position: fixed;
   top: 0;
   right: -100%;
-  z-index: 200;
+  z-index: 3;
   clear: both;
   width: 100%;
   height: 100%;
@@ -749,6 +757,34 @@ th {
   -webkit-transition: all 0.5s;
   -o-transition: all 0.5s;
   transition: all 0.5s;
+}
+.menu-active .logo-black {
+  opacity: 0;
+  z-index: 0;
+}
+.menu-active .logo-white {
+  opacity: 1;
+  z-index: 1;
+}
+.menu-active .menu {
+  right: 0;
+  z-index: 3;
+}
+.menu-active .hamburger-icon span {
+  background-color: #fff;
+}
+.menu-active .main-header {
+  position: absolute;
+}
+.menu-active .main-header:after {
+  content: "";
+  position: absolute;
+  left: 7%;
+  right: 7%;
+  bottom: 0;
+  height: 1px;
+  background-color: #fff;
+  width: 86%;
 }
 .menu__item {
   display: block;
@@ -764,37 +800,6 @@ th {
   text-decoration: none;
   color: #fff;
 }
-.menu-active .logo {
-  display: none;
-}
-.menu-active .logo-white {
-  display: block;
-  z-index: 1;
-}
-.menu-active .menu {
-  right: 0;
-  z-index: 3;
-}
-.menu-active .mobilemenu-trigger {
-  z-index: 1;
-}
-.menu-active .hamburger-icon span {
-  background-color: #fff;
-}
-.menu-active .main-header {
-  position: absolute;
-  padding-bottom: 15px;
-}
-.menu-active .main-header:after {
-  content: "";
-  position: absolute;
-  left: 7%;
-  right: 7%;
-  bottom: 0;
-  height: 1px;
-  background-color: #fff;
-  width: 86%;
-}
 .mobilemenu-trigger {
   position: absolute;
   right: 6.8%;
@@ -803,9 +808,6 @@ th {
 .hamburger-icon {
   display: block;
   width: 18px;
-  -webkit-transition: background-color 0.35s;
-  -o-transition: background-color 0.35s;
-  transition: background-color 0.35s;
 }
 .hamburger-icon span {
   display: block;
@@ -813,6 +815,9 @@ th {
   height: 3px;
   margin: 0 0 5px;
   background-color: #000;
+  -webkit-transition: background-color 0.5s;
+  -o-transition: background-color 0.5s;
+  transition: background-color 0.5s;
 }
 .timer--small {
   float: right;
@@ -1376,11 +1381,6 @@ div[class^="owl"] {
 .modal-close {
   display: none;
 }
-#sizesModal {
-  -webkit-transition: all 0.35s ease-in-out;
-  -o-transition: all 0.35s ease-in-out;
-  transition: all 0.35s ease-in-out;
-}
 #sizesModal img {
   display: block;
   margin: 130px auto 0;
@@ -1391,9 +1391,6 @@ div[class^="owl"] {
   background-color: #ff0028;
   -webkit-background-size: 88% auto;
   background-size: 88% auto;
-  -webkit-transition: all 0.35s ease-in-out;
-  -o-transition: all 0.35s ease-in-out;
-  transition: all 0.35s ease-in-out;
 }
 #formModal {
   -webkit-transition: all 0.35s ease-in-out;
@@ -1416,6 +1413,11 @@ div[class^="owl"] {
 }
 .modal-active {
   /*default*/
+}
+.modal-active .modal {
+  -webkit-transition: opacity 0.35s ease-in-out;
+  -o-transition: opacity 0.35s ease-in-out;
+  transition: opacity 0.35s ease-in-out;
 }
 .modal-active .main-header {
   z-index: 4;

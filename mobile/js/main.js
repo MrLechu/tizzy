@@ -239,6 +239,7 @@ TIZZY.productSize = function () {
     $sizeTrigger.click(function (event) {
         event.preventDefault();
         TIZZY.doc.addClass('modal-active modal-sizes');
+
         if (TIZZY.sliderIndex === 0) {
             TIZZY.gifGirl_0.pause();
         }
