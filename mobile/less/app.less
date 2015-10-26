@@ -22,7 +22,7 @@ h1 {
   left: 0;
   z-index: 4;
   width: 100%;
-  height: 48px;
+  //height: 48px;
   // .container {
   //   padding-left: 6%;
   //   padding-right: 6.8%;
@@ -79,6 +79,7 @@ h1 {
   }
   .main-header {
     position: absolute;
+    height: 48px;
     &:after {
       content: "";
       position: absolute;
@@ -773,6 +774,18 @@ div[class^="owl"] {
     padding-bottom: 22px;
     overflow: auto;
   }
+  .modal-close {
+    right: 6.8%;
+    top: 20px;
+    z-index: 1;
+    display: block;
+    width: 20px;
+    height: 20px;
+    opacity: 1;
+    background: url(../img/modal-close.png) no-repeat 0 0;
+    -webkit-background-size: 20px 20px;
+    background-size: 20px 20px;
+  }
   // .checkbox label {
   //   border-color: #a1a1a1;
   //   border-width: 0 0 1px;
@@ -836,7 +849,7 @@ div[class^="owl"] {
     }
   }
   &.modal-form {
-    .main-header {
+    .purchase {
       background-color: #ff0028;
     }
     h1 {
@@ -849,19 +862,7 @@ div[class^="owl"] {
     .mobilemenu-trigger {
       display: none;
     }
-    .modal-close {
-      right: 6.8%;
-      display: block;
-      top: 20px;
-      background: url(../img/modal-close.png) no-repeat 0 0;
-      width: 20px;
-      height: 20px;
-      -webkit-background-size: 20px 20px;
-      background-size: 20px 20px;
-    }
-    .purchase {
-      display: block;
-    }
+
   }
 }
 .form-group {
@@ -1015,9 +1016,14 @@ div[class^="owl"] {
 
 
 .purchase {
-  display: none;
-  padding-bottom: 2%;
-  min-height: 61px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  // padding-bottom: 2%;
+  padding-left: 6%;
+  height: 70px;
   .v-center {
     display: table;
     width: 100%;

@@ -721,7 +721,6 @@ h1 {
   left: 0;
   z-index: 4;
   width: 100%;
-  height: 48px;
 }
 .logo {
   position: absolute;
@@ -775,6 +774,7 @@ h1 {
 }
 .menu-active .main-header {
   position: absolute;
+  height: 48px;
 }
 .menu-active .main-header:after {
   content: "";
@@ -1432,6 +1432,18 @@ div[class^="owl"] {
   padding-bottom: 22px;
   overflow: auto;
 }
+#formModal .modal-close {
+  right: 6.8%;
+  top: 20px;
+  z-index: 1;
+  display: block;
+  width: 20px;
+  height: 20px;
+  opacity: 1;
+  background: url(../img/modal-close.png) no-repeat 0 0;
+  -webkit-background-size: 20px 20px;
+  background-size: 20px 20px;
+}
 .modal-active {
   /*default*/
 }
@@ -1480,7 +1492,7 @@ div[class^="owl"] {
   -webkit-background-size: 20px 20px;
   background-size: 20px 20px;
 }
-.modal-active.modal-form .main-header {
+.modal-active.modal-form .purchase {
   background-color: #ff0028;
 }
 .modal-active.modal-form h1 {
@@ -1492,19 +1504,6 @@ div[class^="owl"] {
 }
 .modal-active.modal-form .mobilemenu-trigger {
   display: none;
-}
-.modal-active.modal-form .modal-close {
-  right: 6.8%;
-  display: block;
-  top: 20px;
-  background: url(../img/modal-close.png) no-repeat 0 0;
-  width: 20px;
-  height: 20px;
-  -webkit-background-size: 20px 20px;
-  background-size: 20px 20px;
-}
-.modal-active.modal-form .purchase {
-  display: block;
 }
 .form-group {
   margin-bottom: 20px;
@@ -1643,9 +1642,13 @@ div[class^="owl"] {
   text-transform: none;
 }
 .purchase {
-  display: none;
-  padding-bottom: 2%;
-  min-height: 61px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  padding-left: 6%;
+  height: 70px;
 }
 .purchase .v-center {
   display: table;
