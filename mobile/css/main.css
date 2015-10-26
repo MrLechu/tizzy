@@ -729,9 +729,9 @@ h1 {
   display: block;
   max-width: 82px;
   height: auto;
-  -webkit-transition: all 0.8s;
-  -o-transition: all 0.8s;
-  transition: all 0.8s;
+  -webkit-transition: all 0.35s;
+  -o-transition: all 0.35s;
+  transition: all 0.35s;
 }
 .logo-black {
   opacity: 1;
@@ -754,9 +754,9 @@ h1 {
   padding-left: 27px;
   list-style: none;
   background-color: #000;
-  -webkit-transition: all 0.5s;
-  -o-transition: all 0.5s;
-  transition: all 0.5s;
+  -webkit-transition: all 0.35s;
+  -o-transition: all 0.35s;
+  transition: all 0.35s;
 }
 .menu-active .logo-black {
   opacity: 0;
@@ -804,6 +804,10 @@ h1 {
   position: absolute;
   right: 6.8%;
   display: block;
+  opacity: 1;
+  -webkit-transition: all 0.35s;
+  -o-transition: all 0.35s;
+  transition: all 0.35s;
 }
 .hamburger-icon {
   display: block;
@@ -815,9 +819,9 @@ h1 {
   height: 3px;
   margin: 0 0 5px;
   background-color: #000;
-  -webkit-transition: background-color 0.5s;
-  -o-transition: background-color 0.5s;
-  transition: background-color 0.5s;
+  -webkit-transition: background-color 0.35s;
+  -o-transition: background-color 0.35s;
+  transition: background-color 0.35s;
 }
 .timer--small {
   float: right;
@@ -901,7 +905,7 @@ h1 {
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 2;
+  z-index: 1;
   background-color: #fff;
   border-top: 1px solid #a7a7ac;
 }
@@ -997,6 +1001,10 @@ h1 {
   right: 3%;
   top: -45px;
   z-index: 1;
+  opacity: 1;
+  -webkit-transition: all 0.25s;
+  -o-transition: all 0.25s;
+  transition: all 0.25s;
 }
 .shapes .static {
   margin: auto;
@@ -1329,7 +1337,10 @@ div[class^="owl"] {
   bottom: 0;
   width: 100%;
   height: 100%;
-  z-index: -1;
+  z-index: 0;
+  -webkit-transition: opacity 0.35s;
+  -o-transition: opacity 0.35s;
+  transition: opacity 0.35s;
 }
 .modal-overlay {
   position: absolute;
@@ -1337,6 +1348,7 @@ div[class^="owl"] {
   right: 0;
   top: 0;
   bottom: 0;
+  z-index: 0;
   width: 100%;
   height: 100%;
 }
@@ -1348,7 +1360,7 @@ div[class^="owl"] {
   bottom: 0;
   width: 100%;
   height: 100%;
-  z-index: 2;
+  z-index: 1;
 }
 .modal-content .product {
   display: block;
@@ -1379,7 +1391,16 @@ div[class^="owl"] {
   -webkit-background-size: 32px;
 }
 .modal-close {
-  display: none;
+  opacity: 0;
+  z-index: -1;
+  -webkit-transition: all 0.35s;
+  -o-transition: all 0.35s;
+  transition: all 0.35s;
+}
+#sizesModal {
+  -webkit-transition: all 0.35s;
+  -o-transition: all 0.35s;
+  transition: all 0.35s;
 }
 #sizesModal img {
   display: block;
@@ -1414,27 +1435,23 @@ div[class^="owl"] {
 .modal-active {
   /*default*/
 }
-.modal-active .modal {
-  -webkit-transition: opacity 0.35s ease-in-out;
-  -o-transition: opacity 0.35s ease-in-out;
-  transition: opacity 0.35s ease-in-out;
-}
 .modal-active .main-header {
   z-index: 4;
 }
-.modal-active .logo {
-  z-index: 4;
-  display: none;
+.modal-active .logo-black {
+  z-index: 0;
+  opacity: 0;
 }
 .modal-active .logo-white {
-  display: block;
+  z-index: 1;
+  opacity: 1;
 }
 .modal-active.modal-description #productModal {
   opacity: 1;
   z-index: 3;
 }
 .modal-active.modal-description .shapes .shape {
-  display: none;
+  opacity: 0;
 }
 .modal-active.modal-description .modal .show-details {
   display: none;
@@ -1446,20 +1463,20 @@ div[class^="owl"] {
   background-color: #fff;
 }
 .modal-active.modal-sizes #sizesModal {
-  visibility: visible;
-  z-index: 3;
+  z-index: 2;
   opacity: 1;
+  top: 0;
 }
 .modal-active.modal-sizes .mobilemenu-trigger {
-  display: none;
+  opacity: 0;
 }
 .modal-active.modal-sizes .modal-close {
   right: 6.8%;
-  display: block;
-  top: 20px;
-  background: url(../img/modal-close.png) no-repeat 0 0;
+  z-index: 1;
   width: 20px;
   height: 20px;
+  opacity: 1;
+  background: url(../img/modal-close.png) no-repeat 0 0;
   -webkit-background-size: 20px 20px;
   background-size: 20px 20px;
 }
@@ -1470,7 +1487,6 @@ div[class^="owl"] {
   display: none;
 }
 .modal-active.modal-form #formModal {
-  visibility: visible;
   z-index: 3;
   opacity: 1;
 }

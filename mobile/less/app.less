@@ -35,7 +35,7 @@ h1 {
   display: block;
   max-width: 82px;
   height: auto;
-  .transition(all 0.8s);
+  .transition(all 0.35s);
 }
 .logo-black {
   opacity: 1;
@@ -59,7 +59,7 @@ h1 {
   list-style: none;
   background-color: #000;
 
-  .transition(all 0.5s);
+  .transition(all 0.35s);
 }
 .menu-active {
   .logo-black {
@@ -110,6 +110,8 @@ h1 {
   position: absolute;
   right: 6.8%;
   display: block;
+  opacity: 1;
+  .transition(all 0.35s);
 }
 .hamburger-icon {
   display: block;
@@ -120,7 +122,7 @@ h1 {
     height: 3px;
     margin: 0 0 5px;
     background-color: #000;
-    .transition(background-color 0.5s);
+    .transition(background-color 0.35s);
   }
 }
 
@@ -210,7 +212,7 @@ h1 {
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 2;
+  z-index: 1;
   background-color: #fff;
   border-top: 1px solid #a7a7ac;
   .container {
@@ -315,6 +317,8 @@ h1 {
     right: 3%;
     top: -45px;
     z-index: 1;
+    opacity: 1;
+    .transition(all 0.25s);
   }
   .static {
     margin: auto;
@@ -676,7 +680,8 @@ div[class^="owl"] {
   bottom: 0;
   width: 100%;
   height: 100%;
-  z-index: -1;
+  z-index: 0;
+  .transition(opacity 0.35s);
 }
 .modal-overlay {
   position: absolute;
@@ -684,9 +689,9 @@ div[class^="owl"] {
   right: 0;
   top: 0;
   bottom: 0;
+  z-index: 0;
   width: 100%;
   height: 100%;
-  //z-index: 1;
 }
 .modal-content {
   position: absolute;
@@ -696,7 +701,7 @@ div[class^="owl"] {
   bottom: 0;
   width: 100%;
   height: 100%;
-  z-index: 2;
+  z-index: 1;
   .product {
     display: block;
   }
@@ -728,12 +733,14 @@ div[class^="owl"] {
   -webkit-background-size: 32px;
 }
 .modal-close {
-  display: none;
+  opacity: 0;
+  z-index: -1;
+  .transition(all 0.35s);
 }
 
 //popup - rozmiarowka
 #sizesModal {
-
+  .transition(all 0.35s);
   img {
     display: block;
     margin: 130px auto 0;
@@ -744,9 +751,6 @@ div[class^="owl"] {
       background-color: #ff0028;
       -webkit-background-size: 88% auto;
       background-size: 88% auto;
-      // -webkit-transition: all 0.35s ease-in-out;
-      //  -o-transition: all 0.35s ease-in-out;
-      //     transition: all 0.35s ease-in-out;
   }
 }
 
@@ -778,20 +782,17 @@ div[class^="owl"] {
 
 .modal-active {
   /*default*/
-  .modal {
-    -webkit-transition: opacity 0.35s ease-in-out;
-       -o-transition: opacity 0.35s ease-in-out;
-          transition: opacity 0.35s ease-in-out;
-  }
+
   .main-header {
     z-index: 4;
   }
-  .logo {
-    z-index: 4;
-    display: none;
+  .logo-black {
+    z-index: 0;
+    opacity: 0;
   }
   .logo-white {
-    display: block;
+    z-index: 1;
+    opacity: 1
   }
 
   &.modal-description {
@@ -800,7 +801,7 @@ div[class^="owl"] {
       z-index: 3;
     }
     .shapes .shape {
-      display: none;
+      opacity: 0;
     }
     .modal {
       .show-details {
@@ -816,20 +817,20 @@ div[class^="owl"] {
   }
   &.modal-sizes {
     #sizesModal {
-      visibility: visible;
-      z-index: 3;
+      z-index: 2;
       opacity: 1;
+      top: 0;
     }
     .mobilemenu-trigger {
-      display: none;
+      opacity: 0;
     }
     .modal-close {
       right: 6.8%;
-      display: block;
-      top: 20px;
-      background: url(../img/modal-close.png) no-repeat 0 0;
+      z-index: 1;
       width: 20px;
       height: 20px;
+      opacity: 1;
+      background: url(../img/modal-close.png) no-repeat 0 0;
       -webkit-background-size: 20px 20px;
       background-size: 20px 20px;
     }
@@ -842,7 +843,6 @@ div[class^="owl"] {
       display: none;
     }
     #formModal {
-      visibility: visible;
       z-index: 3;
       opacity: 1;
     }
