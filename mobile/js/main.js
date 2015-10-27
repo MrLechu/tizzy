@@ -85,7 +85,8 @@ TIZZY.startPage = function () {
         }
     }
 
-    layerGirls.hammer().bind("swpieright click", function () {
+    layerGirls.hammer().bind("panright click", function (e) {
+        console.log(e);
         TIZZY.doc.addClass('girls');
 
         girls.css('zIndex', 2);
@@ -103,7 +104,7 @@ TIZZY.startPage = function () {
         TIZZY.category = 'girls';
     });
 
-    layerBoys.hammer().bind("swpieleft click", function () {
+    layerBoys.hammer().bind("panleft click", function () {
         TIZZY.doc.addClass('boys');
         boys.css('zIndex', 2);
         girls.css('zIndex', 1);
