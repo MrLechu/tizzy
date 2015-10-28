@@ -1418,6 +1418,8 @@ div[class^="owl"] {
   margin-top: -9px;
   margin-left: -9px;
   text-align: center;
+  opacity: 1;
+  visibility: visible;
 }
 .show-details .ico,
 .hide-details .ico {
@@ -1425,12 +1427,17 @@ div[class^="owl"] {
   width: 32px;
   height: 32px;
 }
+.show-details {
+  -webkit-transition: all 0.35s;
+  -o-transition: all 0.35s;
+  transition: all 0.35s;
+}
 .show-details .ico {
   background: url(../img/button-add.png) no-repeat 50%;
   -webkit-background-size: 32px;
   background-size: 32px;
 }
-.hide-details {
+.hide-details .ico {
   background: url(../img/button-hide.png) no-repeat 50%;
   background-size: 32px;
   -webkit-background-size: 32px;
@@ -1510,11 +1517,12 @@ div[class^="owl"] {
 .modal-active.modal-description #productModal {
   z-index: 3;
 }
+.modal-active.modal-description .show-details {
+  opacity: 0;
+  visibility: hidden;
+}
 .modal-active.modal-description .shapes .shape {
   opacity: 0;
-}
-.modal-active.modal-description .modal .show-details {
-  display: none;
 }
 .modal-active.modal-description .mobilemenu-trigger {
   z-index: 5;

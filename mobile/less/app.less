@@ -752,6 +752,8 @@ div[class^="owl"] {
   margin-top: -9px;
   margin-left: -9px;
   text-align: center;
+  opacity: 1;
+  visibility: visible;
   .ico {
     margin-top: 9px;
     width: 32px;
@@ -759,6 +761,7 @@ div[class^="owl"] {
   }
 }
 .show-details {
+  .transition(all 0.35s);
   .ico {
     background: url(../img/button-add.png) no-repeat 50%;
     -webkit-background-size: 32px;
@@ -766,9 +769,11 @@ div[class^="owl"] {
   }
 }
 .hide-details {
-  background: url(../img/button-hide.png) no-repeat 50%;
-  background-size: 32px;
-  -webkit-background-size: 32px;
+  .ico {
+    background: url(../img/button-hide.png) no-repeat 50%;
+    background-size: 32px;
+    -webkit-background-size: 32px;
+  }
 }
 .modal-close {
   opacity: 0;
@@ -852,13 +857,12 @@ div[class^="owl"] {
     #productModal {
       z-index: 3;
     }
+    .show-details {
+      opacity: 0;
+      visibility: hidden;
+    }
     .shapes .shape {
       opacity: 0;
-    }
-    .modal {
-      .show-details {
-        display: none;
-      }
     }
     .mobilemenu-trigger {
       z-index: 5;
