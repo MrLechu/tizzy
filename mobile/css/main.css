@@ -1565,12 +1565,11 @@ div[class^="owl"] {
 }
 .form-control {
   width: 100%;
-  height: 57px;
   padding-left: 10px;
   font-family: Robot, sans-serif;
   font-weight: 400;
   font-size: 16px;
-  line-height: 22px;
+  line-height: 30px;
   color: #5d5d5d;
   border-color: #a1a1a1;
   border-width: 0 0 1px;
@@ -1674,7 +1673,7 @@ div[class^="owl"] {
 }
 .form .btn {
   display: block;
-  margin-top: 50px;
+  margin-top: 30px;
   width: 100%;
   height: 57px;
   font-size: 20px;
