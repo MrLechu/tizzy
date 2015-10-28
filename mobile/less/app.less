@@ -246,8 +246,10 @@ h1 {
 // }
 .sizer__trigger {
   display: block;
-  padding-left: 10px;
+  //padding-left: 10px;
+  padding-right: 12px;
   color: #fff;
+  text-align: center;
   text-transform: uppercase;
   text-decoration: none;
   background: url(../img/ico-arrow-bottom.png) no-repeat 80% 50% #ff0028;
@@ -295,7 +297,12 @@ h1 {
   -webkit-transition: background-color 0.35s;
   -o-transition: background-color 0.35s;
   transition: background-color 0.35s;
-
+  &:active,
+  &:hover,
+  &:focus {
+    color: #ff0028;
+    background-color: #fff;
+  }
   &:nth-child(1) {
     margin-left: 0;
   }

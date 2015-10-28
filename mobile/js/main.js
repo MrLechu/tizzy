@@ -250,6 +250,24 @@ TIZZY.productSize = function () {
 
     $('.modal-close').click(function (e) {
         e.preventDefault();
+        if (TIZZY.sliderIndex === 0) {
+            TIZZY.gifGirl_0.play();
+        }
+        if (TIZZY.sliderIndex === 1) {
+            TIZZY.gifGirl_1.play();
+        }
+    });
+
+    $('.sizer__size').click(function () {
+        var thatSize = $(this),
+            thatSizeText = thatSize.data("size");
+
+        thatSize.siblings('input:radio').prop("checked");
+
+        $(".sizer__trigger span").text("");
+        $(".sizer__trigger span").text(thatSizeText);
+
+        TIZZY.doc.removeClass('modal-active modal-sizes modal-form');
 
         if (TIZZY.sliderIndex === 0) {
             TIZZY.gifGirl_0.play();
