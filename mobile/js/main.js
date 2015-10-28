@@ -85,8 +85,7 @@ TIZZY.startPage = function () {
         }
     }
 
-    layerGirls.hammer().bind("panright click", function (e) {
-        console.log(e);
+    layerGirls.hammer().bind("panright click", function () {
         TIZZY.doc.addClass('girls');
 
         girls.css('zIndex', 2);
@@ -270,13 +269,48 @@ TIZZY.productDetails = function () {
         TIZZY.productDetails.prototype.showContent('#girls-carousel', TIZZY.sliderIndex);
     });
 
+    var sp = document.getElementById("girls-carousel");
+
+    var swipeUp = new Hammer.Manager(sp);
+
+    swipeUp.add(
+        new Hammer.Pan({
+            direction: Hammer.DIRECTION_VERTICAL,
+            treshold: 80,
+            pointers: 0
+        })
+    );
+
+    swipeUp.on("panend", function (ev) {
+        if (ev.direction === Hammer.DIRECTION_UP) {
+            TIZZY.productDetails.prototype.showContent('#girls-carousel', TIZZY.sliderIndex);
+        }
+    });
+
     $('body.boys').find('.show-details').click(function () {
         TIZZY.productDetails.prototype.showContent('#boys-carousel', TIZZY.sliderIndex);
     });
 
+
     $hideDetails.on('click', function () {
         TIZZY.productDetails.prototype.hideContent();
-        //TIZZY.t.play();
+    });
+
+    var hp = document.getElementById("productModal");
+    var swipeDown = new Hammer.Manager(hp);
+
+    swipeDown.add(
+        new Hammer.Pan({
+            direction: Hammer.DIRECTION_VERTICAL,
+            treshold: 80,
+            pointers: 0
+        })
+    );
+
+    swipeDown.on("panend", function (ev) {
+        if (ev.direction === Hammer.DIRECTION_DOWN) {
+            TIZZY.productDetails.prototype.hideContent();
+        }
     });
 };
 
