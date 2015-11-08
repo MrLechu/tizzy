@@ -783,6 +783,29 @@ div[class^="owl"] {
   .transition(all 0.35s);
 }
 
+//popup - default
+#defaultModal {
+  .transition(all 0.35s);
+  .modal-overlay {
+      background-color: #ff0028;
+      -webkit-background-size: 88% auto;
+      background-size: 88% auto;
+  }
+  .modal-content {
+    padding: 80px 6.8% 0;
+    text-align: center;
+  }
+  h2 {
+    text-transform: uppercase;
+    color: #fff;
+  }
+  p {
+    font-size: 18px;
+    line-height: 24px;
+    color: #fff;
+  }
+}
+
 //popup - rozmiarowka
 #sizesModal {
   .transition(all 0.35s);
@@ -830,11 +853,6 @@ div[class^="owl"] {
     -webkit-background-size: 20px 20px;
     background-size: 20px 20px;
   }
-  // .checkbox label {
-  //   border-color: #a1a1a1;
-  //   border-width: 0 0 1px;
-  //   border-style: solid;
-  // }
 }
 
 .modal-active {
@@ -905,6 +923,26 @@ div[class^="owl"] {
     }
     .mobilemenu-trigger {
       display: none;
+    }
+  }
+  &.modal-default {
+   #defaultModal {
+      z-index: 2;
+      top: 0;
+    }
+    .mobilemenu-trigger {
+      opacity: 0;
+      visibility: hidden;
+    }
+    .modal-close {
+      right: 6.8%;
+      z-index: 1;
+      width: 20px;
+      height: 20px;
+      opacity: 1;
+      background: url(../img/modal-close.png) no-repeat 0 0;
+      -webkit-background-size: 20px 20px;
+      background-size: 20px 20px;
     }
 
   }

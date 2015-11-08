@@ -1450,6 +1450,29 @@ div[class^="owl"] {
   -o-transition: all 0.35s;
   transition: all 0.35s;
 }
+#defaultModal {
+  -webkit-transition: all 0.35s;
+  -o-transition: all 0.35s;
+  transition: all 0.35s;
+}
+#defaultModal .modal-overlay {
+  background-color: #ff0028;
+  -webkit-background-size: 88% auto;
+  background-size: 88% auto;
+}
+#defaultModal .modal-content {
+  padding: 80px 6.8% 0;
+  text-align: center;
+}
+#defaultModal h2 {
+  text-transform: uppercase;
+  color: #fff;
+}
+#defaultModal p {
+  font-size: 18px;
+  line-height: 24px;
+  color: #fff;
+}
 #sizesModal {
   -webkit-transition: all 0.35s;
   -o-transition: all 0.35s;
@@ -1560,6 +1583,24 @@ div[class^="owl"] {
 }
 .modal-active.modal-form .mobilemenu-trigger {
   display: none;
+}
+.modal-active.modal-default #defaultModal {
+  z-index: 2;
+  top: 0;
+}
+.modal-active.modal-default .mobilemenu-trigger {
+  opacity: 0;
+  visibility: hidden;
+}
+.modal-active.modal-default .modal-close {
+  right: 6.8%;
+  z-index: 1;
+  width: 20px;
+  height: 20px;
+  opacity: 1;
+  background: url(../img/modal-close.png) no-repeat 0 0;
+  -webkit-background-size: 20px 20px;
+  background-size: 20px 20px;
 }
 .form-group {
   margin-bottom: 20px;
