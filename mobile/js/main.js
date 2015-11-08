@@ -267,7 +267,9 @@ TIZZY.productSize = function () {
         $(".sizer__trigger span").text("");
         $(".sizer__trigger span").text(thatSizeText);
 
-        TIZZY.doc.removeClass('modal-active modal-sizes modal-form');
+        //TIZZY.doc.removeClass('modal-active modal-sizes modal-form');
+        $(".sizer__size").removeClass("active");
+        thatSize.addClass('active');
 
         if (TIZZY.sliderIndex === 0) {
             TIZZY.gifGirl_0.play();

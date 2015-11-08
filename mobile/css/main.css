@@ -994,6 +994,7 @@ h1 {
   -o-transition: background-color 0.35s;
   transition: background-color 0.35s;
 }
+.sizer__size.active,
 .sizer__size:active,
 .sizer__size:hover,
 .sizer__size:focus {
