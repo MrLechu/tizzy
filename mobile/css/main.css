@@ -696,7 +696,7 @@ th {
 .jquery-checkbox {
   display: block;
   float: left;
-  margin-right: 15px;
+  margin-right: 10px;
   font-size: 20px;
   line-height: 20px;
   cursor: pointer;
@@ -1633,6 +1633,8 @@ div[class^="owl"] {
 }
 .form-label {
   display: inline-block;
+  font-size: 12px;
+  line-height: 16px;
   color: #5d5d5d;
 }
 .form-label span {
@@ -1656,7 +1658,7 @@ div[class^="owl"] {
   color: #5d5d5d;
 }
 .form .checkbox {
-  margin-bottom: 50px;
+  margin-bottom: 30px;
   padding-left: 10px;
 }
 .form .checkbox input[type="checkbox"] {
@@ -1683,6 +1685,7 @@ div[class^="owl"] {
 }
 .form .radio .form-label {
   display: block;
+  padding-top: 4px;
   overflow: hidden;
 }
 .form .radio .jquery-checkbox img {
