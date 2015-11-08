@@ -250,7 +250,8 @@ TIZZY.productSize = function () {
         }
     });
 
-    $('.sizer__size').click(function () {
+    $('.sizer__size').click(function (e) {
+        e.preventDefault();
         var thatSize = $(this),
             thatSizeText = thatSize.data("size");
 
@@ -264,7 +265,7 @@ TIZZY.productSize = function () {
         thatSize.addClass('active');
 
         if (TIZZY.sliderIndex === 0) {
-            TIZZY.gifGirl_0.play();
+            //TIZZY.gifGirl_0.play();
         }
         if (TIZZY.sliderIndex === 1) {
             TIZZY.gifGirl_1.play();
