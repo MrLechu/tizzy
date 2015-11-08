@@ -263,9 +263,14 @@ TIZZY.productSize = function () {
         //TIZZY.doc.removeClass('modal-active modal-sizes modal-form');
         $(".sizer__size").removeClass("active");
         thatSize.addClass('active');
+    });
 
+    $('.sizer .btn').click(function (e) {
+        e.preventDefault();
+
+        TIZZY.doc.removeClass('modal-active modal-sizes modal-form');
         if (TIZZY.sliderIndex === 0) {
-            //TIZZY.gifGirl_0.play();
+            TIZZY.gifGirl_0.play();
         }
         if (TIZZY.sliderIndex === 1) {
             TIZZY.gifGirl_1.play();
