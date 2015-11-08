@@ -17,8 +17,8 @@ TIZZY = {
     category: '',
     sliderIndex: 0,
     modalContent: $('#productModal').find('.modal-content'),
-    gifGirl_0: null,
-    gifGirl_1: null
+    gifGirl_0: undefined,
+    gifGirl_1: undefined
 };
 //wersja z konstruktorem
 
@@ -27,13 +27,11 @@ function Gif(what) {
     this.gif = what;
     this.gW = 0;
     this.speed = 2.5;
-    this.tl = null;
+    this.tl = new TimelineLite({pause: true});
     this.play = function (speed) {
         var myObject = {a: 0},
             gifWidth = $(this.gif).css('width'),
             gif = this.gif;
-
-        //this.gif = what;
 
         if (speed) {
             this.speed = speed;
@@ -48,7 +46,6 @@ function Gif(what) {
         gifWidth = 2 * gifWidth.replace("px", "");
 
         this.tl = TweenLite.to(myObject, this.speed, {a: -gifWidth, ease: SteppedEase.config(2), onUpdate: updateFn, onComplete: repeatFn});
-
     };
     this.pause = function () {
         this.tl.pause();
@@ -75,10 +72,9 @@ TIZZY.startPage = function () {
         TweenLite.fromTo(layer, 0.7, {opacity: 1}, {opacity: 0, ease: animEase, onComplete: onOpacityComplete});
         TIZZY.productDetails();
 
-        TIZZY.gifGirl_0.play();
-
         if (TIZZY.category === "girls") {
             $("#boys").remove();
+            TIZZY.gifGirl_0.play();
         }
         if (TIZZY.category === "boys") {
             $("#girls").remove();
@@ -101,6 +97,9 @@ TIZZY.startPage = function () {
         TweenLite.to(girlsWrap, 0.5, {right: 0, ease: animEase, onComplete: onComplete});
 
         TIZZY.category = 'girls';
+
+        TIZZY.gifGirl_0 = new Gif('.gif0');
+        TIZZY.gifGirl_1 = new Gif('.gif1');
     });
 
     layerBoys.hammer().bind("panleft click", function () {
@@ -129,12 +128,6 @@ TIZZY.slider = function () {
         items: 1,
         dots: false,
         onInitialized: function () {
-            // var gifGirlImg_0 = $('#girls-carousel').find('.owl-item').eq(0).find('.gif0'),
-            //     gifGirlImg_1 = $('#girls-carousel').find('.owl-item').eq(1).find('.gif1');
-
-            TIZZY.gifGirl_0 = new Gif('.gif0');
-            TIZZY.gifGirl_1 = new Gif('.gif1');
-
             $(".model").each(function () {
                 var thatModel = $(this);
                 thatModel.css({
@@ -145,26 +138,27 @@ TIZZY.slider = function () {
             prizeValue.text(39);
         }
     });
+
     owlGirls.on('drag.owl.carousel', function (event) {
-        console.log(event);
         if (event.item.index === 0) {
             TIZZY.gifGirl_0.pause();
         }
         if (event.item.index === 1) {
             TIZZY.gifGirl_1.pause();
         }
-        TweenLite.to($('.show-details'), 0.3, {opacity: 0, scale: 0.5});
+        //TweenLite.to($('.show-details'), 0.3, {opacity: 0, scale: 0.5});
     });
 
-    owlGirls.on('dragged.owl.carousel', function (event) {
-        if (event.item.index === 0) {
-            TIZZY.gifGirl_0.play();
-        }
-        if (event.item.index === 1) {
-            TIZZY.gifGirl_1.play();
-        }
-        TweenLite.to($('.show-details'), 0.3, {opacity: 1, scale: 1});
-    });
+    // owlGirls.on('dragged.owl.carousel', function (event) {
+    //     console.log(event);
+    //     if (event.item.index === 0) {
+    //         TIZZY.gifGirl_0.play();
+    //     }
+    //     if (event.item.index === 1) {
+    //         TIZZY.gifGirl_1.play();
+    //     }
+    //     TweenLite.to($('.show-details'), 0.3, {opacity: 1, scale: 1});
+    // });
 
     owlGirls.on('translated.owl.carousel', function (event) {
         TIZZY.sliderIndex = event.item.index;
@@ -172,17 +166,15 @@ TIZZY.slider = function () {
         if (TIZZY.sliderIndex === 0) {
             //cena po obniżce
             prizeValue.text('39');
-
-            //uruchomienie danego gifa
+            //console.log(TIZZY.gifGirl_0.);
             TIZZY.gifGirl_0.play();
-
-            //zatrzymanie pozostałych gifów
-            //TIZZY.gifGirl_1.pause();
+            TIZZY.gifGirl_1.pause();
 
         } else if (TIZZY.sliderIndex === 1) {
             prizeValue.text('45');
-            //TIZZY.gifGirl_0.pause();
+            TIZZY.gifGirl_0.pause();
             TIZZY.gifGirl_1.play();
+
         } else if (TIZZY.sliderIndex === 2) {
             prizeValue.text('90');
             TIZZY.gifGirl_0.pause();
@@ -279,7 +271,6 @@ TIZZY.productSize = function () {
         }
     });
 };
-
 
 TIZZY.productDetails = function () {
     "use strict";
