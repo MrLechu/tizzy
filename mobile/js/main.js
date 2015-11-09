@@ -152,7 +152,7 @@ TIZZY.slider = function () {
         }
     });
 
-    owlGirls.on('drag.owl.carousel', function (event) {
+    owlGirls.on('translate.owl.carousel', function (event) {
         if (event.item.index === 0) {
             TIZZY.gifGirl_0.tl.pause();
         }
@@ -317,23 +317,23 @@ TIZZY.productDetails = function () {
         }
     });
 
-            var sp = document.getElementById("girls-carousel"),
-            swipeUp = new Hammer.Manager(sp);
+    var sp = document.getElementById("girls-carousel"),
+    swipeUp = new Hammer.Manager(sp);
 
-        swipeUp.add(
-            new Hammer.Pan({
-                direction: Hammer.DIRECTION_VERTICAL,
-                treshold: 80,
-                pointers: 0
-            })
-        );
+    swipeUp.add(
+        new Hammer.Pan({
+            direction: Hammer.DIRECTION_VERTICAL,
+            treshold: 80,
+            pointers: 0
+        })
+    );
 
-        //pokazanie szczegóły produktu
-        swipeUp.on("panend", function (ev) {
-            if (ev.direction === Hammer.DIRECTION_UP) {
-                TIZZY.productDetails.prototype.showContent('#girls-carousel', TIZZY.sliderIndex);
-            }
-        });
+    //pokazanie szczegóły produktu
+    swipeUp.on("panend", function (ev) {
+        if (ev.direction === Hammer.DIRECTION_UP) {
+            TIZZY.productDetails.prototype.showContent('#girls-carousel', TIZZY.sliderIndex);
+        }
+    });
 };
 
 TIZZY.productDetails.prototype.showContent = function (carousel, index) {
@@ -350,12 +350,12 @@ TIZZY.productDetails.prototype.showContent = function (carousel, index) {
     }
 
     function onCompleteFn() {
-        if (TIZZY.sliderIndex === 0) {
             TIZZY.gifGirl_0.tl.pause();
-        }
-        if (TIZZY.sliderIndex === 1) {
             TIZZY.gifGirl_1.tl.pause();
-        }
+        // if (TIZZY.sliderIndex === 0) {
+        // }
+        // if (TIZZY.sliderIndex === 1) {
+        // }
     }
 
     var slideLeftElem = $('.modal').find('.slide-left'),
