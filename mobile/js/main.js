@@ -28,28 +28,30 @@ function Gif(what) {
     this.gW = 0;
     this.speed = 2.5;
     this.tl = new TimelineLite({pause: true});
-    this.play = function (speed) {
-        var myObject = {a: 0},
-            gifWidth = $(this.gif).css('width'),
-            gif = this.gif;
+}
 
-        if (speed) {
-            this.speed = speed;
-        }
-        function updateFn() {
-            $(gif).css("backgroundPosition", myObject.a + "px 0px");
-        }
-        function repeatFn() {
-            this.restart();
-        }
+Gif.prototype.play = function (speed) {
+    var myObject = {a: 0},
+        gifWidth = $(this.gif).css('width'),
+        gif = this.gif;
 
-        gifWidth = 2 * gifWidth.replace("px", "");
+    if (speed) {
+        this.speed = speed;
+    }
+    function updateFn() {
+        $(gif).css("backgroundPosition", myObject.a + "px 0px");
+    }
+    function repeatFn() {
+        this.restart();
+    }
 
-        this.tl = TweenLite.to(myObject, this.speed, {a: -gifWidth, ease: SteppedEase.config(2), onUpdate: updateFn, onComplete: repeatFn});
-    };
-    this.pause = function () {
-        this.tl.pause();
-    };
+    gifWidth = 2 * gifWidth.replace("px", "");
+
+    this.tl = TweenLite.to(myObject, this.speed, {a: -gifWidth, ease: SteppedEase.config(2), onUpdate: updateFn, onComplete: repeatFn});
+}
+
+Gif.prototype.pause = function () {
+    this.tl.pause();
 }
 
 TIZZY.startPage = function () {
@@ -71,13 +73,13 @@ TIZZY.startPage = function () {
     function onComplete() {
         TweenLite.fromTo(layer, 0.7, {opacity: 1}, {opacity: 0, ease: animEase, onComplete: onOpacityComplete});
         TIZZY.productDetails();
+        TIZZY.productSize();
 
         if (TIZZY.category === "girls") {
-            $("#boys").remove();
             TIZZY.gifGirl_0.play();
         }
         if (TIZZY.category === "boys") {
-            $("#girls").remove();
+            // start pierwszego gifa w sekcji dla chłpców
         }
     }
 
@@ -139,26 +141,14 @@ TIZZY.slider = function () {
         }
     });
 
-    owlGirls.on('drag.owl.carousel', function (event) {
+    owlGirls.on('translate.owl.carousel', function (event) {
         if (event.item.index === 0) {
             TIZZY.gifGirl_0.pause();
         }
         if (event.item.index === 1) {
             TIZZY.gifGirl_1.pause();
         }
-        //TweenLite.to($('.show-details'), 0.3, {opacity: 0, scale: 0.5});
     });
-
-    // owlGirls.on('dragged.owl.carousel', function (event) {
-    //     console.log(event);
-    //     if (event.item.index === 0) {
-    //         TIZZY.gifGirl_0.play();
-    //     }
-    //     if (event.item.index === 1) {
-    //         TIZZY.gifGirl_1.play();
-    //     }
-    //     TweenLite.to($('.show-details'), 0.3, {opacity: 1, scale: 1});
-    // });
 
     owlGirls.on('translated.owl.carousel', function (event) {
         TIZZY.sliderIndex = event.item.index;
@@ -166,10 +156,8 @@ TIZZY.slider = function () {
         if (TIZZY.sliderIndex === 0) {
             //cena po obniżce
             prizeValue.text('39');
-            //console.log(TIZZY.gifGirl_0.);
             TIZZY.gifGirl_0.play();
             TIZZY.gifGirl_1.pause();
-
         } else if (TIZZY.sliderIndex === 1) {
             prizeValue.text('45');
             TIZZY.gifGirl_0.pause();
@@ -285,10 +273,18 @@ TIZZY.productDetails = function () {
     $('body.girls').find('.show-details').click(function () {
         TIZZY.productDetails.prototype.showContent('#girls-carousel', TIZZY.sliderIndex);
     });
+    $('body.boys').find('.show-details').click(function () {
+        TIZZY.productDetails.prototype.showContent('#boys-carousel', TIZZY.sliderIndex);
+    });
+    $hideDetails.on('click', function () {
+        TIZZY.productDetails.prototype.hideContent();
+    });
 
-    var sp = document.getElementById("girls-carousel");
-
-    var swipeUp = new Hammer.Manager(sp);
+    //gesty mobile
+    var sp = document.getElementById("girls-carousel"),
+        swipeUp = new Hammer.Manager(sp),
+        hp = document.getElementById("productModal"),
+        swipeDown = new Hammer.Manager(hp);
 
     swipeUp.add(
         new Hammer.Pan({
@@ -298,24 +294,6 @@ TIZZY.productDetails = function () {
         })
     );
 
-    swipeUp.on("panend", function (ev) {
-        if (ev.direction === Hammer.DIRECTION_UP) {
-            TIZZY.productDetails.prototype.showContent('#girls-carousel', TIZZY.sliderIndex);
-        }
-    });
-
-    $('body.boys').find('.show-details').click(function () {
-        TIZZY.productDetails.prototype.showContent('#boys-carousel', TIZZY.sliderIndex);
-    });
-
-
-    $hideDetails.on('click', function () {
-        TIZZY.productDetails.prototype.hideContent();
-    });
-
-    var hp = document.getElementById("productModal");
-    var swipeDown = new Hammer.Manager(hp);
-
     swipeDown.add(
         new Hammer.Pan({
             direction: Hammer.DIRECTION_VERTICAL,
@@ -324,6 +302,14 @@ TIZZY.productDetails = function () {
         })
     );
 
+    //pokazanie szczegóły produktu
+    swipeUp.on("panend", function (ev) {
+        if (ev.direction === Hammer.DIRECTION_UP) {
+            TIZZY.productDetails.prototype.showContent('#girls-carousel', TIZZY.sliderIndex);
+        }
+    });
+
+    //ukrycie szczegółów produktu
     swipeDown.on("panend", function (ev) {
         if (ev.direction === Hammer.DIRECTION_DOWN) {
             TIZZY.productDetails.prototype.hideContent();
@@ -342,6 +328,9 @@ TIZZY.productDetails.prototype.showContent = function (carousel, index) {
 
     function onStartFn() {
         TIZZY.doc.addClass('modal-active modal-description');
+    }
+
+    function onCompleteFn() {
         if (TIZZY.sliderIndex === 0) {
             TIZZY.gifGirl_0.pause();
         }
@@ -354,7 +343,7 @@ TIZZY.productDetails.prototype.showContent = function (carousel, index) {
         modalFadeElem = $('.modal').find('.fade');
 
     TweenLite.to(slideLeftElem, 0.35, {x: '0', ease: animEase});
-    TweenLite.fromTo(TIZZY.modalOverlay, 0.35, {opacity: 0}, {opacity: 1, ease: animEase, onStart: onStartFn});
+    TweenLite.fromTo(TIZZY.modalOverlay, 0.35, {opacity: 0}, {opacity: 1, ease: animEase, onStart: onStartFn, onComplete: onCompleteFn});
     TweenLite.fromTo(modalFadeElem, 0.35, {opacity: 0}, {opacity: 1, ease: animEase});
 };
 
@@ -417,7 +406,6 @@ TIZZY.form = function () {
 
 };
 
-
 $(".modal-close").click(function (ev) {
     "use strict";
     ev.preventDefault();
@@ -439,9 +427,7 @@ $(function () {
     "use strict";
     wH = $(window).height();
     $('#girls, #boys').css('height', wH);
-
     TIZZY.startPage();
-    TIZZY.productSize();
     TIZZY.slider();
     TIZZY.menu();
     TIZZY.timer();
