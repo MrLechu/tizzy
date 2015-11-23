@@ -1,29 +1,28 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <title>Page Not Found</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
     <style>
 
         * {
-            line-height: 1.2;
+            line-height: 1.5;
             margin: 0;
         }
 
         html {
             color: #888;
-            display: table;
             font-family: sans-serif;
-            height: 100%;
             text-align: center;
-            width: 100%;
         }
 
         body {
-            display: table-cell;
-            vertical-align: middle;
-            margin: 2em auto;
+            left: 50%;
+            margin: -43px 0 0 -150px;
+            position: absolute;
+            top: 50%;
+            width: 300px;
         }
 
         h1 {
@@ -33,19 +32,19 @@
         }
 
         p {
-            margin: 0 auto;
-            width: 280px;
+            line-height: 1.2;
         }
 
-        @media only screen and (max-width: 280px) {
+        @media only screen and (max-width: 270px) {
 
-            body, p {
+            body {
+                margin: 10px auto;
+                position: static;
                 width: 95%;
             }
 
             h1 {
                 font-size: 1.5em;
-                margin: 0 0 0.3em;
             }
 
         }

@@ -3,9 +3,12 @@
     <head>
         <meta charset="utf-8">
         <title></title>
-        <link rel="stylesheet" href="css/normalize.css">
-        <link rel="stylesheet" href="css/main.css">
-        <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+        <meta name="description" content="">
+        <meta http-equiv="cleartype" content="on">
+
+        <script>
+            var media_url = './';
+        </script>
         <script type="text/javascript">
           WebFontConfig = {
             google: { families: [ 'Roboto:400,500,700,900:latin,latin-ext' ] }
@@ -20,129 +23,385 @@
             s.parentNode.insertBefore(wf, s);
           })();
         </script>
+        <link rel="stylesheet" href="css/main.css">
     </head>
-    <body class="she">
+    <body>
+        <!-- header -->
         <header class="main-header">
             <div class="container">
-                <a href="/" title="Tizzy Ninja" class="logo">
-                    <img src="img/tizzy-logo.png" alt="TIZZY NINJA">
+                <a href="/" title="Tizzy Ninja">
+                    <h1>
+                        <img src="img/tizzy-logo.png" alt="TIZZY NINJA" width="126" height="51" class="logo logo-black">
+                        <img src="img/tizzy-logo-white.png" alt="TIZZY NINJA" width="126" height="51" class="logo logo-white">
+                    </h1>
                 </a>
-                <div class="timer--small">
-                    <span class="ico ico-thisrt">?</span>
-                    <span class="timer--time">4:21</span>
-                </div>
                 <nav>
                     <ul class="menu">
+                        <li class="menu__item"><a href="#" title="Dostawa i zwroty">Girls</a></li>
+                        <li class="menu__item"><a href="#" title="Dostawa i zwroty">Boys</a></li>
                         <li class="menu__item"><a href="dostawa-zwroty.html" title="Dostawa i zwroty">Dostawa i zwroty</a></li>
+                        <li class="menu__item"><a href="regulamin.html" title="Regulamin">Regulamin</a></li>
                         <li class="menu__item"><a href="kontakt.html" title="Kontakt">Kontakt</a></li>
+                        <li class="menu__item timer--small">
+                            <img src="img/t-shirt-ico.gif" alt="t-shirt">
+                            <span>4:21</span>
+                        </li>
                     </ul>
-                    <a href="#" class="mobilemenu-trigger">
-                        <span class="hamburger-icon">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </span>
-                    </a>
                 </nav>
+                <a href="#" class="modal-close"></a>
             </div>
         </header>
-        <main>
-            <div class="container">
-                <div class="main-body">
-                    <article class="product">
-                        <header class="product__name">
-                            <h1>
-                                <span>ALOHA FROM DEER</span>
-                                Evil Cat Hoody
-                            </h1>
-                        </header>
-                        <div class="product__description">
-                            <p>
-                                Were you always seeking for a perfect hoodie, 
-                                with the cutes fabric? Here we go! Warm, 
-                                breathable and very comfy piece with ribbed cuffs and them. Unique fabric melt makes these goodies 
-                                so enjoyable. Don't you ever worry about the rainy, awful days again!
-                            </p>
+
+        <!-- body -->
+        <div class="main-body">
+            <div class="wrapper">
+                <div id="girls">
+                    <div class="container">
+                    <div class="wrap">
+                        <div class="owl-carousel" id="girls-carousel">
+                            <div>
+                                <div class="model">
+                                    <div class="gif gif0"></div>
+                                    <div class="zoom-wrapper"></div>
+                                </div>
+                                <article class="product">
+                                    <header class="product__name">
+                                        <h1>
+                                            <span>ALOHA FROM DEER 1 GIRLS <b class="ft-black">bluza</b></span>
+                                            Evil Cat Hoody
+                                        </h1>
+                                    </header>
+                                    <div class="product__description">
+                                        <p>
+                                           Were you always seeking for a perfect hoodie,
+                                                with the cutes fabric? Here we go! Warm,
+                                                breathable and very comfy piece with ribbed cuffs and them. Unique fabric melt makes these goodies
+                                                so enjoyable. Don't you ever worry about the rainy, awful days again!
+                                        </p>
+                                        <a href="#" title="Rozmiarówka">Rozmiarówka</a>
+                                    </div>
+                                </article>
+                            </div>
+
+                            <div>
+                                <div class="model">
+                                    <div class="gif gif1"></div>
+                                </div>
+                                <article class="product">
+                                    <header class="product__name">
+                                        <h1>
+                                            <span>ALOHA FROM DEER 2 GIRLS</span>
+                                            Evil Cat Hoody
+                                        </h1>
+                                    </header>
+                                    <div class="product__description">
+                                        <p>
+                                           Were you always seeking for a perfect hoodie,
+                                                with the cutes fabric? Here we go! Warm,
+                                                breathable and very comfy piece with ribbed cuffs and them. Unique fabric melt makes these goodies
+                                                so enjoyable. Don't you ever worry about the rainy, awful days again!
+                                        </p>
+                                        <a href="#" title="Rozmiarówka">Rozmiarówka</a>
+                                    </div>
+                                    <footer class="product__footer">
+                                        <img src="img/online-store-logo.jpg" width="250" height="95" alt="">
+                                    </footer>
+                                </article>
+                            </div>
+
+                            <div>
+                                <div class="model">
+                                    <div class="gif"></div>
+                                </div>
+                                <article class="product">
+                                    <header class="product__name">
+                                        <h1>
+                                            <span>ALOHA FROM DEER 3 GIRLS</span>
+                                            Evil Cat Hoody
+                                        </h1>
+                                    </header>
+                                    <div class="product__description">
+                                        <p>
+                                           Were you always seeking for a perfect hoodie,
+                                                with the cutes fabric? Here we go! Warm,
+                                                breathable and very comfy piece with ribbed cuffs and them. Unique fabric melt makes these goodies
+                                                so enjoyable. Don't you ever worry about the rainy, awful days again!
+                                        </p>
+                                        <a href="#" title="Rozmiarówka">Rozmiarówka</a>
+                                    </div>
+                                    <footer class="product__footer">
+                                        <img src="img/online-store-logo.jpg" width="250" height="95" alt="">
+                                    </footer>
+                                </article>
+                            </div>
                         </div>
-                        <footer class="product__footer"><!-- ?? -->
-                            <p><a href="#" title="Rozmiarówka">Rozmiarówka</a></p>
-                        </footer>
-                    </article>
-                    <img src="img/ona.jpg" alt="Modelka" class="model">
-                    <div class="product__media">
-                        <div class="product__media__thumbnails">
-                            <img class="product__media__thumbnail" src="img/thumb1.jpg">
-                            <img class="product__media__thumbnail" src="img/thumb2.jpg">
+                    </div>
+                    </div>
+                </div>
+                <div id="boys">
+                    <div class="wrap">
+                        <div class="owl-carousel" id="boys-carousel">
+                            <div>
+                                <div class="model">
+                                    <div class="gif"></div>
+                                </div>
+                                <article class="product">
+                                    <header class="product__name">
+                                        <h1>
+                                            <span>ALOHA FROM DEER 1 BOYS</span>
+                                            Evil Cat Hoody
+                                        </h1>
+                                    </header>
+                                    <div class="product__description">
+                                        <p>
+                                           Were you always seeking for a perfect hoodie,
+                                                with the cutes fabric? Here we go! Warm,
+                                                breathable and very comfy piece with ribbed cuffs and them. Unique fabric melt makes these goodies
+                                                so enjoyable. Don't you ever worry about the rainy, awful days again!
+                                        </p>
+                                        <a href="#" title="Rozmiarówka">Rozmiarówka</a>
+                                    </div>
+                                    <footer class="product__footer">
+                                        <img src="img/online-store-logo.jpg" width="250" height="95" alt="">
+                                    </footer>
+                                </article>
+                            </div>
+
+                            <div>
+                                <div class="model">
+                                    <div class="gif"></div>
+                                </div>
+                                <article class="product">
+                                    <header class="product__name">
+                                        <h1>
+                                            <span>ALOHA FROM DEER 2 BOYS</span>
+                                            Evil Cat Hoody
+                                        </h1>
+                                    </header>
+                                    <div class="product__description">
+                                        <p>
+                                           Were you always seeking for a perfect hoodie,
+                                                with the cutes fabric? Here we go! Warm,
+                                                breathable and very comfy piece with ribbed cuffs and them. Unique fabric melt makes these goodies
+                                                so enjoyable. Don't you ever worry about the rainy, awful days again!
+                                        </p>
+                                        <a href="#" title="Rozmiarówka">Rozmiarówka</a>
+                                    </div>
+                                    <footer class="product__footer">
+                                        <img src="img/online-store-logo.jpg" width="250" height="95" alt="">
+                                    </footer>
+                                </article>
+                            </div>
+
+                            <div>
+                                <div class="model">
+                                    <div class="gif"></div>
+                                </div>
+                                <img src="img/on.jpg" alt="Model" class="model">
+                                <article class="product">
+                                    <header class="product__name">
+                                        <h1>
+                                            <span>ALOHA FROM DEER 3 BOYS</span>
+                                            Evil Cat Hoody
+                                        </h1>
+                                    </header>
+                                    <div class="product__description">
+                                        <p>
+                                           Were you always seeking for a perfect hoodie,
+                                                with the cutes fabric? Here we go! Warm,
+                                                breathable and very comfy piece with ribbed cuffs and them. Unique fabric melt makes these goodies
+                                                so enjoyable. Don't you ever worry about the rainy, awful days again!
+                                        </p>
+                                        <a href="#" title="Rozmiarówka">Rozmiarówka</a>
+                                    </div>
+                                    <footer class="product__footer">
+                                        <img src="img/online-store-logo.jpg" width="250" height="95" alt="">
+                                    </footer>
+                                </article>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </main>
+        </div>
+
+        <!-- footer -->
         <footer class="main-footer">
+            <div class="bar">
+                <div class="bar__inner"></div>
+            </div>
             <div class="container">
-                <div class="col">
+                <!-- <div class="text">
+                    <h2>co ziomeczku...</h2>
+                    <p class="text-indent">zapomniałeś wczoraj zajrzeć</p>
+                    <p>Tu kupuj po normalnej cenie</p>
+                </div> -->
                 <div class="product__size">
-                    <a href="#" class="product__size__trigger">
-                        <span>XL</span>
+                    <a href="#" class="sizer__trigger">
+                        <span>L</span>
                     </a>
-                    <ul class="product__size__sizes">
-                        <li class="product__size__item">
-                            <input type="radio" name="size" value="M">
-                            <span>M</span>
-                        </li>
-                        <li class="product__size__item">
-                            <input type="radio" name="size" value="S">
-                            <span>S</span>
-                        </li>
-                        <li class="product__size__item">
-                            <input type="radio" name="size" value="L">
-                            <span>L</span>
-                        </li>
-                        <li class="product__size__item">
-                            <input type="radio" name="size" value="XL">
-                            <span>XL</span>
-                        </li>
-                        <li class="product__size__item">
-                            <input type="radio" name="size" value="XXL">
-                            <span>XXL</span>
-                        </li>
-                        <li class="product__size__item">
-                            <input type="radio" name="size" value="XXXL">
-                            <span>XXXL</span>
-                        </li>
-                    </ul>
                 </div>
+                <div class="shapes fade">
+                    <img src="img/logo.jpg" alt="Aloha From Deer" width="134" height="134" class="aloha-from-deer-logo">
+                    <span class="shape shape-star-red static">-50%</span>
                 </div>
-                <div class="col">
-                    <div class="product__discount-p">
-                        <span class="shape shape-star-red">-20%</span>
-                        <span class="shape shape-star-white">-30%</span>
-                    </div>
+                <div class="timer fade">
+                    <div id="defaultCountdown"></div>
                 </div>
-                <div class="col">
-                    <div class="product__timer">4:21</div>
-                </div>
-                <div class="col">
-                    <div class="product__discount-a">
-                        <span class="product__discount--before">
-                            150<b>zł</b>
-                            <span class="shape shape-cross-line">&bull;</span>
+                <div class="discount fade">
+                    <span class="discount--before">
+                        <span class="line-wrap">
+                            <span class="shape-cross-line"></span>
+                            <span class="prize">100</span>
                         </span>
-                        <span class="product__discount--after">100<b>zł</b></span>
-                    </div>
+                        <sup>zł</sup>
+                    </span>
+                    <span class="discount--after">
+                        <span class="prize-value"></span>
+                        <sup>zł</sup>
+                    </span>
                 </div>
-                <div class="col">
-                    <div class="product__action">
-                        <a href="#" class="btn btn--buy" class="Kup">Kup</a>
-                    </div>
+                <div class="buy">
+                    <a href="#" class="btn btn--buy">Kup</a>
                 </div>
             </div>
         </footer>
 
+        <div class="modal" id="productModal">
+            <div class="modal-overlay"></div>
+            <div class="modal-content">
+                <a href="#" class="hide-details">
+                    <span class="ico"></span>
+                </a>
+            </div>
+        </div>
+
+        <div class="modal" id="sizesModal">
+            <div class="modal-overlay"></div>
+            <div class="modal-content">
+                <img src="img/bg-sizes.jpg" alt="rozmiarówka" width="768" height="513">
+                <div class="sizer">
+                    <ul class="sizer__sizes clearfix">
+                        <li class="sizer__size" data-size="XS">
+                            <input type="radio" name="size" value="XS">
+                            <span>XS</span>
+                        </li>
+                        <li class="sizer__size" data-size="S">
+                            <input type="radio" name="size" value="S">
+                            <span>S</span>
+                        </li>
+                        <li class="sizer__size" data-size="M">
+                            <input type="radio" name="size" value="M">
+                            <span>M</span>
+                        </li>
+                        <li class="sizer__size active" data-size="L">
+                            <input type="radio" name="size" value="L">
+                            <span>L</span>
+                        </li>
+                        <li class="sizer__size" data-size="XL">
+                            <input type="radio" name="size" value="XL">
+                            <span>XL</span>
+                        </li>
+                    </ul>
+                    <a href="#" class="btn btn-white">Wybierz</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" id="defaultModal">
+            <div class="modal-overlay"></div>
+            <div class="modal-content">
+                <h2>Evila Cat Hoody</h2>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta dolore exercitationem quasi quis laboriosam ea ut deleniti obcaecati id totam, odio natus necessitatibus cum voluptatem aspernatur harum quas, veniam officia.
+                </p>
+            </div>
+        </div>
+
+        <div class="modal" id="formModal">
+            <div class="modal-overlay"></div>
+            <div class="modal-content">
+                <div class="purchase">
+                    <div class="v-center">
+                        <div class="v-center-inner">
+                            <img class="purchese-thumb" src="img/thumb.jpg" alt="Evil Cat Hoody (75zł)" width="54" height="54">
+                            <div class="purchese-details">
+                                <h2>Evil Cat Hoody (75zł)</h2>
+                                <a href="#">Rozmiar L</a>
+                                <a href="#">Zasady dostawy</a>
+                            </div>
+                            <a href="#" class="modal-close"></a>
+                        </div>
+                    </div>
+                </div>
+                <form action="" class="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Imie i Nazwisko">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Ulica i Numer Domu">
+                    </div>
+                    <div class="form-group inline">
+                        <input type="text" class="form-control" placeholder="Kod pocztowy">
+                        <input type="text" class="form-control" placeholder="Miasto">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Telefon (opacjonalnie)">
+                    </div>
+                    <div class="form-group checkbox">
+                        <input type="checkbox" id="checkbox">
+                        <label class="form-label" for="checkbox"><a href="#" onclick="window.open('/terms','_blank');return false;">dane zamawiającego inne niż dostawy</a></label>
+                    </div>
+                    <div class="form-group radio payu">
+                        <input type="radio" id="payu">
+                        <label class="form-label" for="payu" >PayU - przelew lub karta <span>(przesyłka UPS 16zł)</span></label>
+                    </div>
+                    <div class="form-group radio cod">
+                        <input type="radio" id="zapobraniem">
+                        <label class="form-label" for="zapobraniem">Za pobraniem <span>(przesyłka UPS 19zł)</span></label>
+                    </div>
+                    <button type="submit" class="btn btn-red">
+                        <b>Przejdź do płatności</b>
+                        <span>81<sup>zł</sup></span></a>
+                </form>
+            </div>
+        </div>
+
+
+
+        <div class="layer" id="layer-girls">
+            <div class="t">
+                <div class="tc">
+                    <span class="layer-text">girls</span>
+                </div>
+            </div>
+        </div>
+        <div class="layer" id="layer-boys">
+            <div class="t">
+                <div class="tc">
+                    <span class="layer-text">boys</span>
+                </div>
+            </div>
+        </div>
         <!-- Add your site or application content here -->
 
-        <script src="js/vendor/jquery-1.11.3.min.js"></script>
+        <script src="js/vendor/jquery-2.1.0.min.js"></script>
+        <script src="js/hammer.min.js"></script>
+        <script src="js/jquery.hammer.js"></script>
+    <!-- //-beg- concat_js -->
+        <script src="js/TweenMax.min.js"></script>
+        <script src="js/helper.js"></script>
+        <script src="js/jquery.history.js"></script>
+        <script src="js/jquery.checkbox.min.js"></script>
+        <script src="js/jquery.plugin.min.js"></script>
+        <script src="js/jquery.countdown.min.js"></script>
+        <script src="js/owl.carousel.min.js"></script>
+        <script src="js/jquery.zoom.min.js"></script>
         <script src="js/main.js"></script>
+    <!-- //-end- concat_js -->
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>

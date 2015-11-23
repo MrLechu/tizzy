@@ -1,162 +1,99 @@
-[HTML5 Boilerplate homepage](https://html5boilerplate.com) | [Documentation
-table of contents](TOC.md)
+[Mobile Boilerplate homepage](http://html5boilerplate.com/mobile/) | [Documentation
+table of contents](README.md)
 
 # The CSS
 
-HTML5 Boilerplate's CSS includes:
+The Mobile Boilerplate starting CSS includes:
 
-* [Normalize.css](#normalizecss)
-* [Useful defaults](#useful-defaults)
-* [Common helpers](#common-helpers)
-* [Placeholder media queries](#media-queries)
-* [Print styles](#print-styles)
+* [Normalize.css](https://github.com/necolas/normalize.css).
+* Useful Mobile Boilerplate defaults.
+* Common helpers.
+* Placeholder media queries.
 
-This starting CSS does not rely on the presence of
-[conditional class names](https://www.paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/),
-[conditional style sheets](https://css-tricks.com/how-to-create-an-ie-only-stylesheet/),
-or [Modernizr](http://modernizr.com/), and it is ready to use no matter what
-your development preferences happen to be.
+This starting CSS does not rely on the presence of conditional classnames,
+conditional style sheets, or Modernizr. It is ready to use whatever your
+development preferences happen to be.
 
 
 ## Normalize.css
 
-In order to make browsers render all elements more consistently and in line
-with modern standards, we include
-[Normalize.css](https://necolas.github.io/normalize.css/) — a modern, HTML5-ready
-alternative to CSS resets.
-
-As opposed to CSS resets, Normalize.css:
-
-* targets only the styles that need normalizing
-* preserves useful browser defaults rather than erasing them
-* corrects bugs and common browser inconsistencies
-* improves usability with subtle improvements
-* doesn't clutter the debugging tools
-* has better documentation
-
-For more information about Normalize.css, please refer to its [project
-page](https://necolas.github.com/normalize.css/), as well as this
-[blog post](http://nicolasgallagher.com/about-normalize-css/).
+Normalize.css is a modern, HTML5-ready alternative to CSS resets. It contains
+extensive inline documentation. Please refer to the [Normalize.css
+project](http://necolas.github.com/normalize.css/) for more information.
 
 
-## Useful defaults
+## Mobile Boilerplate defaults
 
-Several base styles are included that build upon `Normalize.css`. These
-styles:
+This project includes a handful of base styles that build upon Normalize.css.
+These include:
 
-* provide basic typography settings that improve text readability
-* protect against unwanted `text-shadow` during text highlighting
-* tweak the default alignment of some elements (e.g.: `img`, `video`,
-  `fieldset`, `textarea`)
-* style the prompt that is displayed to users using an outdated browser
+* Basic typography setting to provide improved text readability by default.
+* Tweaks to default image alignment, fieldsets, and textareas.
 
-You are free and even encouraged to modify or add to these base styles as your
-project requires.
+You are free to modify or add to these base styles as your project requires.
 
 
 ## Common helpers
 
-Along with the base styles, we also provide some commonly used helper classes.
+#### `.nocallout`
+
+Prevent the callout menu appearing in iOS Safari when the user performs tap & hold.
+
+#### `.pressed`
+
+An active button class for Mobile Boilerplate's `fastButton` helper method.
+
+#### `textarea[contenteditable]`
+
+A hack for HTML5 contenteditable attribute on mobile
+
+#### `.gifhidden`
+
+A workaround for S60 3.x and 5.0 devices which do not animated gif images if they have been set as display: none
+
+#### `.ir`
+
+Add the `.ir` class to any element you are applying image-replacement to. Be
+sure to include `background-image: url(pathtoimage.png);` for that specific
+element so that image replacement can occur.
 
 #### `.hidden`
 
-The `hidden` class can be added to any element that you want to hide visually
-and from screen readers. It could be an element that will be populated and
-displayed later, or an element you will hide with JavaScript.
+Add the `.hidden` class to any elements that you want to hide from all
+presentations, including screen readers. It could be an element that will be
+populated later with JavaScript or an element you will hide with JavaScript. Do
+not use this for SEO keyword stuffing. That is just not cool.
 
 #### `.visuallyhidden`
 
-The `visuallyhidden` class can be added to any element that you want to hide
-visually, while still have its content accessible to screen readers.
-
-See also:
-
-* [CSS in Action: Invisible Content Just for Screen Reader
-  Users](http://www.webaim.org/techniques/css/invisiblecontent/)
-* [Hiding content for
-  accessibility](http://snook.ca/archives/html_and_css/hiding-content-for-accessibility)
-* [HTML5 Boilerplate - Issue #194](https://github.com/h5bp/html5-boilerplate/issues/194/).
+Add the `.visuallyhidden` class to hide text from browsers but make it
+available for screen readers. You can use this to hide text that is specific to
+screen readers but that other users should not see. [About invisible
+content](http://www.webaim.org/techniques/css/invisiblecontent/), [Hiding
+content for
+accessibility](http://snook.ca/archives/html_and_css/hiding-content-for-accessibility),
+[HTML5 Boilerplate
+issue/research](https://github.com/h5bp/html5-boilerplate/issues/194/).
 
 #### `.invisible`
 
-The `invisible` class can be added to any element that you want to hide
-visually and from screen readers, but without affecting the layout.
-
-As opposed to the `hidden` class that effectively removes the element from the
-layout, the `invisible` class will simply make the element invisible while
-keeping it in the flow and not affecting the positioning of the surrounding
+Add the `.invisible` class to any element you want to hide without affecting
+layout. When you use `display: none` an element is effectively removed from the
+layout. But in some cases you want the element to simply be invisible while
+remaining in the flow and not affecting the positioning of surrounding
 content.
-
-__N.B.__ Try to stay away from, and don't use the classes specified above for
-[keyword stuffing](https://en.wikipedia.org/wiki/Keyword_stuffing) as you will
-harm your site's ranking!
 
 #### `.clearfix`
 
-The `clearfix` class can be added to any element to ensure that it always fully
-contains its floated children.
-
-Over the years there have been many variants of the clearfix hack, but currently,
-we use the [micro clearfix](http://nicolasgallagher.com/micro-clearfix-hack/).
+Adding `.clearfix` to an element will ensure that it always fully contains its
+floated children. There have been many variants of the clearfix hack over the
+years, and there are other hacks that can also help you to contain floated
+children, but the HTML5 Boilerplate currently uses the [micro
+clearfix](http://nicolasgallagher.com/micro-clearfix-hack/).
 
 
 ## Media Queries
 
-HTML5 Boilerplate makes it easy for you to get started with a
-[_mobile first_](http://www.lukew.com/presos/preso.asp?26) and [_responsive web
-design_](http://www.alistapart.com/articles/responsive-web-design/) approach to
-development. But it's worth remembering that there are [no silver
-bullets](http://blog.cloudfour.com/css-media-query-for-mobile-is-fools-gold/).
+The Mobile Boilerplate provides a default placeholder Media Query that can be used to override the primary 'mobile first' styles, providing adjustments for wider viewports (such as tablet devices). It is recommended that you adapt these Media Queries based on the content of your mobile web app, rather than mirroring the fixed dimensions of specific devices.
 
-We include placeholder media queries to help you build up your mobile styles for
-wider viewports and high-resolution displays. It's recommended that you adapt
-these media queries based on the content of your site rather than mirroring the
-fixed dimensions of specific devices.
-
-If you do not want to take the _mobile first_ approach, you can simply edit or
-remove these placeholder media queries. One possibility would be to work from
-wide viewports down, and use `max-width` media queries instead (e.g.:
-`@media only screen and (max-width: 480px)`).
-
-For more features that can help you in your mobile web development, take a look
-into our [Mobile Boilerplate](https://github.com/h5bp/mobile-boilerplate).
-
-
-## Print styles
-
-Lastly, we provide some useful print styles that will optimize the printing
-process, as well as make the printed pages easier to read.
-
-At printing time, these styles will:
-
-* strip all background colors, change the font color to black, and remove the
-  `text-shadow` — done in order to [help save printer ink and speed up the
-  printing process](http://www.sanbeiji.com/archives/953)
-* underline and expand links to include the URL — done in order to allow users
-  to know where to refer to<br>
-  (exceptions to this are: the links that are
-  [fragment identifiers](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#attr-href),
-  or use the
-  [`javascript:` pseudo protocol](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/void#JavaScript_URIs))
-* expand abbreviations to include the full description — done in order to allow
-  users to know what the abbreviations stands for
-* provide instructions on how browsers should break the content into pages and
-  on [orphans/widows](https://en.wikipedia.org/wiki/Widows_and_orphans), namely,
-  we instruct
-  [supporting browsers](https://en.wikipedia.org/wiki/Comparison_of_layout_engines_%28Cascading_Style_Sheets%29#Grammar_and_rules)
-  that they should:
-
-  * ensure the table header (`<thead>`) is [printed on each page spanned by the
-    table](http://css-discuss.incutio.com/wiki/Printing_Tables)
-  * prevent block quotations, preformatted text, images and table rows from
-    being split onto two different pages
-  * ensure that headings never appear on a different page than the text they
-    are associated with
-  * ensure that
-    [orphans and widows](https://en.wikipedia.org/wiki/Widows_and_orphans) do
-    [not appear on printed pages](https://css-tricks.com/almanac/properties/o/orphans/)
-
-The print styles are included along with the other `css` to [avoid the
-additional HTTP request](http://www.phpied.com/delay-loading-your-print-css/).
-Also, they should always be included last, so that the other styles can be
-overwritten.
+The mobile boilerplate also provides a second placeholder Media Query to help target high density screens.

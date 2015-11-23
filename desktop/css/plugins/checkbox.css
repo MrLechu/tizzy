@@ -1,0 +1,17 @@
+.jquery-checkbox {
+  display: block;
+  float: left;
+  margin-right: 10px;
+  font-size: 20px;
+  line-height: 20px;
+  cursor: pointer;
+}
+.jquery-checkbox .mark {
+  display: inline;
+}
+.jquery-checkbox img {
+  vertical-align: middle;
+}
+.jquery-checkbox img {
+  background-position: 0px 0px;
+}
