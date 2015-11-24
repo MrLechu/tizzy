@@ -406,16 +406,30 @@ TIZZY.zoomPhoto = function () {
         TIZZY.gifGirl_0.tl.pause();
         TIZZY.gifGirl_1.tl.pause();
     });
+
     $(".gif").zoom({
-        url: media_url + 'img/gif/girls/gif0.jpg',
+        url: media_url + 'img/ona.jpg',
         target: $(".zoom-wrapper"),
+        magnify: 1.3,
         onZoomIn: function () {
             $(".zoom-wrapper").addClass("zoom");
+            $(document).mousemove(function (ev) {
+                var mouseX = ev.pageX + 40,
+                    mouseY = ev.pageY - 150;
+
+
+                $(".zoom-wrapper").css({
+                    "left": mouseX,
+                    "top": mouseY
+                });
+            });
         },
         onZoomOut: function () {
             $(".zoom-wrapper").removeClass("zoom");
         }
     });
+
+
 }
 
 TIZZY.timer = function () {
