@@ -88,8 +88,13 @@ h1 {
   color: #ee322d;
 }
 .timer--small {
+  position: relative;
+  z-index: -1;
+  opacity: 1;
+  visibility: visible;
   padding-left: 50px;
   color: #ff0126;
+  .transition(all 0.35s);
 }
 
 .product {
@@ -150,22 +155,7 @@ h1 {
     color: #000;
   }
 }
-.product__thumbnails {
-  position: absolute;
-  left: 50%;
-  top: 35%;
-  margin-left: 200px;
-  a {
-    display: block;
-    margin-bottom: 10px;
-  }
-  img {
-    border: 1px solid #a6a7ac;
-    &:hover {
-      border: 1px solid #fe0025;
-    }
-  }
-}
+
 
 .model {
   display: block;
@@ -263,9 +253,7 @@ h1 {
   color: #fff;
   cursor: pointer;
   border: 1px solid #fff;
-  -webkit-transition: background-color 0.35s;
-  -o-transition: background-color 0.35s;
-  transition: background-color 0.35s;
+  .transition(background-color 0.35s);
   &.active,
   &:active,
   &:hover,
@@ -524,9 +512,7 @@ textarea {
   color: #fff;
   border: 0;
   background-color: #ff0028;
-  -webkit-transition: background-color 0.35s;
-  -o-transition: background-color 0.35s;
-  transition: background-color 0.35s;
+  .transition(background-color 0.35s)
 }
 .btn-red {
   background-color: #ff0028;
@@ -792,6 +778,11 @@ div[class^="owl"] {
     .mobilemenu-trigger {
       opacity: 0;
       visibility: hidden;
+    }
+    .timer--small {
+      opacity: 0;
+      visibility: hidden;
+      z-index: -1;
     }
     .modal-close {
       right: 6.8%;
@@ -1088,6 +1079,28 @@ body.boys .modal-overlay {
   width: 100%;
   bottom: 0;
 }
+.model img {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  margin-left: -110px;
+}
+
+.model {
+  .gif-wrap,
+  img {
+    opacity: 0;
+    visibility: hidden;
+    z-index: -1;
+    .transition(all 0.35s);
+    &.active {
+      opacity: 1;
+      visibility: visible;
+      z-index: 1;
+    }
+  }
+
+}
 .gif-set (@width; @height) {
   margin: auto;
   display: block;
@@ -1103,28 +1116,55 @@ body.boys .modal-overlay {
 }
 
 .gif {
-  position: relative;
-  left: -20px;
-  .gif-set(@width: 143px; @height: 215px);
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+
+  @width: 143px;
+  @height: 215px;
+
+  .gif-set(@width; @height);
+
+  margin-left: -@width / 2;
 }
 @media (min-height: 500px) {
   .gif {
-    .gif-set(@width: 203px; @height: 305px);
+
+    @width: 203px;
+    @height: 305px;
+
+    .gif-set(@width; @height);
+    margin-left: -@width / 2;
   }
 }
 @media (min-height: 600px) {
   .gif {
-    .gif-set(@width: 210px; @height: 315px);
+
+    @width: 210px;
+    @height: 315px;
+
+    .gif-set(@width; @height);
+    margin-left: -@width / 2;
   }
 }
 @media (min-height: 650px) {
   .gif {
-    .gif-set(@width: 270px; @height: 405px);
+
+    @width: 270px;
+    @height: 405px;
+
+    .gif-set(@width; @height);
+    margin-left: -@width / 2;
   }
 }
 @media (min-height: 900px) {
   .gif {
-    .gif-set(@width: 390px; @height: 585px);
+
+    @width: 390px;
+    @height: 585px;
+
+    .gif-set(@width; @height);
+    margin-left: -@width / 2;
   }
 }
 #girls  {
@@ -1138,6 +1178,31 @@ body.boys .modal-overlay {
 #boys .gif {
   background-image: url(../img/gif/boys/gif.jpg);
 }
+
+
+
+.thumbnails {
+  position: absolute;
+  left: 50%;
+  top: 35%;
+  margin-left: 200px;
+  .thumbnail {
+    display: block;
+    margin-bottom: 10px;
+    img {
+      border: 1px solid #a6a7ac;
+      &:hover {
+        border: 1px solid #fe0025;
+      }
+    }
+    &.active {
+      img {
+        border: 1px solid #fe0025;
+      }
+    }
+  }
+}
+
 .zoom-wrapper {
   position: absolute;
   width: 300px;

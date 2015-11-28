@@ -1,5 +1,5 @@
 /*jslint browser: true*/
-/*globals $, window, alert, TweenLite, ease, Power0, SteppedEase, MBP, Hammer, media_url*/
+/*globals $, window, alert, TweenLite, ease, Power0, SteppedEase, MBP, Hammer, media_url, TimelineLite*/
 var TIZZY,
     wH,
     prizeValue = $('.prize-value'),
@@ -22,6 +22,12 @@ TIZZY = {
 };
 //wersja z konstruktorem
 
+TIZZY.config = {
+    productImage: "produkty"
+};
+
+var config = TIZZY.config;
+
 function Gif(what) {
     "use strict";
     this.gif = what;
@@ -31,6 +37,7 @@ function Gif(what) {
 }
 
 Gif.prototype.init = function (speed, isPlaying) {
+    "use strict";
     if (speed) {
         this.speed = speed;
     }
@@ -54,15 +61,17 @@ Gif.prototype.init = function (speed, isPlaying) {
     } else {
         this.tl.pause();
     }
-}
+};
 
 Gif.prototype.play = function (speed) {
+    "use strict";
     this.tl.resume();
-}
+};
 
 Gif.prototype.pause = function () {
+    "use strict";
     this.tl.pause();
-}
+};
 
 TIZZY.startPage = function () {
     "use strict";
@@ -82,14 +91,12 @@ TIZZY.startPage = function () {
             TIZZY.gifGirl_0.init(false, true);
             TIZZY.gifGirl_1.init(false, false);
         }
-        if (TIZZY.category === "boys") {
-            // start pierwszego gifa w sekcji dla chłpców
-        }
+        // if (TIZZY.category === "boys") {
+        // }
     }
 
     function onComplete() {
         TweenLite.fromTo(layer, 0.7, {opacity: 1}, {opacity: 0, ease: animEase, onComplete: onOpacityComplete});
-        TIZZY.productDetails();
         TIZZY.productSize();
     }
 
@@ -112,7 +119,6 @@ TIZZY.startPage = function () {
 
         TIZZY.gifGirl_0 = new Gif('.gif0');
         TIZZY.gifGirl_1 = new Gif('.gif1');
-
     });
 
     layerBoys.hammer().bind("panleft click", function () {
@@ -152,15 +158,6 @@ TIZZY.slider = function () {
         }
     });
 
-    owlGirls.on('drag.owl.carousel', function (event) {
-        TweenLite.to($('.show-details'), 0.3, {opacity: 0, scale: 0.5});
-    });
-
-    owlGirls.on('dragged.owl.carousel', function (event) {
-        TweenLite.to($('.show-details'), 0.3, {opacity: 1, scale: 1});
-    });
-
-
     owlGirls.on('translate.owl.carousel', function (event) {
         if (event.item.index === 0) {
             TIZZY.gifGirl_0.tl.pause();
@@ -172,7 +169,6 @@ TIZZY.slider = function () {
 
     owlGirls.on('translated.owl.carousel', function (event) {
         TIZZY.sliderIndex = event.item.index;
-        console.log(TIZZY.sliderIndex);
         if (TIZZY.sliderIndex === 0) {
             //cena po obniżce
             prizeValue.text('39');
@@ -197,8 +193,6 @@ TIZZY.slider = function () {
             TweenLite.to(footerText, 0.5, {opacity: 1});
             TweenLite.to(footerFadeElem, 0.5, {opacity: 0});
         }
-
-
     });
 
     var owlBoys = $("#boys-carousel");
@@ -243,8 +237,6 @@ TIZZY.productSize = function () {
         event.preventDefault();
         TIZZY.doc.addClass('modal-active modal-sizes');
 
-        History.pushState(null, "size", "?rozmiar=" + size);
-
         if (TIZZY.sliderIndex === 0) {
             TIZZY.gifGirl_0.tl.pause();
         }
@@ -274,17 +266,12 @@ TIZZY.productSize = function () {
 
         $(".sizer__trigger span").text("");
         $(".sizer__trigger span").text(size);
-
-        History.replaceState(null, "size", "?rozmiar=" + size);
-
-        //TIZZY.doc.removeClass('modal-active modal-sizes modal-form');
         $(".sizer__size").removeClass("active");
         thatSize.addClass('active');
     });
 
     $('.sizer .btn').click(function (e) {
         e.preventDefault();
-
         TIZZY.doc.removeClass('modal-active modal-sizes modal-form');
         if (TIZZY.sliderIndex === 0) {
             TIZZY.gifGirl_0.tl.resume();
@@ -295,157 +282,75 @@ TIZZY.productSize = function () {
     });
 };
 
-TIZZY.productDetails = function () {
-    "use strict";
-    var $hideDetails = $('.hide-details');
-
-    $('body.girls').find('.show-details').click(function () {
-        TIZZY.productDetails.prototype.showContent('#girls-carousel', TIZZY.sliderIndex);
-    });
-    $('body.boys').find('.show-details').click(function () {
-        TIZZY.productDetails.prototype.showContent('#boys-carousel', TIZZY.sliderIndex);
-    });
-    $hideDetails.on('click', function () {
-        TIZZY.productDetails.prototype.hideContent();
-    });
-
-    //gesty mobile
-
-    var hp = document.getElementById("productModal"),
-        swipeDown = new Hammer.Manager(hp);
-
-
-
-    swipeDown.add(
-        new Hammer.Pan({
-            direction: Hammer.DIRECTION_VERTICAL,
-            treshold: 80,
-            pointers: 0
-        })
-    );
-
-
-    //ukrycie szczegółów produktu
-    swipeDown.on("panend", function (ev) {
-        if (ev.direction === Hammer.DIRECTION_DOWN) {
-            TIZZY.productDetails.prototype.hideContent();
-        }
-    });
-
-    var sp = document.getElementById("girls-carousel"),
-    swipeUp = new Hammer.Manager(sp);
-
-    swipeUp.add(
-        new Hammer.Pan({
-            direction: Hammer.DIRECTION_VERTICAL,
-            treshold: 80,
-            pointers: 0
-        })
-    );
-
-    //pokazanie szczegóły produktu
-    swipeUp.on("panend", function (ev) {
-        if (ev.direction === Hammer.DIRECTION_UP) {
-            TIZZY.productDetails.prototype.showContent('#girls-carousel', TIZZY.sliderIndex);
-        }
-    });
-};
-
-TIZZY.productDetails.prototype.showContent = function (carousel, index) {
-    "use strict";
-    $(carousel)
-        .find('.owl-item')
-        .eq(index)
-        .find('.product')
-        .clone()
-        .appendTo(TIZZY.modalContent);
-
-    function onStartFn() {
-        TIZZY.doc.addClass('modal-active modal-description');
-
-    }
-
-    function onCompleteFn() {
-        TIZZY.gifGirl_0.tl.pause();
-        TIZZY.gifGirl_1.tl.pause();
-    }
-
-    var slideLeftElem = $('.modal').find('.slide-left'),
-        modalFadeElem = $('.modal').find('.fade');
-
-    TweenLite.to(slideLeftElem, 0.35, {x: '0', ease: animEase});
-    TweenLite.fromTo(TIZZY.modalOverlay, 0.35, {opacity: 0}, {opacity: 1, ease: animEase, onStart: onStartFn, onComplete: onCompleteFn});
-    TweenLite.fromTo(modalFadeElem, 0.35, {opacity: 0}, {opacity: 1, ease: animEase});
-};
-
-TIZZY.productDetails.prototype.hideContent = function () {
-    "use strict";
-    event.preventDefault();
-
-    function onCompleteFn() {
-        $('#productModal').find('.product').remove();
-        TIZZY.doc.removeClass('modal-active modal-description');
-        if (TIZZY.sliderIndex === 0) {
-            TIZZY.gifGirl_0.tl.play();
-        }
-        if (TIZZY.sliderIndex === 1) {
-            TIZZY.gifGirl_1.tl.play();
-        }
-    }
-
-    var slideLeftElem = $('.modal').find('.slide-left'),
-        modalFadeElem = $('.modal').find('.fade');
-
-    TweenLite.to(modalFadeElem, 0.5, {opacity: 0, ease: animEase});
-    TweenLite.to(slideLeftElem, 0.3, {x: '-100%', ease: animEase});
-    TweenLite.to(TIZZY.modalOverlay, 0.4, {opacity: '0', ease: animEase, onComplete: onCompleteFn});
-};
-
 TIZZY.zoomPhoto = function () {
-    $(".gif").mouseover(function () {
-        TIZZY.gifGirl_0.tl.pause();
-        TIZZY.gifGirl_1.tl.pause();
-    });
+    "use strict";
 
-    $(".gif").zoom({
-        url: media_url + 'img/ona.jpg',
-        target: $(".zoom-wrapper"),
-        magnify: 1.3,
-        onZoomIn: function () {
-            $(".zoom-wrapper").addClass("zoom");
-            $(document).mousemove(function (ev) {
-                var mouseX = ev.pageX + 40,
-                    mouseY = ev.pageY - 150;
+    var thumbnail = $(".thumbnail");
+
+    thumbnail.click(function (e) {
+        e.preventDefault();
+
+        var that = $(this),
+            fullPhotoFileName = that.data("filename"),
+            isGif = that.hasClass("is-gif"),
+            id = that.attr("href"),
+            gif = that.parents(".owl-item").find(".gif-wrap"),
+            img = that.parents(".owl-item").find(".model img"),
+            thumbnails = that.parents(".owl-item").find(".thumbnails");
 
 
-                $(".zoom-wrapper").css({
-                    "left": mouseX,
-                    "top": mouseY
-                });
-            });
-        },
-        onZoomOut: function () {
-            $(".zoom-wrapper").removeClass("zoom");
+        //pokazuje dany podgląd
+        gif.removeClass("active");
+        img.removeClass("active");
+
+        $(id).addClass("active");
+        if (!isGif) {
+            zoomPhoto(fullPhotoFileName);
         }
+
+        //aktywna miniaturka
+        thumbnail.removeClass("active");
+        that.addClass("active");
     });
 
+    function zoomPhoto(fullPhotoFileName) {
+        $(".model img").zoom({
+            url: products_url + fullPhotoFileName,
+            target: $(".zoom-wrapper"),
+            magnify: 1.3,
+            onZoomIn: function () {
+                $(".zoom-wrapper").addClass("zoom");
+                $(document).mousemove(function (ev) {
+                    var mouseX = ev.pageX + 40,
+                        mouseY = ev.pageY - 150;
 
-}
+                    $(".zoom-wrapper").css({
+                        left: mouseX,
+                        top: mouseY
+                    });
+                });
+            },
+            onZoomOut: function () {
+                $(".zoom-wrapper").removeClass("zoom");
+            }
+        });
+    }
+
+};
 
 TIZZY.timer = function () {
     "use strict";
     var until = new Date(2015, 11 - 1, 25);
-
     $('#defaultCountdown').countdown({until: until, compact: false, padZeroes: true, format: 'HMS'});
 };
 
 TIZZY.form = function () {
     "use strict";
     $('.form input:checkbox').checkbox({
-        empty: media_url + 'img/empty.png'
+        empty: media_url + 'empty.png'
     });
     $('.form input:radio').checkbox({
-        empty: media_url + 'img/empty.png'
+        empty: media_url + 'empty.png'
     });
     $('.btn--buy').click(function (ev) {
         ev.preventDefault();
@@ -453,7 +358,6 @@ TIZZY.form = function () {
         TIZZY.gifGirl_0.tl.pause();
         TIZZY.gifGirl_1.tl.pause();
     });
-
 };
 
 $(".modal-close").click(function (ev) {
@@ -461,7 +365,6 @@ $(".modal-close").click(function (ev) {
     ev.preventDefault();
     TIZZY.doc.removeClass('modal-active modal-sizes modal-form');
 });
-
 
 TIZZY.debug = function () {
     "use strict";
@@ -472,7 +375,6 @@ TIZZY.debug = function () {
     $("#boys").css('right', '100%');
 };
 
-
 $(function () {
     "use strict";
     wH = $(window).height();
@@ -482,7 +384,7 @@ $(function () {
     TIZZY.timer();
     TIZZY.form();
     TIZZY.zoomPhoto();
-    //MBP.preventScrolling();
+    //TIZZY.productDetails();
     //TIZZY.debug();
 });
 

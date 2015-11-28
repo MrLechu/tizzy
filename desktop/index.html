@@ -7,7 +7,8 @@
         <meta http-equiv="cleartype" content="on">
 
         <script>
-            var media_url = './';
+            var media_url = './img/';
+            var products_url = './produkty/';
         </script>
         <script type="text/javascript">
           WebFontConfig = {
@@ -43,7 +44,7 @@
                         <li class="menu__item"><a href="regulamin.html" title="Regulamin">Regulamin</a></li>
                         <li class="menu__item"><a href="kontakt.html" title="Kontakt">Kontakt</a></li>
                         <li class="menu__item timer--small">
-                            <img src="img/t-shirt-ico.gif" alt="t-shirt">
+                            <img src="img/t-shirt-ico.png" alt="t-shirt">
                             <span>4:21</span>
                         </li>
                     </ul>
@@ -62,8 +63,11 @@
                         <div class="owl-carousel" id="girls-carousel">
                             <div>
                                 <div class="model">
-                                    <div class="gif gif0"></div>
-
+                                    <div class="gif-wrap active" id="model_1_1">
+                                        <div class="gif gif0"></div>
+                                    </div>
+                                    <img src="produkty/front-medium.jpg" class="model-front" id="model_1_2">
+                                    <img src="produkty/back-medium.jpg" class="model-back" id="model_1_3">
                                 </div>
                                 <article class="product">
                                     <header class="product__name">
@@ -82,9 +86,10 @@
                                         <a href="#" title="Rozmiarówka">Rozmiarówka</a>
                                     </div>
                                 </article>
-                                <div class="product__thumbnails">
-                                    <a href="#"><img src="img/thumb1.jpg" alt=""></a>
-                                    <a href="#"><img src="img/thumb2.jpg" alt=""></a>
+                                <div class="thumbnails">
+                                    <a href="#model_1_1" class="thumbnail is-gif active"><img src="img/thumb1.jpg" alt="miniaturka zdjęcia produktu" width="66" height="66"></a>
+                                    <a href="#model_1_2" data-filename="front-big.jpg" class="thumbnail is-zoom"><img src="produkty/przod.jpg" alt="miniaturka zdjęcia produktu" width="66" height="66"></a>
+                                    <a href="#model_1_3" data-filename="back-big.jpg" class="thumbnail is-zoom"><img src="produkty/tyl.jpg" alt="miniaturka zdjęcia produktu" width="66" height="66"></a>
                                 </div>
                             </div>
 

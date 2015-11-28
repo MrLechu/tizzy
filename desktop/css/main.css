@@ -791,8 +791,15 @@ h1 {
   color: #ee322d;
 }
 .timer--small {
+  position: relative;
+  z-index: -1;
+  opacity: 1;
+  visibility: visible;
   padding-left: 50px;
   color: #ff0126;
+  -webkit-transition: all 0.35s;
+  -o-transition: all 0.35s;
+  transition: all 0.35s;
 }
 .product {
   position: absolute;
@@ -849,22 +856,6 @@ h1 {
   text-transform: uppercase;
   text-decoration: underline;
   color: #000;
-}
-.product__thumbnails {
-  position: absolute;
-  left: 50%;
-  top: 35%;
-  margin-left: 200px;
-}
-.product__thumbnails a {
-  display: block;
-  margin-bottom: 10px;
-}
-.product__thumbnails img {
-  border: 1px solid #a6a7ac;
-}
-.product__thumbnails img:hover {
-  border: 1px solid #fe0025;
 }
 .model {
   display: block;
@@ -1461,6 +1452,11 @@ div[class^="owl"] {
   opacity: 0;
   visibility: hidden;
 }
+.modal-active.modal-sizes .timer--small {
+  opacity: 0;
+  visibility: hidden;
+  z-index: -1;
+}
 .modal-active.modal-sizes .modal-close {
   right: 6.8%;
   z-index: 1;
@@ -1739,9 +1735,31 @@ body.boys .modal-overlay {
   width: 100%;
   bottom: 0;
 }
+.model img {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  margin-left: -110px;
+}
+.model .gif-wrap,
+.model img {
+  opacity: 0;
+  visibility: hidden;
+  z-index: -1;
+  -webkit-transition: all 0.35s;
+  -o-transition: all 0.35s;
+  transition: all 0.35s;
+}
+.model .gif-wrap.active,
+.model img.active {
+  opacity: 1;
+  visibility: visible;
+  z-index: 1;
+}
 .gif {
-  position: relative;
-  left: -20px;
+  position: absolute;
+  left: 50%;
+  bottom: 0;
   margin: auto;
   display: block;
   width: 143px;
@@ -1752,6 +1770,7 @@ body.boys .modal-overlay {
   background-position: 0 0;
   -webkit-background-size: cover;
   background-size: cover;
+  margin-left: -71.5px;
 }
 @media (min-height: 500px) {
   .gif {
@@ -1765,6 +1784,7 @@ body.boys .modal-overlay {
     background-position: 0 0;
     -webkit-background-size: cover;
     background-size: cover;
+    margin-left: -101.5px;
   }
 }
 @media (min-height: 600px) {
@@ -1779,6 +1799,7 @@ body.boys .modal-overlay {
     background-position: 0 0;
     -webkit-background-size: cover;
     background-size: cover;
+    margin-left: -105px;
   }
 }
 @media (min-height: 650px) {
@@ -1793,6 +1814,7 @@ body.boys .modal-overlay {
     background-position: 0 0;
     -webkit-background-size: cover;
     background-size: cover;
+    margin-left: -135px;
   }
 }
 @media (min-height: 900px) {
@@ -1807,6 +1829,7 @@ body.boys .modal-overlay {
     background-position: 0 0;
     -webkit-background-size: cover;
     background-size: cover;
+    margin-left: -195px;
   }
 }
 #girls .gif0 {
@@ -1817,6 +1840,25 @@ body.boys .modal-overlay {
 }
 #boys .gif {
   background-image: url(../img/gif/boys/gif.jpg);
+}
+.thumbnails {
+  position: absolute;
+  left: 50%;
+  top: 35%;
+  margin-left: 200px;
+}
+.thumbnails .thumbnail {
+  display: block;
+  margin-bottom: 10px;
+}
+.thumbnails .thumbnail img {
+  border: 1px solid #a6a7ac;
+}
+.thumbnails .thumbnail img:hover {
+  border: 1px solid #fe0025;
+}
+.thumbnails .thumbnail.active img {
+  border: 1px solid #fe0025;
 }
 .zoom-wrapper {
   position: absolute;
