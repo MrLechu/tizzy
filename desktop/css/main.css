@@ -489,7 +489,7 @@ th {
     top: -20px;
   }
 }
-/* 
+/*
  *  Owl Carousel - Animate Plugin
  */
 .owl-carousel .animated {
@@ -524,7 +524,7 @@ th {
     opacity: 0;
   }
 }
-/* 
+/*
  * 	Owl Carousel - Auto Height Plugin
  */
 .owl-height {
@@ -534,7 +534,7 @@ th {
   -o-transition: height 500ms ease-in-out;
   transition: height 500ms ease-in-out;
 }
-/* 
+/*
  *  Core Owl Carousel CSS File
  */
 .owl-carousel {
@@ -628,7 +628,7 @@ th {
 .no-js .owl-carousel {
   display: block;
 }
-/* 
+/*
  * 	Owl Carousel - Lazy Load Plugin
  */
 .owl-carousel .owl-item .owl-lazy {
@@ -642,7 +642,7 @@ th {
 .owl-carousel .owl-item img {
   transform-style: preserve-3d;
 }
-/* 
+/*
  * 	Owl Carousel - Video Plugin
  */
 .owl-carousel .owl-video-wrapper {
@@ -698,6 +698,30 @@ th {
   position: relative;
   z-index: 1;
 }
+/*moje*/
+.owl-next,
+.owl-prev {
+  position: absolute;
+  top: 50%;
+  width: 50px;
+  height: 50px!important;
+  margin-top: -55px;
+  text-indent: -999em;
+  border-radius: 160px;
+  border: 1px solid #ff0028;
+}
+.owl-next:hover,
+.owl-prev:hover {
+  background-color: #000;
+}
+.owl-next {
+  content: "<";
+  right: 2%;
+}
+.owl-prev {
+  content: ">";
+  left: 2%;
+}
 .jquery-checkbox {
   display: block;
   float: left;
@@ -724,7 +748,7 @@ h1 {
   margin-left: auto;
   margin-right: auto;
 }
-/**/
+/***/
 .main-header {
   position: fixed;
   left: 0;
@@ -745,6 +769,9 @@ h1 {
   width: 86%;
   height: 1px;
   background-color: rgba(255, 255, 255, 0);
+}
+.main-header .container {
+  position: relative;
 }
 .logo {
   display: block;
@@ -772,11 +799,11 @@ h1 {
 }
 .menu__item a {
   display: inline-block;
-  padding: 10px 20px;
+  padding: 10px 15px;
   font-family: Roboto, sans-serif;
   font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
+  font-size: 14px;
+  line-height: 22px;
   text-transform: uppercase;
   text-decoration: none;
   color: #000;
@@ -919,18 +946,15 @@ h1 {
   color: #fff;
 }
 .sizer {
-  position: absolute;
-  bottom: 0;
-  left: 0;
   width: 100%;
-  padding-left: 6.8%;
-  padding-right: 6.8%;
-  margin-bottom: 22px;
+  margin-top: 100px;
+  padding: 0 80px 0 83px;
 }
 .sizer .btn {
-  height: 57px;
+  max-width: 435px;
+  height: 63px;
   font-size: 30px;
-  line-height: 57px;
+  line-height: 63px;
 }
 .sizer__sizes {
   margin: 0 0 10px;
@@ -942,11 +966,11 @@ h1 {
 }
 .sizer__size {
   float: left;
-  width: 18.23%;
-  height: 57px;
-  margin-left: 2.2%;
+  width: 63px;
+  height: 63px;
+  margin-left: 30px;
   font-size: 27px;
-  line-height: 57px;
+  line-height: 63px;
   font-weight: 700;
   text-align: center;
   color: #fff;
@@ -1387,13 +1411,17 @@ div[class^="owl"] {
 #sizesModal img {
   display: block;
   margin: 130px auto 0;
-  max-width: 90%;
+  max-width: 100%;
   height: auto;
 }
 #sizesModal .modal-overlay {
   background-color: #ff0028;
   -webkit-background-size: 88% auto;
   background-size: 88% auto;
+}
+#sizesModal .modal-content {
+  max-width: 640px;
+  margin: auto;
 }
 #formModal {
   -webkit-transition: all 0.35s ease-in-out;
@@ -1441,12 +1469,19 @@ div[class^="owl"] {
   opacity: 0;
 }
 .modal-active .logo-white {
+  position: absolute;
+  left: 0;
   z-index: 1;
   opacity: 1;
 }
 .modal-active.modal-sizes #sizesModal {
   z-index: 2;
   top: 0;
+}
+.modal-active.modal-sizes .menu {
+  z-index: -1;
+  opacity: 0;
+  visibility: hidden;
 }
 .modal-active.modal-sizes .mobilemenu-trigger {
   opacity: 0;
@@ -1458,7 +1493,7 @@ div[class^="owl"] {
   z-index: -1;
 }
 .modal-active.modal-sizes .modal-close {
-  right: 6.8%;
+  right: 0;
   z-index: 1;
   width: 20px;
   height: 20px;
@@ -1862,8 +1897,8 @@ body.boys .modal-overlay {
 }
 .zoom-wrapper {
   position: absolute;
-  width: 300px;
-  height: 300px;
+  width: 600px;
+  height: 450px;
   opacity: 0;
   visibility: hidden;
   z-index: -1;
@@ -1887,6 +1922,51 @@ body.boys .modal-overlay {
   background-color: #fff;
   display: none;
 }
+/*moje*/
+.owl-next,
+.owl-prev {
+  position: absolute;
+  top: 50%;
+  width: 50px;
+  height: 50px!important;
+  margin-top: -55px;
+  text-indent: -999em;
+  border-radius: 160px;
+  border: 1px solid #ff0028;
+  -webkit-transition: all 0.35s;
+  -o-transition: all 0.35s;
+  transition: all 0.35s;
+}
+.owl-next:hover,
+.owl-prev:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+  border: 1px solid #000;
+}
+.owl-next:after,
+.owl-prev:after {
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  display: block;
+  text-indent: 0;
+  font-size: 40px;
+  line-height: 50px;
+  font-weight: 400;
+  text-align: center;
+  color: #ff0028;
+}
+.owl-next {
+  right: 2%;
+}
+.owl-next:after {
+  content: ">";
+}
+.owl-prev {
+  left: 2%;
+}
+.owl-prev:after {
+  content: "<";
+}
 /**
  * Clearfix helper
  * Used to contain floats: h5bp.com/q
@@ -1907,4 +1987,13 @@ body.boys .modal-overlay {
 }
 .relative {
   position: relative;
+}
+@media (max-width: 1400px) {
+  #sizesModal img {
+    margin-top: 80px;
+    max-width: 70%;
+  }
+  .sizer {
+    margin-top: 50px;
+  }
 }

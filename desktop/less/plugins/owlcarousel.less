@@ -1,4 +1,4 @@
-/* 
+/*
  *  Owl Carousel - Animate Plugin
  */
 .owl-carousel .animated {
@@ -37,7 +37,7 @@
   }
 }
 
-/* 
+/*
  * 	Owl Carousel - Auto Height Plugin
  */
 .owl-height {
@@ -48,7 +48,7 @@
   transition: height 500ms ease-in-out;
 }
 
-/* 
+/*
  *  Core Owl Carousel CSS File
  */
 .owl-carousel {
@@ -144,7 +144,7 @@
   display: block;
 }
 
-/* 
+/*
  * 	Owl Carousel - Lazy Load Plugin
  */
 .owl-carousel .owl-item .owl-lazy {
@@ -159,7 +159,7 @@
   transform-style: preserve-3d;
 }
 
-/* 
+/*
  * 	Owl Carousel - Video Plugin
  */
 .owl-carousel .owl-video-wrapper {
@@ -214,4 +214,28 @@
 .owl-carousel .owl-video-frame {
   position: relative;
   z-index: 1;
+}
+
+/*moje*/
+.owl-next,
+.owl-prev {
+  position: absolute;
+  top: 50%;
+  width: 50px;
+  height: 50px!important;
+  margin-top: -55px;
+  text-indent: -999em;
+  border-radius: 160px;
+  border: 1px solid #ff0028;
+  &:hover {
+    background-color: #000;
+  }
+}
+.owl-next {
+  content: "<";
+  right: 2%;
+}
+.owl-prev {
+  content: ">";
+  left: 2%;
 }

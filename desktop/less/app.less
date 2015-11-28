@@ -21,7 +21,7 @@ h1 {
   margin-right: auto;
 }
 
-/**/
+/***/
 .main-header {
   position: fixed;
   left: 0;
@@ -41,6 +41,9 @@ h1 {
     width: 86%;
     height: 1px;
     background-color: rgba(255, 255, 255, 0);
+  }
+  .container {
+    position: relative;
   }
 }
 .logo {
@@ -67,11 +70,11 @@ h1 {
   display: inline-block;
   a {
     display: inline-block;
-    padding: 10px 20px;
+    padding: 10px 15px;
     font-family: Roboto, sans-serif;
     font-weight: 400;
-    font-size: 16px;
-    line-height: 24px;
+    font-size: 14px;
+    line-height: 22px;
     text-transform: uppercase;
     text-decoration: none;
     color: #000;
@@ -220,17 +223,14 @@ h1 {
   }
 }
 .sizer {
-  position: absolute;
-  bottom: 0;
-  left: 0;
   width: 100%;
-  padding-left: 6.8%;
-  padding-right: 6.8%;
-  margin-bottom: 22px;
+  margin-top: 100px;
+  padding: 0 80px 0 83px;
   .btn {
-    height: 57px;
+    max-width: 435px;
+    height: 63px;
     font-size: 30px;
-    line-height: 57px;
+    line-height: 63px;
   }
 }
 .sizer__sizes {
@@ -243,11 +243,11 @@ h1 {
 }
 .sizer__size {
   float: left;
-  width: 18.23%;
-  height: 57px;
-  margin-left: 2.2%;
+  width: 63px;
+  height: 63px;
+  margin-left: 30px;
   font-size: 27px;
-  line-height: 57px;
+  line-height: 63px;
   font-weight: 700;
   text-align: center;
   color: #fff;
@@ -708,13 +708,17 @@ div[class^="owl"] {
   img {
     display: block;
     margin: 130px auto 0;
-    max-width: 90%;
+    max-width: 100%;
     height: auto;
   }
   .modal-overlay {
       background-color: #ff0028;
       -webkit-background-size: 88% auto;
       background-size: 88% auto;
+  }
+  .modal-content {
+    max-width: 640px;
+    margin: auto;
   }
 }
 
@@ -765,6 +769,8 @@ div[class^="owl"] {
     opacity: 0;
   }
   .logo-white {
+    position: absolute;
+    left: 0;
     z-index: 1;
     opacity: 1
   }
@@ -774,6 +780,12 @@ div[class^="owl"] {
     #sizesModal {
       z-index: 2;
       top: 0;
+    }
+    .menu {
+      z-index: -1;
+      opacity: 0;
+      visibility: hidden;
+
     }
     .mobilemenu-trigger {
       opacity: 0;
@@ -785,7 +797,7 @@ div[class^="owl"] {
       z-index: -1;
     }
     .modal-close {
-      right: 6.8%;
+      right: 0;
       z-index: 1;
       width: 20px;
       height: 20px;
@@ -1205,8 +1217,8 @@ body.boys .modal-overlay {
 
 .zoom-wrapper {
   position: absolute;
-  width: 300px;
-  height: 300px;
+  width: 600px;
+  height: 450px;
   opacity: 0;
   visibility: hidden;
   z-index: -1;
@@ -1229,6 +1241,48 @@ body.boys .modal-overlay {
   text-align: center;
   background-color: #fff;
   display: none;
+}
+
+/*moje*/
+.owl-next,
+.owl-prev {
+  position: absolute;
+  top: 50%;
+  width: 50px;
+  height: 50px!important;
+  margin-top: -55px;
+  text-indent: -999em;
+  border-radius: 160px;
+  border: 1px solid #ff0028;
+  .transition(all 0.35s);
+  &:hover {
+    background-color: rgba(0,0,0,0.3);
+    border: 1px solid #000;
+  }
+  &:after {
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    display: block;
+    text-indent: 0;
+    font-size: 40px;
+    line-height: 50px;
+    font-weight: 400;
+    text-align: center;
+    color: #ff0028;
+  }
+}
+.owl-next {
+  right: 2%;
+  &:after {
+    content: ">";
+  }
+}
+.owl-prev {
+  left: 2%;
+  &:after {
+    content: "<";
+  }
 }
 
 
@@ -1254,4 +1308,15 @@ body.boys .modal-overlay {
 }
 .relative {
   position: relative;
+}
+
+
+@media (max-width: 1400px) {
+  #sizesModal img {
+    margin-top: 80px;
+    max-width: 70%;
+  }
+  .sizer {
+    margin-top: 50px;
+  }
 }

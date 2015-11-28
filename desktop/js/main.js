@@ -146,6 +146,7 @@ TIZZY.slider = function () {
     owlGirls.owlCarousel({
         items: 1,
         dots: false,
+        nav: true,
         onInitialized: function () {
             $(".model").each(function () {
                 var thatModel = $(this);
