@@ -698,30 +698,6 @@ th {
   position: relative;
   z-index: 1;
 }
-/*moje*/
-.owl-next,
-.owl-prev {
-  position: absolute;
-  top: 50%;
-  width: 50px;
-  height: 50px!important;
-  margin-top: -55px;
-  text-indent: -999em;
-  border-radius: 160px;
-  border: 1px solid #ff0028;
-}
-.owl-next:hover,
-.owl-prev:hover {
-  background-color: #000;
-}
-.owl-next {
-  content: "<";
-  right: 2%;
-}
-.owl-prev {
-  content: ">";
-  left: 2%;
-}
 .jquery-checkbox {
   display: block;
   float: left;
@@ -801,15 +777,12 @@ h1 {
   display: inline-block;
   padding: 10px 15px;
   font-family: Roboto, sans-serif;
-  font-weight: 400;
+  font-weight: 500;
   font-size: 14px;
   line-height: 22px;
   text-transform: uppercase;
   text-decoration: none;
   color: #000;
-}
-.timer {
-  float: left;
 }
 .timer--time {
   display: inline-block;
@@ -838,6 +811,15 @@ h1 {
   margin-right: 270px;
   text-align: right;
   color: #000;
+  -webkit-transition: all 0.35s;
+  -o-transition: all 0.35s;
+  transition: all 0.35s;
+}
+.product.is-hidding {
+  opacity: 0;
+}
+.product.is-showing {
+  opacity: 1;
 }
 @media (max-width: 1366px) {
   .product {
@@ -852,7 +834,7 @@ h1 {
 .product__name h1 {
   margin-bottom: 10px;
   font-family: Roboto, sans-serif;
-  font-size: 28px;
+  font-size: 36px;
   line-height: 32px;
   font-weight: 500;
   text-transform: uppercase;
@@ -860,12 +842,11 @@ h1 {
 }
 .product__name h1 span {
   display: block;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 22px;
-  font-weight: 400;
+  font-weight: 700;
 }
 .product__name h1 span b {
-  font-weight: 400;
   color: #000;
 }
 .product__description {
@@ -903,8 +884,9 @@ h1 {
 }
 .main-footer .container {
   position: relative;
-  padding-top: 50px;
-  padding-bottom: 50px;
+  padding-top: 55px;
+  padding-bottom: 36px;
+  text-align: center;
 }
 .main-footer .bar {
   position: absolute;
@@ -991,9 +973,6 @@ h1 {
   margin-left: 0;
 }
 /*---------Procentowe obniżki---------------*/
-.shapes {
-  float: left;
-}
 .shapes .absolute {
   position: absolute;
   right: 3%;
@@ -1016,8 +995,7 @@ h1 {
 }
 /**/
 .is-countdown {
-  display: block;
-  float: left;
+  display: inline-block;
   font-family: Roboto, sans-serif;
   font-weight: 900;
   font-size: 52px;
@@ -1033,9 +1011,9 @@ h1 {
 }
 .discount {
   position: relative;
-  float: left;
-  font-size: 40px;
-  text-align: center;
+  font-size: 55px;
+  letter-spacing: -0.025em;
+  text-align: right;
 }
 .discount > span {
   display: inline-block;
@@ -1045,7 +1023,9 @@ h1 {
   text-align: center;
 }
 .discount sup {
-  font-size: 18px;
+  font-family: Roboto, sans-serif;
+  font-size: 23px;
+  font-weight: 500;
   top: -0.2em;
   left: -0.5em;
   vertical-align: super;
@@ -1068,7 +1048,7 @@ h1 {
   display: inline-block;
   width: 100%;
   height: 100%;
-  background: url(../img/shape-cross-line.png) no-repeat;
+  background: url(../img/shape-cross-line.png) no-repeat 50% 50%;
 }
 .discount--before .prize {
   display: inline-block;
@@ -1093,6 +1073,15 @@ h1 {
 .main-footer .buy {
   float: left;
   width: 20%;
+}
+.main-footer .shapes {
+  text-align: left;
+}
+.main-footer .timer {
+  text-align: center;
+}
+.main-footer .buy {
+  float: right;
 }
 /*
  * HTML5 Boilerplate
@@ -1274,27 +1263,35 @@ div[class^="owl"] {
   bottom: 0;
   z-index: 99999;
   width: 50%;
-  font-family: Roboto, sans-serif;
-  font-size: 50px;
-  font-weight: 900;
+  text-align: center;
   color: #fff;
   overflow: hidden;
   cursor: grab;
 }
 .layer-text {
   position: relative;
+  display: inline-block;
+  width: 200px;
+  height: 80px;
+  text-indent: -999em;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
 }
 #layer-girls {
   left: 0;
   padding-right: 35px;
-  text-align: right;
   background-color: rgba(34, 2, 18, 0.8);
+}
+#layer-girls .layer-text {
+  background-image: url(../img/textGirls.png);
 }
 #layer-boys {
   right: 0;
   padding-left: 35px;
-  text-align: left;
   background-color: rgba(5, 10, 38, 0.8);
+}
+#layer-boys .layer-text {
+  background-image: url(../img/textBoys.png);
 }
 .wrapper {
   position: relative;
@@ -1386,22 +1383,30 @@ div[class^="owl"] {
   transition: all 0.35s;
 }
 #defaultModal .modal-overlay {
-  background-color: #ff0028;
+  background-color: #fff;
   -webkit-background-size: 88% auto;
   background-size: 88% auto;
 }
 #defaultModal .modal-content {
-  padding: 80px 6.8% 0;
+  max-width: 580px;
+  margin: auto;
+  padding: 80px 0 0;
   text-align: center;
 }
 #defaultModal h2 {
+  font-family: Roboto, sans-serif;
+  font-size: 48px;
+  line-height: 64px;
+  font-weight: 500;
   text-transform: uppercase;
-  color: #fff;
+  color: #000;
 }
 #defaultModal p {
-  font-size: 18px;
-  line-height: 24px;
-  color: #fff;
+  font-family: Roboto, sans-serif;
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 300;
+  color: #787878;
 }
 #sizesModal {
   -webkit-transition: all 0.35s;
@@ -1464,6 +1469,9 @@ div[class^="owl"] {
 .modal-active .main-header {
   z-index: 5;
 }
+.modal-active .menu {
+  display: none;
+}
 .modal-active .logo-black {
   z-index: 0;
   opacity: 0;
@@ -1518,19 +1526,29 @@ div[class^="owl"] {
   z-index: 2;
   top: 0;
 }
+.modal-active.modal-default .logo-white {
+  z-index: -1;
+  opacity: 0;
+  visibility: hidden;
+}
+.modal-active.modal-default .logo-black {
+  z-index: 1;
+  opacity: 1;
+  visibility: visible;
+}
 .modal-active.modal-default .mobilemenu-trigger {
   opacity: 0;
   visibility: hidden;
 }
 .modal-active.modal-default .modal-close {
-  right: 6.8%;
+  right: 0;
   z-index: 1;
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
   opacity: 1;
-  background: url(../img/modal-close.png) no-repeat 0 0;
-  -webkit-background-size: 20px 20px;
-  background-size: 20px 20px;
+  background: url(../img/modal-close-red.png) no-repeat 0 0;
+  -webkit-background-size: 30px 30px;
+  background-size: 30px 30px;
 }
 .form-group {
   margin-bottom: 20px;
@@ -1841,15 +1859,15 @@ body.boys .modal-overlay {
   .gif {
     margin: auto;
     display: block;
-    width: 270px;
-    height: 405px;
+    width: 233px;
+    height: 370px;
     margin-left: auto;
     margin-right: auto;
     background-repeat: no-repeat;
     background-position: 0 0;
     -webkit-background-size: cover;
     background-size: cover;
-    margin-left: -135px;
+    margin-left: -116.5px;
   }
 }
 @media (min-height: 900px) {

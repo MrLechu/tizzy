@@ -14,6 +14,16 @@ h1 {
   -o-transition: @transition;
   transition: @transition;
 }
+.visiblity-state(@state) when (@state = "on") {
+  z-index: 1;
+  opacity: 1;
+  visibility: visible;
+}
+.visiblity-state(@state) when (@state = "off") {
+  z-index: -1;
+  opacity: 0;
+  visibility: hidden;
+}
 
 .container {
   width: 100%;
@@ -72,7 +82,7 @@ h1 {
     display: inline-block;
     padding: 10px 15px;
     font-family: Roboto, sans-serif;
-    font-weight: 400;
+    font-weight: 500;
     font-size: 14px;
     line-height: 22px;
     text-transform: uppercase;
@@ -81,9 +91,6 @@ h1 {
   }
 }
 
-.timer {
-  float: left;
-}
 .timer--time {
   display: inline-block;
   vertical-align: -2px;
@@ -110,6 +117,13 @@ h1 {
   margin-right: 270px;
   text-align: right;
   color: #000;
+  .transition(all 0.35s);
+  &.is-hidding {
+    opacity: 0;
+  }
+  &.is-showing {
+    opacity: 1;
+  }
   @media (max-width: 1366px) {
     top: 20%;
   }
@@ -126,18 +140,17 @@ h1 {
 .product__name h1 {
   margin-bottom: 10px;
   font-family: Roboto, sans-serif;
-  font-size: 28px;
+  font-size: 36px;
   line-height: 32px;
   font-weight: 500;
   text-transform: uppercase;
   color: #ff0028;
   span {
     display: block;
-    font-size: 16px;
+    font-size: 14px;
     line-height: 22px;
-    font-weight: 400;
+    font-weight: 700;
     b {
-      font-weight: 400;
       color: #000;
     }
   }
@@ -178,8 +191,9 @@ h1 {
   background-color: #fff;
   .container {
     position: relative;
-    padding-top: 50px;
-    padding-bottom: 50px;
+    padding-top: 55px;
+    padding-bottom: 36px;
+    text-align: center;
   }
   .bar {
     position: absolute;
@@ -270,7 +284,6 @@ h1 {
 
 /*---------Procentowe obniżki---------------*/
 .shapes {
-  float: left;
   .absolute {
     position: absolute;
     right: 3%;
@@ -292,8 +305,7 @@ h1 {
 }
 /**/
 .is-countdown {
-  display: block;
-  float: left;
+  display: inline-block;
   font-family: Roboto, sans-serif;
   font-weight: 900;
   font-size: 52px;
@@ -307,9 +319,9 @@ h1 {
 }
 .discount {
   position: relative;
-  float: left;
-  font-size: 40px;
-  text-align: center;
+  font-size: 55px;
+  letter-spacing: -0.025em;
+  text-align: right;
   > span {
     display: inline-block;
     vertical-align: middle;
@@ -318,7 +330,9 @@ h1 {
     text-align: center;
   }
   sup {
-    font-size: 18px;
+    font-family: Roboto, sans-serif;
+    font-size: 23px;
+    font-weight: 500;
     top: -0.2em;
     left: -0.5em;
     vertical-align: super;
@@ -341,7 +355,7 @@ h1 {
     display: inline-block;
     width: 100%;
     height: 100%;
-    background: url(../img/shape-cross-line.png) no-repeat;
+    background: url(../img/shape-cross-line.png) no-repeat 50% 50%;
   }
   .prize {
     display: inline-block;
@@ -372,6 +386,17 @@ h1 {
     float: left;
     width: 20%;
   }
+  .shapes {
+    text-align: left;
+  }
+  .timer {
+    text-align: center;
+  }
+  .buy {
+    float: right;
+  }
+
+
 }
 
 /*
@@ -573,27 +598,35 @@ div[class^="owl"] {
   bottom: 0;
   z-index: 99999;
   width: 50%;
-  font-family: Roboto, sans-serif;
-  font-size: 50px;
-  font-weight: 900;
+  text-align: center;
   color: #fff;
   overflow: hidden;
   cursor: grab;
 }
 .layer-text {
   position: relative;
+  display: inline-block;
+  width: 200px;
+  height: 80px;
+  text-indent: -999em;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
 }
 #layer-girls {
   left: 0;
   padding-right: 35px;
-  text-align: right;
   background-color: rgba(34, 2, 18, 0.8);
+  .layer-text {
+    background-image: url(../img/textGirls.png);
+  }
 }
 #layer-boys {
   right: 0;
   padding-left: 35px;
-  text-align: left;
   background-color: rgba(5, 10, 38, 0.8);
+  .layer-text {
+    background-image: url(../img/textBoys.png);
+  }
 }
 .wrapper {
   position: relative;
@@ -683,22 +716,30 @@ div[class^="owl"] {
 #defaultModal {
   .transition(all 0.35s);
   .modal-overlay {
-      background-color: #ff0028;
+      background-color: #fff;
       -webkit-background-size: 88% auto;
       background-size: 88% auto;
   }
   .modal-content {
-    padding: 80px 6.8% 0;
+    max-width: 580px;
+    margin: auto;
+    padding: 80px 0 0;
     text-align: center;
   }
   h2 {
+    font-family: Roboto, sans-serif;
+    font-size: 48px;
+    line-height: 64px;
+    font-weight: 500;
     text-transform: uppercase;
-    color: #fff;
+    color: #000;
   }
   p {
-    font-size: 18px;
-    line-height: 24px;
-    color: #fff;
+    font-family: Roboto, sans-serif;
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 300;
+    color: #787878;
   }
 }
 
@@ -764,6 +805,9 @@ div[class^="owl"] {
   .main-header {
     z-index: 5;
   }
+  .menu {
+    display: none;
+  }
   .logo-black {
     z-index: 0;
     opacity: 0;
@@ -774,7 +818,6 @@ div[class^="owl"] {
     z-index: 1;
     opacity: 1
   }
-
 
   &.modal-sizes {
     #sizesModal {
@@ -822,27 +865,35 @@ div[class^="owl"] {
     }
   }
   &.modal-default {
-   #defaultModal {
+    #defaultModal {
       z-index: 2;
       top: 0;
     }
+    .logo-white {
+      .visiblity-state("off");
+    }
+    .logo-black {
+      .visiblity-state("on");
+    }
+
     .mobilemenu-trigger {
       opacity: 0;
       visibility: hidden;
     }
     .modal-close {
-      right: 6.8%;
+      right: 0;
       z-index: 1;
-      width: 20px;
-      height: 20px;
+      width: 30px;
+      height: 30px;
       opacity: 1;
-      background: url(../img/modal-close.png) no-repeat 0 0;
-      -webkit-background-size: 20px 20px;
-      background-size: 20px 20px;
+      background: url(../img/modal-close-red.png) no-repeat 0 0;
+      -webkit-background-size: 30px 30px;
+      background-size: 30px 30px;
     }
 
   }
 }
+
 .form-group {
   margin-bottom: 20px;
 }
@@ -1162,8 +1213,8 @@ body.boys .modal-overlay {
 @media (min-height: 650px) {
   .gif {
 
-    @width: 270px;
-    @height: 405px;
+    @width: 233px;
+    @height: 370px;
 
     .gif-set(@width; @height);
     margin-left: -@width / 2;

@@ -9,7 +9,6 @@ var TIZZY,
 
 TIZZY = TIZZY || {};
 
-
 TIZZY = {
     doc: $('body'),
     modal: $('.modal'),
@@ -63,6 +62,7 @@ Gif.prototype.init = function (speed, isPlaying) {
     }
 };
 
+
 Gif.prototype.play = function (speed) {
     "use strict";
     this.tl.resume();
@@ -85,6 +85,8 @@ TIZZY.startPage = function () {
         boysWrap = boys.find('.wrap'),
         girlsWrap = girls.find('.wrap');
 
+
+
     function onOpacityComplete() {
         layer.remove();
         if (TIZZY.category === "girls") {
@@ -93,6 +95,7 @@ TIZZY.startPage = function () {
         }
         // if (TIZZY.category === "boys") {
         // }
+        History.pushState({state:1}, "Strona główna", "?state=start");
     }
 
     function onComplete() {
@@ -119,6 +122,7 @@ TIZZY.startPage = function () {
 
         TIZZY.gifGirl_0 = new Gif('.gif0');
         TIZZY.gifGirl_1 = new Gif('.gif1');
+
     });
 
     layerBoys.hammer().bind("panleft click", function () {
@@ -159,7 +163,20 @@ TIZZY.slider = function () {
         }
     });
 
+    owlGirls.on('drag.owl.carousel', function (event) {
+        $(".product").removeClass("is-showing");
+        $(".product").addClass("is-hidding");
+    });
+
+    owlGirls.on('dragged.owl.carousel', function (event) {
+        $(".product").removeClass("is-hidding");
+        $(".product").addClass("is-showing");
+    });
+
     owlGirls.on('translate.owl.carousel', function (event) {
+        $(".product").removeClass("is-showing");
+        $(".product").addClass("is-hidding");
+
         if (event.item.index === 0) {
             TIZZY.gifGirl_0.tl.pause();
         }
@@ -169,6 +186,9 @@ TIZZY.slider = function () {
     });
 
     owlGirls.on('translated.owl.carousel', function (event) {
+        $(".product").removeClass("is-hidding");
+        $(".product").addClass("is-showing");
+
         TIZZY.sliderIndex = event.item.index;
         if (TIZZY.sliderIndex === 0) {
             //cena po obniżce
@@ -194,6 +214,7 @@ TIZZY.slider = function () {
             TweenLite.to(footerText, 0.5, {opacity: 1});
             TweenLite.to(footerFadeElem, 0.5, {opacity: 0});
         }
+
     });
 
     var owlBoys = $("#boys-carousel");
@@ -238,6 +259,8 @@ TIZZY.productSize = function () {
         event.preventDefault();
         TIZZY.doc.addClass('modal-active modal-sizes');
 
+        History.pushState({state:2}, "Rozmiarówka", "?state=rozmiar");
+
         if (TIZZY.sliderIndex === 0) {
             TIZZY.gifGirl_0.tl.pause();
         }
@@ -247,6 +270,7 @@ TIZZY.productSize = function () {
     });
 
     $('.modal-close').click(function (e) {
+        "use strict";
         e.preventDefault();
         if (TIZZY.sliderIndex === 0) {
             TIZZY.gifGirl_0.tl.resume();
@@ -254,6 +278,8 @@ TIZZY.productSize = function () {
         if (TIZZY.sliderIndex === 1) {
             TIZZY.gifGirl_1.tl.resume();
         }
+        TIZZY.doc.removeClass('modal-active modal-sizes modal-form');
+        History.pushState({state:1}, "Strona główna", "?state=start");
     });
 
     $('.sizer__size').click(function (e) {
@@ -307,6 +333,13 @@ TIZZY.zoomPhoto = function () {
         $(id).addClass("active");
         if (!isGif) {
             zoomPhoto(fullPhotoFileName);
+        } else {
+            if (TIZZY.sliderIndex === 0) {
+                TIZZY.gifGirl_0.tl.resume();
+            }
+            if (TIZZY.sliderIndex === 1) {
+                TIZZY.gifGirl_1.tl.resume();
+            }
         }
 
         //aktywna miniaturka
@@ -336,7 +369,6 @@ TIZZY.zoomPhoto = function () {
             }
         });
     }
-
 };
 
 TIZZY.timer = function () {
@@ -358,14 +390,11 @@ TIZZY.form = function () {
         TIZZY.doc.addClass('modal-active modal-form');
         TIZZY.gifGirl_0.tl.pause();
         TIZZY.gifGirl_1.tl.pause();
+        History.pushState({state:3}, "Formularz zamówienia", "?zamowienie");
     });
 };
 
-$(".modal-close").click(function (ev) {
-    "use strict";
-    ev.preventDefault();
-    TIZZY.doc.removeClass('modal-active modal-sizes modal-form');
-});
+
 
 TIZZY.debug = function () {
     "use strict";
@@ -376,6 +405,25 @@ TIZZY.debug = function () {
     $("#boys").css('right', '100%');
 };
 
+TIZZY.pageState = function () {
+    History.Adapter.bind (window,'statechange', function(){ // Note: We are using statechange instead of popstate
+        var State = History.getState(); // Note: We are using History.getState() instead of event.state
+
+        console.log(State);
+
+        if (State.title === "" || State.title === "Strona główna") {
+            $("body").removeClass("modal-active modal-sizes modal-form modal-default");
+            if (TIZZY.sliderIndex === 0) {
+                TIZZY.gifGirl_0.tl.resume();
+            }
+            if (TIZZY.sliderIndex === 1) {
+                TIZZY.gifGirl_1.tl.resume();
+            }
+        }
+
+    });
+}
+
 $(function () {
     "use strict";
     wH = $(window).height();
@@ -385,7 +433,18 @@ $(function () {
     TIZZY.timer();
     TIZZY.form();
     TIZZY.zoomPhoto();
+    TIZZY.pageState();
     //TIZZY.productDetails();
     //TIZZY.debug();
+
+
+    if (window.location.hash) {
+        if (window.location.hash === "#default-view") {
+            $("body").addClass("modal-active");
+            $("body").addClass("modal-default");
+        }
+    }
 });
+
+
 
