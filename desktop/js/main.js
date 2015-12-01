@@ -19,7 +19,7 @@ TIZZY = {
     gifGirl_0: undefined,
     gifGirl_1: undefined
 };
-
+//wersja z konstruktorem
 
 TIZZY.config = {
     productImage: "produkty"
@@ -145,20 +145,13 @@ TIZZY.startPage = function () {
 TIZZY.slider = function () {
     "use strict";
     var owlGirls = $("#girls-carousel"),
-        footer = $('.main-footer'),
-        direction = "",
-        tmpID = null;
-
-    owlGirls.on('initialized.owl.carousel', function (event) {
-        TIZZY.sliderIndex = event.item.index;
-        tmpID = TIZZY.sliderIndex;
-    });
+        footer = $('.main-footer');
 
     owlGirls.owlCarousel({
         items: 1,
         dots: false,
         nav: true,
-        onInitialized: function (event) {
+        onInitialized: function () {
             $(".model").each(function () {
                 var thatModel = $(this);
                 thatModel.css({
@@ -169,7 +162,6 @@ TIZZY.slider = function () {
             prizeValue.text(39);
         }
     });
-
 
     owlGirls.on('drag.owl.carousel', function (event) {
         $(".product").removeClass("is-showing");
@@ -198,15 +190,6 @@ TIZZY.slider = function () {
         $(".product").addClass("is-showing");
 
         TIZZY.sliderIndex = event.item.index;
-
-        if (TIZZY.sliderIndex > tmpID) {
-            direction = "right";
-        } else {
-            direction = "left";
-        }
-
-        tmpID = TIZZY.sliderIndex;
-
         if (TIZZY.sliderIndex === 0) {
             //cena po obniżce
             prizeValue.text('39');
@@ -221,33 +204,6 @@ TIZZY.slider = function () {
             prizeValue.text('90');
             TIZZY.gifGirl_0.tl.pause();
             TIZZY.gifGirl_1.tl.pause();
-        }
-
-        $(".owl-item")
-            .eq(TIZZY.sliderIndex)
-            .find(".gif-wrap")
-            .addClass("translate");
-
-        if (direction === "right") {
-            /*
-            Jeśli kierunek slajdera to prawo, dla poprzedniego slajdu ustawiamy klasę .start-right,
-            natomiast do następnego slajdu usuwamy istniejące klasy start-left lub start-right i dajemy klasę translate
-            */
-            $(".owl-item")
-                .eq(TIZZY.sliderIndex - 1)
-                .find(".gif-wrap")
-                .removeClass("start-left start-right translate")
-                .addClass("start-right");
-        } else {
-            /*
-            Jeśli kierunek slajdera to prawo, dla poprzedniego slajdu ustawiamy klasę .start-left,
-            natomiast do następnego slajdu usuwamy istniejące klasy start-left lub start-right i dajemy klasę translate
-            */
-            $(".owl-item")
-                .eq(TIZZY.sliderIndex + 1)
-                .find(".gif-wrap")
-                .removeClass("start-left start-right translate")
-                .addClass("start-left");
         }
 
         /*zmiana stopki*/
@@ -438,6 +394,8 @@ TIZZY.form = function () {
     });
 };
 
+
+
 TIZZY.debug = function () {
     "use strict";
     $(".layer").hide();
@@ -451,6 +409,8 @@ TIZZY.pageState = function () {
     History.Adapter.bind (window,'statechange', function(){ // Note: We are using statechange instead of popstate
         var State = History.getState(); // Note: We are using History.getState() instead of event.state
 
+        console.log(State);
+
         if (State.title === "" || State.title === "Strona główna") {
             $("body").removeClass("modal-active modal-sizes modal-form modal-default");
             if (TIZZY.sliderIndex === 0) {
@@ -460,6 +420,7 @@ TIZZY.pageState = function () {
                 TIZZY.gifGirl_1.tl.resume();
             }
         }
+
     });
 }
 
