@@ -226,6 +226,7 @@ TIZZY.slider = function () {
         $(".owl-item")
             .eq(TIZZY.sliderIndex)
             .find(".gif-wrap")
+            .removeClass("start-left start-right")
             .addClass("translate");
 
         if (direction === "right") {

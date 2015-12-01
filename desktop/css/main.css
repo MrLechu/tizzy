@@ -1808,9 +1808,9 @@ body.boys .modal-overlay {
   position: absolute;
   bottom: 0;
   left: 50%;
-  -webkit-transition: all 0.35s ease-out;
-  -o-transition: all 0.35s ease-out;
-  transition: all 0.35s ease-out;
+  -webkit-transition: all 0.25s linear;
+  -o-transition: all 0.25s linear;
+  transition: all 0.25s linear;
 }
 .model .gif-wrap.start-left.translate,
 .model .gif-wrap.start-right.translate {
