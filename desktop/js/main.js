@@ -63,6 +63,8 @@ Gif.prototype.init = function (speed, isPlaying) {
 };
 
 
+
+
 Gif.prototype.play = function (speed) {
     "use strict";
     this.tl.resume();
@@ -72,6 +74,17 @@ Gif.prototype.pause = function () {
     "use strict";
     this.tl.pause();
 };
+
+Gif.prototype.jumpTo = function (gifSlideNr) {
+    "use strict";
+    var gif = this.gif,
+        gifWidth = $(this.gif).css('width'),
+        myObject = this.myObject;
+
+    gifWidth = gifWidth.replace("px", "");
+
+    $(gif).css("backgroundPosition", - (gifSlideNr * gifWidth) + "px 0px");
+}
 
 TIZZY.startPage = function () {
     "use strict";
@@ -84,8 +97,6 @@ TIZZY.startPage = function () {
         boysLayerText = layerBoys.find('.layer-text'),
         boysWrap = boys.find('.wrap'),
         girlsWrap = girls.find('.wrap');
-
-
 
     function onOpacityComplete() {
         layer.remove();
@@ -366,30 +377,53 @@ TIZZY.zoomPhoto = function () {
             fullPhotoFileName = that.data("filename"),
             isGif = that.hasClass("is-gif"),
             id = that.attr("href"),
-            gif = that.parents(".owl-item").find(".gif-wrap"),
+            //gif = that.parents(".owl-item").find(".gif-wrap"),
             img = that.parents(".owl-item").find(".model img"),
             thumbnails = that.parents(".owl-item").find(".thumbnails");
 
 
         //pokazuje dany podgląd
-        gif.removeClass("active");
-        img.removeClass("active");
+        //gif.removeClass("active");
+        //img.removeClass("active");
 
-        $(id).addClass("active");
-        if (!isGif) {
-            zoomPhoto(fullPhotoFileName);
-        } else {
-            if (TIZZY.sliderIndex === 0) {
+        if (TIZZY.sliderIndex === 0) {
+            if (!isGif) {
+                TIZZY.gifGirl_0.tl.pause();
+                if (id === "#model_1_2") {
+                    TIZZY.gifGirl_0.jumpTo(1);
+                }
+                if (id === "#model_1_3") {
+                    TIZZY.gifGirl_0.jumpTo(2);
+                }
+
+            } else {
                 TIZZY.gifGirl_0.tl.resume();
             }
-            if (TIZZY.sliderIndex === 1) {
+        }
+
+        if (TIZZY.sliderIndex === 1) {
+            if (!isGif) {
+                TIZZY.gifGirl_1.tl.pause();
+            } else {
                 TIZZY.gifGirl_1.tl.resume();
             }
         }
 
-        //aktywna miniaturka
-        thumbnail.removeClass("active");
-        that.addClass("active");
+        // $(id).addClass("active");
+        // if (!isGif) {
+        //     zoomPhoto(fullPhotoFileName);
+        // } else {
+        //     if (TIZZY.sliderIndex === 0) {
+        //         TIZZY.gifGirl_0.tl.resume();
+        //     }
+        //     if (TIZZY.sliderIndex === 1) {
+        //         TIZZY.gifGirl_1.tl.resume();
+        //     }
+        // }
+
+        // //aktywna miniaturka
+        // thumbnail.removeClass("active");
+        // that.addClass("active");
     });
 
     function zoomPhoto(fullPhotoFileName) {
