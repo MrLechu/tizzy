@@ -1794,20 +1794,33 @@ body.boys .modal-overlay {
   bottom: 0;
   margin-left: -110px;
 }
-.model .gif-wrap,
 .model img {
   opacity: 0;
   visibility: hidden;
   z-index: -1;
-  -webkit-transition: all 0.35s;
-  -o-transition: all 0.35s;
-  transition: all 0.35s;
 }
-.model .gif-wrap.active,
 .model img.active {
   opacity: 1;
   visibility: visible;
   z-index: 1;
+}
+.model .gif-wrap {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  -webkit-transition: all 0.35s ease-out;
+  -o-transition: all 0.35s ease-out;
+  transition: all 0.35s ease-out;
+}
+.model .gif-wrap.start-left.translate,
+.model .gif-wrap.start-right.translate {
+  left: 50%;
+}
+.model .gif-wrap.start-left {
+  left: 10%;
+}
+.model .gif-wrap.start-right {
+  left: 90%;
 }
 .gif {
   position: absolute;

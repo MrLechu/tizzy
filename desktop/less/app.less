@@ -1150,19 +1150,32 @@ body.boys .modal-overlay {
 }
 
 .model {
-  .gif-wrap,
   img {
     opacity: 0;
     visibility: hidden;
     z-index: -1;
-    .transition(all 0.35s);
     &.active {
       opacity: 1;
       visibility: visible;
       z-index: 1;
     }
   }
-
+  .gif-wrap {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    .transition(all 0.35s ease-out);
+    &.start-left.translate,
+    &.start-right.translate {
+      left: 50%;
+    }
+    &.start-left {
+      left: 10%;
+    }
+    &.start-right {
+      left: 90%;
+    }
+  }
 }
 .gif-set (@width; @height) {
   margin: auto;
@@ -1178,6 +1191,7 @@ body.boys .modal-overlay {
   //1.35
 }
 
+//start left: 0, margin-left: 0;
 .gif {
   position: absolute;
   left: 50%;
