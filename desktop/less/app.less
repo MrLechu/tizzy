@@ -1163,17 +1163,18 @@ body.boys .modal-overlay {
   .gif-wrap {
     position: absolute;
     bottom: 0;
-    left: 50%;
-    .transition(all 0.25s linear);
+    width: 100%; // akcja domyślna po załadowaniu strony
+    .transition(all 0.25s);
     &.start-left.translate,
     &.start-right.translate {
-      left: 50%;
+      // akcja po zakończeniu slajdu
+      width: 100%;
     }
     &.start-left {
-      left: 10%;
+      width: 20%; // gdy slajdujemy w prawo, ustawiamy następnego gifa do lewej krawędzi
     }
     &.start-right {
-      left: 90%;
+      width: 180%; // gdy slajdujemy w lewo, ustawiamy następnego gifa do prawej krawędzi
     }
   }
 }

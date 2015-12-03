@@ -17,7 +17,8 @@ TIZZY = {
     sliderIndex: 0,
     modalContent: $('#productModal').find('.modal-content'),
     gifGirl_0: undefined,
-    gifGirl_1: undefined
+    gifGirl_1: undefined,
+    direction: null
 };
 
 
@@ -61,9 +62,6 @@ Gif.prototype.init = function (speed, isPlaying) {
         this.tl.pause();
     }
 };
-
-
-
 
 Gif.prototype.play = function (speed) {
     "use strict";
@@ -157,7 +155,6 @@ TIZZY.slider = function () {
     "use strict";
     var owlGirls = $("#girls-carousel"),
         footer = $('.main-footer'),
-        direction = "",
         tmpID = null;
 
     owlGirls.on('initialized.owl.carousel', function (event) {
@@ -190,6 +187,9 @@ TIZZY.slider = function () {
     owlGirls.on('dragged.owl.carousel', function (event) {
         $(".product").removeClass("is-hidding");
         $(".product").addClass("is-showing");
+        $(".owl-item")
+            .find(".gif-wrap")
+            .addClass("translate");
     });
 
     owlGirls.on('translate.owl.carousel', function (event) {
@@ -211,11 +211,12 @@ TIZZY.slider = function () {
         TIZZY.sliderIndex = event.item.index;
 
         if (TIZZY.sliderIndex > tmpID) {
-            direction = "right";
+            TIZZY.direction = "right";
+            console.log("right")
         } else {
-            direction = "left";
+            TIZZY.direction = "left";
+            console.log("left")
         }
-
         tmpID = TIZZY.sliderIndex;
 
         if (TIZZY.sliderIndex === 0) {
@@ -234,13 +235,7 @@ TIZZY.slider = function () {
             TIZZY.gifGirl_1.tl.pause();
         }
 
-        $(".owl-item")
-            .eq(TIZZY.sliderIndex)
-            .find(".gif-wrap")
-            .removeClass("start-left start-right")
-            .addClass("translate");
-
-        if (direction === "right") {
+        if (TIZZY.direction === "right") {
             /*
             Jeśli kierunek slajdera to prawo, dla poprzedniego slajdu ustawiamy klasę .start-right,
             natomiast do następnego slajdu usuwamy istniejące klasy start-left lub start-right i dajemy klasę translate
@@ -248,9 +243,17 @@ TIZZY.slider = function () {
             $(".owl-item")
                 .eq(TIZZY.sliderIndex - 1)
                 .find(".gif-wrap")
-                .removeClass("start-left start-right translate")
+                .removeClass("translate")
+                .removeClass("start-left")
                 .addClass("start-right");
-        } else {
+
+            $(".owl-item")
+                .eq(TIZZY.sliderIndex + 1)
+                .find(".gif-wrap")
+                .removeClass("translate")
+        }
+
+        if (TIZZY.direction === "left") {
             /*
             Jeśli kierunek slajdera to prawo, dla poprzedniego slajdu ustawiamy klasę .start-left,
             natomiast do następnego slajdu usuwamy istniejące klasy start-left lub start-right i dajemy klasę translate
@@ -258,8 +261,14 @@ TIZZY.slider = function () {
             $(".owl-item")
                 .eq(TIZZY.sliderIndex + 1)
                 .find(".gif-wrap")
-                .removeClass("start-left start-right translate")
+                .removeClass("translate")
+                .removeClass("start-right")
                 .addClass("start-left");
+
+            $(".owl-item")
+                .eq(TIZZY.sliderIndex - 1)
+                .find(".gif-wrap")
+                .removeClass("translate")
         }
 
         /*zmiana stopki*/
@@ -270,7 +279,6 @@ TIZZY.slider = function () {
             TweenLite.to(footerText, 0.5, {opacity: 1});
             TweenLite.to(footerFadeElem, 0.5, {opacity: 0});
         }
-
     });
 
     var owlBoys = $("#boys-carousel");
@@ -377,14 +385,11 @@ TIZZY.zoomPhoto = function () {
             fullPhotoFileName = that.data("filename"),
             isGif = that.hasClass("is-gif"),
             id = that.attr("href"),
-            //gif = that.parents(".owl-item").find(".gif-wrap"),
             img = that.parents(".owl-item").find(".model img"),
             thumbnails = that.parents(".owl-item").find(".thumbnails");
 
-
-        //pokazuje dany podgląd
-        //gif.removeClass("active");
-        //img.removeClass("active");
+        $(this).parent().find(".thumbnail").removeClass("active");
+        $(this).addClass("active");
 
         if (TIZZY.sliderIndex === 0) {
             if (!isGif) {
@@ -409,17 +414,17 @@ TIZZY.zoomPhoto = function () {
             }
         }
 
-        // $(id).addClass("active");
-        // if (!isGif) {
-        //     zoomPhoto(fullPhotoFileName);
-        // } else {
-        //     if (TIZZY.sliderIndex === 0) {
-        //         TIZZY.gifGirl_0.tl.resume();
-        //     }
-        //     if (TIZZY.sliderIndex === 1) {
-        //         TIZZY.gifGirl_1.tl.resume();
-        //     }
-        // }
+        $(id).addClass("active");
+        if (isGif) {
+            if (TIZZY.sliderIndex === 0) {
+                TIZZY.gifGirl_0.tl.resume();
+            }
+            if (TIZZY.sliderIndex === 1) {
+                TIZZY.gifGirl_1.tl.resume();
+            }
+        } else {
+            zoomPhoto(fullPhotoFileName);
+        }
 
         // //aktywna miniaturka
         // thumbnail.removeClass("active");
@@ -427,7 +432,7 @@ TIZZY.zoomPhoto = function () {
     });
 
     function zoomPhoto(fullPhotoFileName) {
-        $(".model img").zoom({
+        $(".gif").zoom({
             url: products_url + fullPhotoFileName,
             target: $(".zoom-wrapper"),
             magnify: 1.3,

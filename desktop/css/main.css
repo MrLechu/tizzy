@@ -1807,20 +1807,20 @@ body.boys .modal-overlay {
 .model .gif-wrap {
   position: absolute;
   bottom: 0;
-  left: 50%;
-  -webkit-transition: all 0.25s linear;
-  -o-transition: all 0.25s linear;
-  transition: all 0.25s linear;
+  width: 100%;
+  -webkit-transition: all 0.25s;
+  -o-transition: all 0.25s;
+  transition: all 0.25s;
 }
 .model .gif-wrap.start-left.translate,
 .model .gif-wrap.start-right.translate {
-  left: 50%;
+  width: 100%;
 }
 .model .gif-wrap.start-left {
-  left: 10%;
+  width: 20%;
 }
 .model .gif-wrap.start-right {
-  left: 90%;
+  width: 180%;
 }
 .gif {
   position: absolute;
