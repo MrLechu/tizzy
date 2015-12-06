@@ -1,6 +1,7 @@
 /*jslint browser: true*/
 /*globals $, window, alert, TweenLite, ease, Power0, SteppedEase, MBP, Hammer, media_url, TimelineLite*/
 var TIZZY,
+
     wH,
     prizeValue = $('.prize-value'),
     footerFadeElem = $('.main-footer').find('.fade'),
@@ -32,15 +33,11 @@ function Gif(what) {
     "use strict";
     this.gif = what;
     this.gW = 0;
-    this.speed = 2.5;
     this.tl = new TimelineLite();
 }
 
 Gif.prototype.init = function (speed, isPlaying) {
     "use strict";
-    if (speed) {
-        this.speed = speed;
-    }
     var myObject = {a: 0},
         gifWidth = $(this.gif).css('width'),
         gif = this.gif;
@@ -54,7 +51,7 @@ Gif.prototype.init = function (speed, isPlaying) {
 
     gifWidth = 2 * gifWidth.replace("px", "");
 
-    this.tl = TweenLite.to(myObject, this.speed, {a: -gifWidth, ease: SteppedEase.config(2), onUpdate: updateFn, onComplete: repeatFn});
+    this.tl = TweenLite.to(myObject, 2.5, {a: -gifWidth, ease: SteppedEase.config(2), onUpdate: updateFn, onComplete: repeatFn});
 
     if (isPlaying) {
         this.tl.resume();
@@ -62,6 +59,36 @@ Gif.prototype.init = function (speed, isPlaying) {
         this.tl.pause();
     }
 };
+
+Gif.prototype.update = function () {
+
+    var myObject = {a: 0},
+        gifWidth = gifWidth = $(this.gif).css('width');
+        gif = this.gif;
+
+
+    function updateFn() {
+        $(gif).css("backgroundPosition", myObject.a + "px 0px");
+    }
+    function repeatFn() {
+        this.restart();
+    }
+
+    this.tl.pause();
+    gifWidth = 2 * gifWidth.replace("px", ""); // ustawia nowy rozmiar
+    this.tl = TweenLite.to(myObject, 2.5, {a: -gifWidth, ease: SteppedEase.config(2), onUpdate: updateFn, onComplete: repeatFn});
+    this.tl.resume();
+}
+
+window.onresize = function () {
+    console.log($(".gif").height());
+    $(".model").each(function () {
+        $(this).css({
+            bottom: $(".main-footer").height()
+        });
+    });
+    TIZZY.gifGirl_0.update();
+}
 
 Gif.prototype.play = function (speed) {
     "use strict";
@@ -503,10 +530,13 @@ TIZZY.pageState = function () {
     });
 }
 
+
+
+
 $(function () {
     "use strict";
-    wH = $(window).height();
-    $('#girls, #boys').css('height', wH);
+    // wH = $(window).height();
+    // $('#girls, #boys').css('height', wH);
     TIZZY.startPage();
     TIZZY.slider();
     TIZZY.timer();
