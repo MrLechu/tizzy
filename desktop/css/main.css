@@ -750,6 +750,8 @@ h1 {
   position: relative;
 }
 .logo {
+  position: absolute;
+  left: 0;
   display: block;
   float: left;
   height: auto;
@@ -861,6 +863,7 @@ h1 {
   font-family: Roboto, sans-serif;
   font-weight: 500;
   font-size: 14px;
+  text-align: right;
   text-transform: uppercase;
   text-decoration: underline;
   color: #000;
@@ -880,6 +883,7 @@ h1 {
   position: relative;
   padding-top: 55px;
   padding-bottom: 36px;
+  max-width: 1800px;
   text-align: center;
 }
 .main-footer .bar {
@@ -983,8 +987,8 @@ h1 {
 /*-------------------------------------------*/
 .aloha-from-deer-logo {
   display: inline-block;
-  width: 72px;
-  height: 72px;
+  width: 63px;
+  height: 63px;
   margin-right: 30px;
 }
 /**/
@@ -1075,7 +1079,7 @@ h1 {
   text-align: center;
 }
 .main-footer .buy {
-  float: right;
+  text-align: right;
 }
 /*
  * HTML5 Boilerplate
@@ -1093,10 +1097,6 @@ input,
 select,
 textarea {
   color: #222;
-}
-body {
-  font-size: 1em;
-  line-height: 1.4;
 }
 /*a {
     color: #00e;
@@ -1151,12 +1151,13 @@ textarea {
 }
 /*---------kształty---------*/
 .shape {
-  width: 72px;
-  height: 72px;
+  width: 63px;
+  height: 63px;
   font-family: Roboto, sans-serif;
   font-size: 18px;
-  line-height: 72px;
+  line-height: 63px;
   font-weight: 700;
+  background-size: 63px 63px;
   text-indent: 0;
   text-align: center;
 }
@@ -1825,51 +1826,66 @@ body.boys .modal-overlay {
   bottom: 0;
   margin: auto;
   display: block;
-  width: 143px;
-  height: 215px;
+  width: 439px;
+  height: 660px;
   margin-left: auto;
   margin-right: auto;
   background-repeat: no-repeat;
   background-position: 0 0;
   -webkit-background-size: cover;
   background-size: cover;
-  margin-left: -71.5px;
+  margin-left: -219.5px;
 }
-@media (min-height: 500px) {
+@media (max-height: 800px) {
   .gif {
     margin: auto;
     display: block;
-    width: 203px;
-    height: 305px;
+    width: 313.33px;
+    height: 470px;
     margin-left: auto;
     margin-right: auto;
     background-repeat: no-repeat;
     background-position: 0 0;
     -webkit-background-size: cover;
     background-size: cover;
-    margin-left: -101.5px;
+    margin-left: -156.665px;
   }
 }
-@media (min-height: 600px) {
+@media (max-height: 700px) {
   .gif {
     margin: auto;
     display: block;
-    width: 210px;
-    height: 315px;
+    width: 233.33px;
+    height: 350px;
     margin-left: auto;
     margin-right: auto;
     background-repeat: no-repeat;
     background-position: 0 0;
     -webkit-background-size: cover;
     background-size: cover;
-    margin-left: -105px;
+    margin-left: -116.665px;
   }
 }
-@media (min-height: 650px) {
+@media (max-height: 690px) {
   .gif {
     margin: auto;
     display: block;
-    width: 233px;
+    width: 273.33px;
+    height: 410px;
+    margin-left: auto;
+    margin-right: auto;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    -webkit-background-size: cover;
+    background-size: cover;
+    margin-left: -136.665px;
+  }
+}
+@media (max-height: 600px) {
+  .gif {
+    margin: auto;
+    display: block;
+    width: 246.67px;
     height: 370px;
     margin-left: auto;
     margin-right: auto;
@@ -1877,22 +1893,11 @@ body.boys .modal-overlay {
     background-position: 0 0;
     -webkit-background-size: cover;
     background-size: cover;
-    margin-left: -116.5px;
+    margin-left: -123.335px;
   }
-}
-@media (min-height: 900px) {
-  .gif {
-    margin: auto;
-    display: block;
-    width: 390px;
-    height: 585px;
-    margin-left: auto;
-    margin-right: auto;
-    background-repeat: no-repeat;
-    background-position: 0 0;
-    -webkit-background-size: cover;
-    background-size: cover;
-    margin-left: -195px;
+  .main-footer .container {
+    padding-top: 35px;
+    padding-bottom: 5px;
   }
 }
 #girls .gif0 {
@@ -1909,6 +1914,11 @@ body.boys .modal-overlay {
   left: 50%;
   top: 35%;
   margin-left: 200px;
+}
+@media (max-width: 1366px) {
+  .thumbnails {
+    top: 30%;
+  }
 }
 .thumbnails .thumbnail {
   display: block;
@@ -2016,6 +2026,17 @@ body.boys .modal-overlay {
 .relative {
   position: relative;
 }
+@media (max-width: 1700px) {
+  .is-countdown {
+    font-size: 35px;
+  }
+  #defaultCountdown .countdown-section:last-child {
+    font-size: 15px;
+  }
+  .aloha-from-deer-logo {
+    margin-right: 20px;
+  }
+}
 @media (max-width: 1400px) {
   #sizesModal img {
     margin-top: 80px;
@@ -2023,5 +2044,72 @@ body.boys .modal-overlay {
   }
   .sizer {
     margin-top: 50px;
+  }
+}
+@media (max-width: 1366px) {
+  .product {
+    right: 45%;
+    top: 30%;
+  }
+}
+@media (max-width: 1300px) {
+  .discount {
+    padding-top: 10px;
+    font-size: 35px;
+  }
+}
+@media (max-width: 1200px) {
+  .is-countdown {
+    font-size: 28px;
+    line-height: 63px;
+  }
+}
+@media (max-width: 1024px) {
+  .product {
+    right: 40%;
+    top: 30%;
+    width: 350px;
+  }
+  .is-countdown {
+    font-size: 24px;
+  }
+  .timer--small {
+    padding-left: 0;
+  }
+  .aloha-from-deer-logo {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+  }
+  .shapes {
+    padding-top: 5px;
+  }
+  .shape {
+    width: 50px;
+    height: 50px;
+    font-size: 14px;
+    line-height: 50px;
+    background-size: 50px 50px;
+  }
+  .discount {
+    padding-top: 5px;
+    font-size: 34px;
+  }
+  .discount sup {
+    font-size: 16px;
+  }
+  .btn--buy {
+    width: 115px;
+  }
+}
+@media (max-width: 1000px) {
+  .main-footer .container {
+    width: 900px;
+  }
+  .main-header .container {
+    width: 900px;
+  }
+  .main-body .container {
+    width: 900px;
   }
 }
