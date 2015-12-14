@@ -158,7 +158,6 @@ TIZZY.startPage = function () {
 
         TIZZY.gifGirl_0 = new Gif('.gif0');
         TIZZY.gifGirl_1 = new Gif('.gif1');
-
     });
 
     layerBoys.hammer().bind("panleft click", function () {
@@ -205,45 +204,55 @@ TIZZY.slider = function () {
         }
     });
 
+    $(".owl-prev, .owl-next").click(function () {
+        $(".owl-item")
+            .find(".gif-wrap")
+            .addClass("translate");
+    });
 
     owlGirls.on('drag.owl.carousel', function (event) {
-        $(".product").removeClass("is-showing");
-        $(".product").addClass("is-hidding");
+        //ukrywa i pokazuje elementy podczas dragowania
+        $(".product, .thumbnails").removeClass("is-showing");
+        $(".product, .thumbnails").addClass("is-hidding");
     });
 
     owlGirls.on('dragged.owl.carousel', function (event) {
-        $(".product").removeClass("is-hidding");
-        $(".product").addClass("is-showing");
+        $(".product, .thumbnails").removeClass("is-hidding");
+        $(".product, .thumbnails").addClass("is-showing");
+
+        //po zakończeniu dragowania środkowany jest gif
         $(".owl-item")
             .find(".gif-wrap")
             .addClass("translate");
     });
 
     owlGirls.on('translate.owl.carousel', function (event) {
-        $(".product").removeClass("is-showing");
-        $(".product").addClass("is-hidding");
+        $(".product, .thumbnails").removeClass("is-showing");
+        $(".product, .thumbnails").addClass("is-hidding");
 
-        if (event.item.index === 0) {
-            TIZZY.gifGirl_0.tl.pause();
-        }
-        if (event.item.index === 1) {
-            TIZZY.gifGirl_1.tl.pause();
+        // przed każdym slajdem zatrzymywany jest gif TODO: czy potrzebne na DESKTOP
+        switch(event.item.index) {
+            case 0:
+                TIZZY.gifGirl_0.tl.pause();
+                break;
+            case 1:
+                TIZZY.gifGirl_1.tl.pause();
+                break;
         }
     });
 
     owlGirls.on('translated.owl.carousel', function (event) {
-        $(".product").removeClass("is-hidding");
-        $(".product").addClass("is-showing");
+        $(".product, .thumbnails").removeClass("is-hidding");
+        $(".product, .thumbnails").addClass("is-showing");
 
         TIZZY.sliderIndex = event.item.index;
 
         if (TIZZY.sliderIndex > tmpID) {
             TIZZY.direction = "right";
-            console.log("right")
         } else {
             TIZZY.direction = "left";
-            console.log("left")
         }
+
         tmpID = TIZZY.sliderIndex;
 
         if (TIZZY.sliderIndex === 0) {
@@ -252,21 +261,18 @@ TIZZY.slider = function () {
             TIZZY.gifGirl_0.tl.resume();
             TIZZY.gifGirl_1.tl.pause();
         } else if (TIZZY.sliderIndex === 1) {
+            //cena przed obniżką
             prizeValue.text('45');
             TIZZY.gifGirl_0.tl.pause();
             TIZZY.gifGirl_1.tl.resume();
-
         } else if (TIZZY.sliderIndex === 2) {
+            //cena przed obniżką
             prizeValue.text('90');
             TIZZY.gifGirl_0.tl.pause();
             TIZZY.gifGirl_1.tl.pause();
         }
 
         if (TIZZY.direction === "right") {
-            /*
-            Jeśli kierunek slajdera to prawo, dla poprzedniego slajdu ustawiamy klasę .start-right,
-            natomiast do następnego slajdu usuwamy istniejące klasy start-left lub start-right i dajemy klasę translate
-            */
             $(".owl-item")
                 .eq(TIZZY.sliderIndex - 1)
                 .find(".gif-wrap")
@@ -281,10 +287,6 @@ TIZZY.slider = function () {
         }
 
         if (TIZZY.direction === "left") {
-            /*
-            Jeśli kierunek slajdera to prawo, dla poprzedniego slajdu ustawiamy klasę .start-left,
-            natomiast do następnego slajdu usuwamy istniejące klasy start-left lub start-right i dajemy klasę translate
-            */
             $(".owl-item")
                 .eq(TIZZY.sliderIndex + 1)
                 .find(".gif-wrap")
@@ -297,6 +299,11 @@ TIZZY.slider = function () {
                 .find(".gif-wrap")
                 .removeClass("translate")
         }
+
+        // //po zakończeniu aninimacji slajdu środkowany jest gif
+        // $(".owl-item")
+        //     .find(".gif-wrap")
+        //     .addClass("translate");
 
         /*zmiana stopki*/
         if (TIZZY.sliderIndex === 0) {
@@ -343,7 +350,7 @@ TIZZY.slider = function () {
 
 TIZZY.productSize = function () {
     "use strict";
-    var $sizeTrigger = $('.sizer__trigger'),
+    var $sizeTrigger = $('.sizer__trigger, .show-sizes'),
         size = $(".sizer__trigger > span").text();
 
     $sizeTrigger.click(function (event) {
@@ -415,10 +422,12 @@ TIZZY.zoomPhoto = function () {
             img = that.parents(".owl-item").find(".model img"),
             thumbnails = that.parents(".owl-item").find(".thumbnails");
 
+        // oznaczenie akrtywnej miniaturki, czerwona ramka wokół miniaturki
         $(this).parent().find(".thumbnail").removeClass("active");
         $(this).addClass("active");
 
         if (TIZZY.sliderIndex === 0) {
+            $('.gif').trigger('zoom.destroy'); // remove zoom
             if (!isGif) {
                 TIZZY.gifGirl_0.tl.pause();
                 if (id === "#model_1_2") {
@@ -427,13 +436,13 @@ TIZZY.zoomPhoto = function () {
                 if (id === "#model_1_3") {
                     TIZZY.gifGirl_0.jumpTo(2);
                 }
-
             } else {
                 TIZZY.gifGirl_0.tl.resume();
             }
         }
 
         if (TIZZY.sliderIndex === 1) {
+            $('.gif').trigger('zoom.destroy');
             if (!isGif) {
                 TIZZY.gifGirl_1.tl.pause();
             } else {
@@ -442,7 +451,9 @@ TIZZY.zoomPhoto = function () {
         }
 
         $(id).addClass("active");
+
         if (isGif) {
+            $('.gif').trigger('zoom.destroy');
             if (TIZZY.sliderIndex === 0) {
                 TIZZY.gifGirl_0.tl.resume();
             }
@@ -452,10 +463,6 @@ TIZZY.zoomPhoto = function () {
         } else {
             zoomPhoto(fullPhotoFileName);
         }
-
-        // //aktywna miniaturka
-        // thumbnail.removeClass("active");
-        // that.addClass("active");
     });
 
     function zoomPhoto(fullPhotoFileName) {

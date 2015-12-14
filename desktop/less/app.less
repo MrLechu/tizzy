@@ -1255,13 +1255,18 @@ body.boys .modal-overlay {
   background-image: url(../img/gif/boys/gif.jpg);
 }
 
-
-
 .thumbnails {
   position: absolute;
   left: 50%;
   top: 35%;
   margin-left: 200px;
+  .transition(all 0.35s);
+  &.is-hidding {
+    opacity: 0;
+  }
+  &.is-showing {
+    opacity: 1;
+  }
   @media (max-width: 1366px) {
     top: 30%;
   }

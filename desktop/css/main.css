@@ -1914,6 +1914,15 @@ body.boys .modal-overlay {
   left: 50%;
   top: 35%;
   margin-left: 200px;
+  -webkit-transition: all 0.35s;
+  -o-transition: all 0.35s;
+  transition: all 0.35s;
+}
+.thumbnails.is-hidding {
+  opacity: 0;
+}
+.thumbnails.is-showing {
+  opacity: 1;
 }
 @media (max-width: 1366px) {
   .thumbnails {
