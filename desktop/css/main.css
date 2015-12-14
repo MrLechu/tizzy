@@ -1448,8 +1448,8 @@ div[class^="owl"] {
   top: 20px;
   z-index: 1;
   display: block;
-  width: 20px;
-  height: 20px;
+  width: 37px;
+  height: 37px;
   opacity: 1;
   background: url(../img/modal-close.png) no-repeat 0 0;
   -webkit-background-size: 20px 20px;
@@ -1965,45 +1965,35 @@ body.boys .modal-overlay {
 .owl-prev {
   position: absolute;
   top: 50%;
-  width: 50px;
-  height: 50px!important;
-  margin-top: -55px;
+  width: 65px;
+  height: 65px!important;
+  margin-top: -95px;
   text-indent: -999em;
   border-radius: 160px;
-  border: 1px solid #ff0028;
+  border: 1px solid #000;
+  background-repeat: no-repeat;
+  background-position: 46% 50%;
   -webkit-transition: all 0.35s;
   -o-transition: all 0.35s;
   transition: all 0.35s;
 }
 .owl-next:hover,
 .owl-prev:hover {
-  background-color: rgba(0, 0, 0, 0.3);
-  border: 1px solid #000;
-}
-.owl-next:after,
-.owl-prev:after {
-  position: absolute;
-  top: 0px;
-  width: 100%;
-  display: block;
-  text-indent: 0;
-  font-size: 40px;
-  line-height: 50px;
-  font-weight: 400;
-  text-align: center;
-  color: #ff0028;
+  border: 1px solid #ff0028;
 }
 .owl-next {
   right: 2%;
+  background-image: url(../img/nav-arrow-right-black.png);
 }
-.owl-next:after {
-  content: ">";
+.owl-next:hover {
+  background-image: url(../img/nav-arrow-right-red.png);
 }
 .owl-prev {
   left: 2%;
+  background-image: url(../img/nav-arrow-left-black.png);
 }
-.owl-prev:after {
-  content: "<";
+.owl-prev:hover {
+  background-image: url(../img/nav-arrow-left-red.png);
 }
 /**
  * Clearfix helper
