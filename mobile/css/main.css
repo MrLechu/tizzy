@@ -897,24 +897,51 @@ h1 {
   font-weight: 500;
   text-transform: uppercase;
 }
+@media (max-width: 320px) {
+  .product__name h1 {
+    font-size: 24px;
+    line-height: 28px;
+  }
+}
 .product__name h1 span {
   display: block;
   font-size: 16px;
   line-height: 22px;
   font-weight: 400;
 }
+@media (max-width: 320px) {
+  .product__name h1 span {
+    font-size: 14px;
+    line-height: 18px;
+  }
+}
 .product__description {
   padding-left: 100px;
   font-size: 14px;
   line-height: 18px;
 }
+@media (max-width: 320px) {
+  .product__description {
+    padding-left: 80px;
+  }
+}
 .product__description a {
+  display: block;
   font-family: Roboto, sans-serif;
   font-weight: 500;
   font-size: 14px;
+  text-decoration: none;
   text-transform: uppercase;
-  text-decoration: underline;
   color: #fff;
+}
+.product__description a img {
+  margin-left: 15px;
+  border: 2px solid #fff;
+  border-radius: 50px;
+}
+.product__description a span {
+  display: inline-block;
+  text-decoration: underline;
 }
 .slide-left {
   position: relative;
@@ -1238,11 +1265,6 @@ textarea {
 }
 .ico-arrow-top {
   background-image: url(../img/ico-arrow-top.png);
-}
-.ico-thisrt {
-  width: 35px;
-  height: 31px;
-  background-image: url(../img/ico-tshirt.png);
 }
 .shape-star-white {
   color: #ee322d;

@@ -196,25 +196,48 @@ h1 {
   line-height: 32px;
   font-weight: 500;
   text-transform: uppercase;
+  @media (max-width: 320px) {
+    font-size: 24px;
+    line-height: 28px;
+  }
   span {
     display: block;
     font-size: 16px;
     line-height: 22px;
     font-weight: 400;
+    @media (max-width: 320px) {
+      font-size: 14px;
+      line-height: 18px;
+    }
   }
 }
 .product__description {
   padding-left: 100px;
   font-size: 14px;
   line-height: 18px;
+  @media (max-width: 320px) {
+    padding-left: 80px;
+  }
+
   a {
+    display: block;
     font-family: Roboto, sans-serif;
     font-weight: 500;
     font-size: 14px;
+    text-decoration: none;
     text-transform: uppercase;
-    text-decoration: underline;
     color: #fff;
+    img {
+      margin-left: 15px;
+      border: 2px solid #fff;
+      border-radius: 50px;
+    }
+    span {
+      display: inline-block;
+      text-decoration: underline;
+    }
   }
+
 }
 .slide-left {
   position: relative;
@@ -570,11 +593,6 @@ textarea {
 .ico-arrow-top {
   background-image: url(../img/ico-arrow-top.png);
 }
-.ico-thisrt {
-  width: 35px;
-  height: 31px;
-  background-image: url(../img/ico-tshirt.png);
-}
 .shape-star-white {
   color: #ee322d;
 }
@@ -875,6 +893,9 @@ div[class^="owl"] {
   }
 }
 
+//popup - zdjęcia
+#photosModal {}
+
 .modal-active {
   /*default*/
   .modal {
@@ -916,7 +937,6 @@ div[class^="owl"] {
       z-index: 2;
       top: 0;
     }
-
     .modal-close {
       right: 6.8%;
       z-index: 1;
@@ -927,7 +947,6 @@ div[class^="owl"] {
       -webkit-background-size: 20px 20px;
       background-size: 20px 20px;
     }
-
     .mobilemenu-trigger {
       opacity: 0;
       visibility: hidden;
@@ -959,6 +978,8 @@ div[class^="owl"] {
       -webkit-background-size: 20px 20px;
       background-size: 20px 20px;
     }
+  }
+  &.modal-photos {
 
   }
 }
