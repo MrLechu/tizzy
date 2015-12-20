@@ -901,6 +901,9 @@ h1 {
   width: 196px;
   height: 6px;
   background-color: #ff0028;
+  -webkit-transition: all 0.4s ease-in-out;
+  -o-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
 }
 /*rozmiary produktów*/
 .product__size {
@@ -1979,16 +1982,11 @@ body.boys .modal-overlay {
   margin-top: -95px;
   text-indent: -999em;
   border-radius: 160px;
-  border: 1px solid #000;
   background-repeat: no-repeat;
   background-position: 46% 50%;
-  -webkit-transition: all 0.35s;
-  -o-transition: all 0.35s;
-  transition: all 0.35s;
-}
-.owl-next:hover,
-.owl-prev:hover {
-  border: 1px solid #ff0028;
+  -webkit-transition: all 0.45s;
+  -o-transition: all 0.45s;
+  transition: all 0.45s;
 }
 .owl-next {
   right: 2%;

@@ -260,16 +260,19 @@ TIZZY.slider = function () {
             prizeValue.text('39');
             TIZZY.gifGirl_0.tl.resume();
             TIZZY.gifGirl_1.tl.pause();
+            $('.bar__inner').css('left', 0);
         } else if (TIZZY.sliderIndex === 1) {
             //cena przed obniżką
             prizeValue.text('45');
             TIZZY.gifGirl_0.tl.pause();
             TIZZY.gifGirl_1.tl.resume();
+            $('.bar__inner').css('left', ($(window).width() / 2) - ($(".bar__inner").width() / 2));
         } else if (TIZZY.sliderIndex === 2) {
             //cena przed obniżką
             prizeValue.text('90');
             TIZZY.gifGirl_0.tl.pause();
             TIZZY.gifGirl_1.tl.pause();
+            $('.bar__inner').css('left', ($(window).width()) - ($(".bar__inner").width()));
         }
 
         if (TIZZY.direction === "right") {
