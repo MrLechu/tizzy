@@ -710,6 +710,7 @@ th {
 .jquery-checkbox img {
   background-position: 0px 0px;
 }
+/*vars*/
 h1 {
   margin: 0;
   padding: 0;
@@ -735,6 +736,13 @@ h1 {
   -webkit-transition: background-color 0.2s;
   -o-transition: background-color 0.2s;
   transition: background-color 0.2s;
+}
+.main-header__right {
+  position: absolute;
+  right: 6.8%;
+  display: block;
+  margin-top: -10px;
+  margin-right: -10px;
 }
 .logo {
   position: absolute;
@@ -791,6 +799,9 @@ h1 {
 .menu-active .main-header:after {
   background-color: #fff;
 }
+.menu-active .product__category {
+  color: #fff;
+}
 .menu__item {
   display: block;
 }
@@ -806,12 +817,9 @@ h1 {
   color: #fff;
 }
 .mobilemenu-trigger {
-  position: absolute;
-  right: 6.8%;
-  display: block;
+  display: inline-block;
+  vertical-align: middle;
   padding: 10px;
-  margin-top: -10px;
-  margin-right: -10px;
   opacity: 1;
   -webkit-transition: all 0.35s;
   -o-transition: all 0.35s;
@@ -870,6 +878,16 @@ h1 {
   margin: auto;
   max-width: 60%;
   height: auto;
+}
+.product__category {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 15px;
+  color: #ff0028;
+  text-transform: uppercase;
+  -webkit-transition: all 0.35s;
+  -o-transition: all 0.35s;
+  transition: all 0.35s;
 }
 .product__name h1 {
   margin-bottom: 10px;
@@ -1548,19 +1566,15 @@ div[class^="owl"] {
 .modal-active.modal-description .shapes .shape {
   opacity: 0;
 }
-.modal-active.modal-description .mobilemenu-trigger {
-  z-index: 5;
-}
 .modal-active.modal-description .hamburger-icon span {
   background-color: #fff;
+}
+.modal-active.modal-description .product__category {
+  color: #fff;
 }
 .modal-active.modal-sizes #sizesModal {
   z-index: 2;
   top: 0;
-}
-.modal-active.modal-sizes .mobilemenu-trigger {
-  opacity: 0;
-  visibility: hidden;
 }
 .modal-active.modal-sizes .modal-close {
   right: 6.8%;
@@ -1572,6 +1586,10 @@ div[class^="owl"] {
   -webkit-background-size: 20px 20px;
   background-size: 20px 20px;
 }
+.modal-active.modal-sizes .mobilemenu-trigger {
+  opacity: 0;
+  visibility: hidden;
+}
 .modal-active.modal-form .purchase {
   background-color: #ff0028;
 }
@@ -1581,16 +1599,9 @@ div[class^="owl"] {
 .modal-active.modal-form #formModal {
   z-index: 6;
 }
-.modal-active.modal-form .mobilemenu-trigger {
-  display: none;
-}
 .modal-active.modal-default #defaultModal {
   z-index: 2;
   top: 0;
-}
-.modal-active.modal-default .mobilemenu-trigger {
-  opacity: 0;
-  visibility: hidden;
 }
 .modal-active.modal-default .modal-close {
   right: 6.8%;
