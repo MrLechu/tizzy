@@ -362,20 +362,23 @@ TIZZY.productDetails.prototype.showContent = function (carousel, index) {
 
     function onStartFn() {
         TIZZY.doc.addClass('modal-active modal-description');
+        TIZZY.gifGirl_0.tl.pause();
+        TIZZY.gifGirl_1.tl.pause();
         TIZZY.gallery();
     }
 
     function onCompleteFn() {
-        TIZZY.gifGirl_0.tl.pause();
-        TIZZY.gifGirl_1.tl.pause();
     }
 
     var slideLeftElem = $('.modal').find('.slide-left'),
         modalFadeElem = $('.modal').find('.fade');
 
-    TweenLite.to(slideLeftElem, 0.35, {x: '0', ease: animEase});
-    TweenLite.fromTo(TIZZY.modalOverlay, 0.35, {opacity: 0}, {opacity: 1, ease: animEase, onStart: onStartFn, onComplete: onCompleteFn});
-    TweenLite.fromTo(modalFadeElem, 0.35, {opacity: 0}, {opacity: 1, ease: animEase});
+    //TweenLite.set(slideLeftElem, {x: "-100%", y: 0, z: 0});
+
+    TweenLite.to(slideLeftElem, 0.45, {x: '0', ease: animEase});
+
+    TweenLite.fromTo(TIZZY.modalOverlay, 0.45, {opacity: 0}, {opacity: 1, ease: animEase, onStart: onStartFn, onComplete: onCompleteFn});
+    TweenLite.fromTo(modalFadeElem, 0.45, {opacity: 0}, {opacity: 1, ease: animEase});
 };
 
 TIZZY.productDetails.prototype.hideContent = function () {
@@ -467,7 +470,7 @@ $(".modal-close").click(function (ev) {
     ev.preventDefault();
     var self = $(this);
 
-    if (self.hasClass(".gallery-close")) {
+    if (self.hasClass("gallery-close")) {
         TIZZY.doc.removeClass('modal-gallery');
     } else {
         TIZZY.doc.removeClass('modal-active modal-sizes modal-form');

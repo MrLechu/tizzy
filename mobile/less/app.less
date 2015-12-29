@@ -154,11 +154,12 @@ h1 {
 
 
 .product {
-  display: none;
   position: absolute;
   left: 0;
   top: 0;
   z-index: -1;
+  opacity: 0;
+  visibility: hidden;
   width: 100%;
   height: 100%;
   padding-top: 20%;
@@ -238,13 +239,20 @@ h1 {
       text-decoration: underline;
     }
   }
-
 }
+
+@full-width: 100vw;
+
 .slide-left {
   position: relative;
-  -webkit-transform: translate(-100%, 0);
-  -ms-transform: translate(-100%, 0);
-  transform: translate(-100%, 0)
+
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+
+  -webkit-transform: translateX(-@full-width);
+  -ms-transform: translateX(-@full-width);
+  transform: translateX(-@full-width);
 }
 .model {
   display: block;
@@ -683,6 +691,11 @@ div[class^="owl"] {
   font-weight: 900;
   color: #fff;
   overflow: hidden;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  transform: translateZ(0);
+
 }
 .layer-text {
   position: relative;
@@ -748,8 +761,9 @@ div[class^="owl"] {
   bottom: 0;
   width: 100%;
   height: 100%;
-  z-index: 0;
-  .transition(opacity 0.35s);
+  z-index: -1;
+  overflow: hidden;
+  .transition(opacity 0.35s ease-in-out);
 }
 .modal-overlay {
   position: absolute;
@@ -771,7 +785,9 @@ div[class^="owl"] {
   height: 100%;
   z-index: 1;
   .product {
-    display: block;
+    opacity: 1;
+    z-index: 1;
+    visibility: visible;
   }
 }
 

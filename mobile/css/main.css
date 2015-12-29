@@ -1308,11 +1308,12 @@ h1 {
   color: #ee322d;
 }
 .product {
-  display: none;
   position: absolute;
   left: 0;
   top: 0;
   z-index: -1;
+  opacity: 0;
+  visibility: hidden;
   width: 100%;
   height: 100%;
   padding-top: 20%;
@@ -1400,9 +1401,12 @@ h1 {
 }
 .slide-left {
   position: relative;
-  -webkit-transform: translate(-100%, 0);
-  -ms-transform: translate(-100%, 0);
-  transform: translate(-100%, 0);
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-transform: translateX(-100vw);
+  -ms-transform: translateX(-100vw);
+  transform: translateX(-100vw);
 }
 .model {
   display: block;
@@ -1805,6 +1809,10 @@ div[class^="owl"] {
   font-weight: 900;
   color: #fff;
   overflow: hidden;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  transform: translateZ(0);
 }
 .layer-text {
   position: relative;
@@ -1869,10 +1877,11 @@ div[class^="owl"] {
   bottom: 0;
   width: 100%;
   height: 100%;
-  z-index: 0;
-  -webkit-transition: opacity 0.35s;
-  -o-transition: opacity 0.35s;
-  transition: opacity 0.35s;
+  z-index: -1;
+  overflow: hidden;
+  -webkit-transition: opacity 0.35s ease-in-out;
+  -o-transition: opacity 0.35s ease-in-out;
+  transition: opacity 0.35s ease-in-out;
 }
 .modal-overlay {
   position: absolute;
@@ -1895,7 +1904,9 @@ div[class^="owl"] {
   z-index: 1;
 }
 .modal-content .product {
-  display: block;
+  opacity: 1;
+  z-index: 1;
+  visibility: visible;
 }
 .show-details,
 .hide-details,
