@@ -362,12 +362,12 @@ TIZZY.productDetails.prototype.showContent = function (carousel, index) {
 
     function onStartFn() {
         TIZZY.doc.addClass('modal-active modal-description');
-        TIZZY.gifGirl_0.tl.pause();
-        TIZZY.gifGirl_1.tl.pause();
         TIZZY.gallery();
     }
 
     function onCompleteFn() {
+        TIZZY.gifGirl_0.tl.pause();
+        TIZZY.gifGirl_1.tl.pause();
     }
 
     var slideLeftElem = $('.modal').find('.slide-left'),
