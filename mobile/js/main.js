@@ -253,7 +253,7 @@ TIZZY.productSize = function () {
         }
     });
 
-    $('.modal-close').click(function (e) {
+    $('.modal-close:not(".gallery-close")').click(function (e) {
         e.preventDefault();
         if (TIZZY.sliderIndex === 0) {
             TIZZY.gifGirl_0.tl.resume();
@@ -383,7 +383,6 @@ TIZZY.productDetails.prototype.showContent = function (carousel, index) {
 
 TIZZY.productDetails.prototype.hideContent = function () {
     "use strict";
-    event.preventDefault();
 
     function onCompleteFn() {
         $('#productModal').find('.product').remove();
