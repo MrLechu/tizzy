@@ -20,6 +20,15 @@ h1 {
   transition: @transition;
 }
 
+.translate(@x, @y, @z) {
+  -webkit-transform: translate3d(@x, @y, @z);
+  -ms-transform: translate3d(@x, @y, @z);
+  -o-transform: translate3d(@x, @y, @z);
+  transform: translate3d(@x, @y, @z);
+}
+
+
+
 /**/
 .main-header {
   position: absolute;
@@ -245,14 +254,6 @@ h1 {
 
 .slide-left {
   position: relative;
-
-  -webkit-transform: translateZ(0);
-  -ms-transform: translateZ(0);
-  transform: translateZ(0);
-
-  -webkit-transform: translateX(-@full-width);
-  -ms-transform: translateX(-@full-width);
-  transform: translateX(-@full-width);
 }
 .model {
   display: block;
@@ -678,40 +679,58 @@ div[class^="owl"] {
   vertical-align: middle;
 }
 
-
-
 .layer {
-  position: absolute;
+  position: fixed;
   top: 0;
   bottom: 0;
   z-index: 99999;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.layer-text {
+  position: fixed;
+  top: 0;
+  z-index: 999999;
   width: 50%;
+  height: 100%;
   font-family: Roboto, sans-serif;
   font-size: 50px;
   font-weight: 900;
   color: #fff;
-  overflow: hidden;
-  -webkit-transform: translateZ(0);
-  -ms-transform: translateZ(0);
-  -o-transform: translateZ(0);
-  transform: translateZ(0);
+  text-align: center;
+  line-height: 100vh;
+  .translate(0,0,0);
+  &__girls {
+    left: 0;
+  }
+  &__boys {
+    right: 0;
+  }
+}
 
-}
-.layer-text {
-  position: relative;
-}
-#layer-girls {
-  left: 0;
-  padding-right: 35px;
+.layer-girls {
+  left: -50%;
   text-align: right;
   background-color: rgba(34, 2, 18, 0.8);
+  .translate(0,0,0);
 }
-#layer-boys {
-  right: 0;
-  padding-left: 35px;
+
+.layer-boys {
+  right: -50%;
   text-align: left;
   background-color: rgba(5, 10, 38, 0.8);
+  .translate(0,0,0);
 }
+
+
+
+
+
+
+
+
 .wrapper {
   position: relative;
   height: 100%;

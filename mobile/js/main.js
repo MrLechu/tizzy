@@ -1,16 +1,16 @@
 /*jslint browser: true*/
 /*globals $, window, alert, TweenLite, ease, Power0, SteppedEase, MBP, Hammer, media_url*/
-var TIZZY,
+var APP,
     wH,
     prizeValue = $('.prize-value'),
     footerFadeElem = $('.main-footer').find('.fade'),
     footerText = $('.main-footer').find('.text'),
     animEase = Power0.easeNone;
 
-TIZZY = TIZZY || {};
+APP = APP || {};
 
 
-TIZZY = {
+APP = {
     doc: $('body'),
     modal: $('.modal'),
     modalOverlay: $('#productModal').find('.modal-overlay'),
@@ -64,75 +64,78 @@ Gif.prototype.pause = function () {
     this.tl.pause();
 }
 
-TIZZY.startPage = function () {
+APP.startPage = function () {
     "use strict";
-    var layer = $('.layer'),
-        layerGirls = $('#layer-girls'),
-        layerBoys = $('#layer-boys'),
+    var layer = document.querySelectorAll(".layer"),
+        layerText = document.querySelectorAll(".layer-text"),
+        startGirls = $('.start-girls'),
+        startBoys = $('.start-boys'),
         girls = $('#girls'),
         boys = $('#boys'),
-        girsLayerText = layerGirls.find('.layer-text'),
-        boysLayerText = layerBoys.find('.layer-text'),
+        girlsLayerText = $('.layer-text__girls'),
+        boysLayerText = $('.layer-text__boys'),
         boysWrap = boys.find('.wrap'),
         girlsWrap = girls.find('.wrap');
 
     function onOpacityComplete() {
-        layer.remove();
-        if (TIZZY.category === "girls") {
-            TIZZY.gifGirl_0.init(false, true);
-            TIZZY.gifGirl_1.init(false, false);
+        $(layer).remove();
+        $(layerText).remove();
+
+        if (APP.category === "girls") {
+            APP.gifGirl_0.init(false, true);
+            APP.gifGirl_1.init(false, false);
         }
-        if (TIZZY.category === "boys") {
+        if (APP.category === "boys") {
             // start pierwszego gifa w sekcji dla chłpców
         }
     }
 
     function onComplete() {
         TweenLite.fromTo(layer, 0.7, {opacity: 1}, {opacity: 0, ease: animEase, onComplete: onOpacityComplete});
-        TIZZY.productDetails();
-        TIZZY.productSize();
+        APP.productDetails();
+        APP.productSize();
     }
 
-    layerGirls.hammer().bind("panright click", function () {
-        TIZZY.doc.addClass('girls');
+    startGirls.hammer().bind("panright click", function () {
+        APP.doc.addClass('girls');
 
         girls.css('zIndex', 2);
         boys.css('zIndex', 1);
 
-        TweenLite.to(layerGirls, 1, {width: '100%', ease: animEase});
-        TweenLite.to(layerBoys, 1, {right: '-50%', ease: animEase});
+        TweenLite.to(startGirls, 1, {x: "50%", ease: animEase});
+        TweenLite.to(girlsLayerText, 0.7, {opacity: 0, ease: animEase});
 
-        TweenLite.to(girsLayerText, 0.7, {opacity: 0, left: -50, ease: animEase});
-        TweenLite.to(boysLayerText, 0.7, {opacity: 0, ease: animEase});
+        TweenLite.to(startBoys, 1, {x: '50%', ease: animEase});
+        TweenLite.to(boysLayerText, 1, {x: "100%", opacity: 0, ease: animEase});
 
         TweenLite.to(girls, 0.5, {left: 0, ease: animEase});
         TweenLite.to(girlsWrap, 0.5, {right: 0, ease: animEase, onComplete: onComplete});
 
-        TIZZY.category = 'girls';
+        APP.category = 'girls';
 
-        TIZZY.gifGirl_0 = new Gif('.gif0');
-        TIZZY.gifGirl_1 = new Gif('.gif1');
-
+        APP.gifGirl_0 = new Gif('.gif0');
+        APP.gifGirl_1 = new Gif('.gif1');
     });
 
-    layerBoys.hammer().bind("panleft click", function () {
-        TIZZY.doc.addClass('boys');
+    startBoys.hammer().bind("panleft click", function () {
+        APP.doc.addClass('boys');
         boys.css('zIndex', 2);
         girls.css('zIndex', 1);
 
-        TweenLite.to(layerBoys, 1, {width: '100%', ease: animEase});
-        TweenLite.to(layerGirls, 1, {left: '-50%', ease: animEase});
+        TweenLite.to(startBoys, 1, {x: "-50%", ease: animEase});
+        TweenLite.to(boysLayerText, 0.7, {opacity: 0, ease: animEase});
 
-        TweenLite.to(boysLayerText, 0.7, {opacity: 0, right: -50, ease: animEase});
+        TweenLite.to(startGirls, 1, {x: '-50%', ease: animEase});
+        TweenLite.to(girlsLayerText, 1, {x: "-100%", opacity: 0, ease: animEase});
 
         TweenLite.to(boys, 0.5, {right: 0, ease: animEase});
         TweenLite.to(boysWrap, 0.5, {left: 0, ease: animEase, onComplete: onComplete});
 
-        TIZZY.category = 'boys';
+        APP.category = 'boys';
     });
 };
 
-TIZZY.slider = function () {
+APP.slider = function () {
     "use strict";
     var owlGirls = $("#girls-carousel"),
         footer = $('.main-footer');
@@ -163,34 +166,34 @@ TIZZY.slider = function () {
 
     owlGirls.on('translate.owl.carousel', function (event) {
         if (event.item.index === 0) {
-            TIZZY.gifGirl_0.tl.pause();
+            APP.gifGirl_0.tl.pause();
         }
         if (event.item.index === 1) {
-            TIZZY.gifGirl_1.tl.pause();
+            APP.gifGirl_1.tl.pause();
         }
     });
 
     owlGirls.on('translated.owl.carousel', function (event) {
-        TIZZY.sliderIndex = event.item.index;
-        console.log(TIZZY.sliderIndex);
-        if (TIZZY.sliderIndex === 0) {
+        APP.sliderIndex = event.item.index;
+        console.log(APP.sliderIndex);
+        if (APP.sliderIndex === 0) {
             //cena po obniżce
             prizeValue.text('39');
-            TIZZY.gifGirl_0.tl.resume();
-            TIZZY.gifGirl_1.tl.pause();
-        } else if (TIZZY.sliderIndex === 1) {
+            APP.gifGirl_0.tl.resume();
+            APP.gifGirl_1.tl.pause();
+        } else if (APP.sliderIndex === 1) {
             prizeValue.text('45');
-            TIZZY.gifGirl_0.tl.pause();
-            TIZZY.gifGirl_1.tl.resume();
+            APP.gifGirl_0.tl.pause();
+            APP.gifGirl_1.tl.resume();
 
-        } else if (TIZZY.sliderIndex === 2) {
+        } else if (APP.sliderIndex === 2) {
             prizeValue.text('90');
-            TIZZY.gifGirl_0.tl.pause();
-            TIZZY.gifGirl_1.tl.pause();
+            APP.gifGirl_0.tl.pause();
+            APP.gifGirl_1.tl.pause();
         }
 
         /*zmiana stopki*/
-        if (TIZZY.sliderIndex === 0) {
+        if (APP.sliderIndex === 0) {
             TweenLite.to(footerText, 0.5, {opacity: 0});
             TweenLite.to(footerFadeElem, 0.5, {opacity: 1});
         } else {
@@ -230,36 +233,36 @@ TIZZY.slider = function () {
 
     owlBoys.on('translated.owl.carousel', function (event) {
         var itemIndex = event.item.index;
-        TIZZY.sliderIndex = itemIndex;
+        APP.sliderIndex = itemIndex;
     });
 };
 
-TIZZY.productSize = function () {
+APP.productSize = function () {
     "use strict";
     var $sizeTrigger = $('.sizer__trigger'),
         size = $(".sizer__trigger > span").text();
 
     $sizeTrigger.click(function (event) {
         event.preventDefault();
-        TIZZY.doc.addClass('modal-active modal-sizes');
+        APP.doc.addClass('modal-active modal-sizes');
 
         History.pushState(null, "size", "?rozmiar=" + size);
 
-        if (TIZZY.sliderIndex === 0) {
-            TIZZY.gifGirl_0.tl.pause();
+        if (APP.sliderIndex === 0) {
+            APP.gifGirl_0.tl.pause();
         }
-        if (TIZZY.sliderIndex === 1) {
-            TIZZY.gifGirl_1.tl.pause();
+        if (APP.sliderIndex === 1) {
+            APP.gifGirl_1.tl.pause();
         }
     });
 
     $('.modal-close:not(".gallery-close")').click(function (e) {
         e.preventDefault();
-        if (TIZZY.sliderIndex === 0) {
-            TIZZY.gifGirl_0.tl.resume();
+        if (APP.sliderIndex === 0) {
+            APP.gifGirl_0.tl.resume();
         }
-        if (TIZZY.sliderIndex === 1) {
-            TIZZY.gifGirl_1.tl.resume();
+        if (APP.sliderIndex === 1) {
+            APP.gifGirl_1.tl.resume();
         }
     });
 
@@ -277,7 +280,7 @@ TIZZY.productSize = function () {
 
         History.replaceState(null, "size", "?rozmiar=" + size);
 
-        //TIZZY.doc.removeClass('modal-active modal-sizes modal-form');
+        //APP.doc.removeClass('modal-active modal-sizes modal-form');
         $(".sizer__size").removeClass("active");
         thatSize.addClass('active');
     });
@@ -285,28 +288,28 @@ TIZZY.productSize = function () {
     $('.sizer .btn').click(function (e) {
         e.preventDefault();
 
-        TIZZY.doc.removeClass('modal-active modal-sizes modal-form');
-        if (TIZZY.sliderIndex === 0) {
-            TIZZY.gifGirl_0.tl.resume();
+        APP.doc.removeClass('modal-active modal-sizes modal-form');
+        if (APP.sliderIndex === 0) {
+            APP.gifGirl_0.tl.resume();
         }
-        if (TIZZY.sliderIndex === 1) {
-            TIZZY.gifGirl_1.tl.resume();
+        if (APP.sliderIndex === 1) {
+            APP.gifGirl_1.tl.resume();
         }
     });
 };
 
-TIZZY.productDetails = function () {
+APP.productDetails = function () {
     "use strict";
     var $hideDetails = $('.hide-details');
 
     $('body.girls').find('.show-details').click(function () {
-        TIZZY.productDetails.prototype.showContent('#girls-carousel', TIZZY.sliderIndex);
+        APP.productDetails.prototype.showContent('#girls-carousel', APP.sliderIndex);
     });
     $('body.boys').find('.show-details').click(function () {
-        TIZZY.productDetails.prototype.showContent('#boys-carousel', TIZZY.sliderIndex);
+        APP.productDetails.prototype.showContent('#boys-carousel', APP.sliderIndex);
     });
     $hideDetails.on('click', function () {
-        TIZZY.productDetails.prototype.hideContent();
+        APP.productDetails.prototype.hideContent();
     });
 
     //gesty mobile
@@ -328,7 +331,7 @@ TIZZY.productDetails = function () {
     //ukrycie szczegółów produktu
     swipeDown.on("panend", function (ev) {
         if (ev.direction === Hammer.DIRECTION_DOWN) {
-            TIZZY.productDetails.prototype.hideContent();
+            APP.productDetails.prototype.hideContent();
         }
     });
 
@@ -346,28 +349,28 @@ TIZZY.productDetails = function () {
     //pokazanie szczegóły produktu
     swipeUp.on("panend", function (ev) {
         if (ev.direction === Hammer.DIRECTION_UP) {
-            TIZZY.productDetails.prototype.showContent('#girls-carousel', TIZZY.sliderIndex);
+            APP.productDetails.prototype.showContent('#girls-carousel', APP.sliderIndex);
         }
     });
 };
 
-TIZZY.productDetails.prototype.showContent = function (carousel, index) {
+APP.productDetails.prototype.showContent = function (carousel, index) {
     "use strict";
     $(carousel)
         .find('.owl-item')
         .eq(index)
         .find('.product')
         .clone()
-        .appendTo(TIZZY.modalContent);
+        .appendTo(APP.modalContent);
 
     function onStartFn() {
-        TIZZY.doc.addClass('modal-active modal-description');
-        TIZZY.gallery();
+        APP.doc.addClass('modal-active modal-description');
+        APP.gallery();
     }
 
     function onCompleteFn() {
-        TIZZY.gifGirl_0.tl.pause();
-        TIZZY.gifGirl_1.tl.pause();
+        APP.gifGirl_0.tl.pause();
+        APP.gifGirl_1.tl.pause();
     }
 
     var slideLeftElem = $('.modal').find('.slide-left'),
@@ -377,21 +380,21 @@ TIZZY.productDetails.prototype.showContent = function (carousel, index) {
 
     TweenLite.to(slideLeftElem, 0.45, {x: '0', ease: animEase});
 
-    TweenLite.fromTo(TIZZY.modalOverlay, 0.45, {opacity: 0}, {opacity: 1, ease: animEase, onStart: onStartFn, onComplete: onCompleteFn});
+    TweenLite.fromTo(APP.modalOverlay, 0.45, {opacity: 0}, {opacity: 1, ease: animEase, onStart: onStartFn, onComplete: onCompleteFn});
     TweenLite.fromTo(modalFadeElem, 0.45, {opacity: 0}, {opacity: 1, ease: animEase});
 };
 
-TIZZY.productDetails.prototype.hideContent = function () {
+APP.productDetails.prototype.hideContent = function () {
     "use strict";
 
     function onCompleteFn() {
         $('#productModal').find('.product').remove();
-        TIZZY.doc.removeClass('modal-active modal-description');
-        if (TIZZY.sliderIndex === 0) {
-            TIZZY.gifGirl_0.tl.play();
+        APP.doc.removeClass('modal-active modal-description');
+        if (APP.sliderIndex === 0) {
+            APP.gifGirl_0.tl.play();
         }
-        if (TIZZY.sliderIndex === 1) {
-            TIZZY.gifGirl_1.tl.play();
+        if (APP.sliderIndex === 1) {
+            APP.gifGirl_1.tl.play();
         }
     }
 
@@ -400,10 +403,10 @@ TIZZY.productDetails.prototype.hideContent = function () {
 
     TweenLite.to(modalFadeElem, 0.5, {opacity: 0, ease: animEase});
     TweenLite.to(slideLeftElem, 0.3, {x: '-100%', ease: animEase});
-    TweenLite.to(TIZZY.modalOverlay, 0.4, {opacity: '0', ease: animEase, onComplete: onCompleteFn});
+    TweenLite.to(APP.modalOverlay, 0.4, {opacity: '0', ease: animEase, onComplete: onCompleteFn});
 };
 
-TIZZY.menu = function () {
+APP.menu = function () {
     "use strict";
     $('.mobilemenu-trigger').click(function () {
         $('.menu').toggleClass('is-active');
@@ -411,14 +414,14 @@ TIZZY.menu = function () {
     });
 };
 
-TIZZY.timer = function () {
+APP.timer = function () {
     "use strict";
     var until = new Date(2015, 10 - 1, 31);
 
     $('#defaultCountdown').countdown({until: until, compact: false, padZeroes: true, format: 'HMS'});
 };
 
-TIZZY.form = function () {
+APP.form = function () {
     "use strict";
     $('.form input:checkbox').checkbox({
         empty: media_url + 'img/empty.png'
@@ -428,18 +431,18 @@ TIZZY.form = function () {
     });
     $('.btn--buy').click(function (ev) {
         ev.preventDefault();
-        TIZZY.doc.addClass('modal-active modal-form');
-        TIZZY.gifGirl_0.tl.pause();
-        TIZZY.gifGirl_1.tl.pause();
+        APP.doc.addClass('modal-active modal-form');
+        APP.gifGirl_0.tl.pause();
+        APP.gifGirl_1.tl.pause();
     });
 };
 
-TIZZY.gallery = function () {
+APP.gallery = function () {
     var galleryTrigger = $('.gallery-trigger');
 
     galleryTrigger.click(function (ev) {
         ev.preventDefault();
-        TIZZY.doc.addClass('modal-gallery');
+        APP.doc.addClass('modal-gallery');
     });
 
     var mySwiper = new Swiper ('.swiper-container', {
@@ -480,28 +483,6 @@ TIZZY.gallery = function () {
             "top": top + ev.originalEvent.gesture.deltaY,
         });
     });
-
-
-
-    // var img, marginLeft, marginTop;
-    // new Hammer( $( "#galleryModal .modal-content" )[0], {
-    //   domEvents: true
-    // } );
-    // $( "#galleryModal .modal-content" ).on( "panstart", function( e ) {
-    //   img = $( "#galleryModal .modal-content img" );
-    //   marginLeft = parseInt( img.css( "margin-left" ), 10 );
-    //   marginTop = parseInt( img.css( "margin-top" ), 10 );
-    // } );
-    // $( "#galleryModal .modal-content" ).on( "pan", function( e ) {
-    //     console.log( "pan" );
-
-    //     img.css( {
-    //         "margin-left": marginLeft + e.originalEvent.gesture.deltaX,
-    //         "margin-top": marginTop + e.originalEvent.gesture.deltaY
-    //     });
-
-    // } );
-
 }
 
 $(".modal-close").click(function (ev) {
@@ -510,14 +491,14 @@ $(".modal-close").click(function (ev) {
     var self = $(this);
 
     if (self.hasClass("gallery-close")) {
-        TIZZY.doc.removeClass('modal-gallery');
+        APP.doc.removeClass('modal-gallery');
     } else {
-        TIZZY.doc.removeClass('modal-active modal-sizes modal-form');
+        APP.doc.removeClass('modal-active modal-sizes modal-form');
     }
 });
 
 
-TIZZY.debug = function () {
+APP.debug = function () {
     "use strict";
     $(".layer").hide();
     $("body").addClass('girls');
@@ -531,13 +512,13 @@ $(function () {
     "use strict";
     wH = $(window).height();
     $('#girls, #boys').css('height', wH);
-    TIZZY.startPage();
-    TIZZY.slider();
-    TIZZY.menu();
-    TIZZY.timer();
-    TIZZY.form();
+    APP.startPage();
+    APP.slider();
+    APP.menu();
+    APP.timer();
+    APP.form();
 
     //MBP.preventScrolling();
-    //TIZZY.debug();
+    //APP.debug();
 });
 
