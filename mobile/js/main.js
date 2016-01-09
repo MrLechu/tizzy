@@ -458,10 +458,50 @@ TIZZY.gallery = function () {
         }
     });
 
-    $('.photo-big').zoom({
-        url: media_url + 'img/test.jpg',
-        magnify: 1.5
+    var img,
+        left = 0,
+        top = 0;
+
+    new Hammer( $(".pan")[0], {
+        domEvents: true
     });
+
+    //pokazanie szczegóły produktu
+    $(".pan").on("panstart", function (ev) {
+        img = $(".pan img");
+        left = parseInt( img.css( "left" ), 10 );
+        top = parseInt( img.css( "top" ), 10 );
+    });
+
+
+    $(".pan").on("pan", function (ev) {
+        img.css( {
+            "left": left + ev.originalEvent.gesture.deltaX,
+            "top": top + ev.originalEvent.gesture.deltaY,
+        });
+    });
+
+
+
+    // var img, marginLeft, marginTop;
+    // new Hammer( $( "#galleryModal .modal-content" )[0], {
+    //   domEvents: true
+    // } );
+    // $( "#galleryModal .modal-content" ).on( "panstart", function( e ) {
+    //   img = $( "#galleryModal .modal-content img" );
+    //   marginLeft = parseInt( img.css( "margin-left" ), 10 );
+    //   marginTop = parseInt( img.css( "margin-top" ), 10 );
+    // } );
+    // $( "#galleryModal .modal-content" ).on( "pan", function( e ) {
+    //     console.log( "pan" );
+
+    //     img.css( {
+    //         "margin-left": marginLeft + e.originalEvent.gesture.deltaX,
+    //         "margin-top": marginTop + e.originalEvent.gesture.deltaY
+    //     });
+
+    // } );
+
 }
 
 $(".modal-close").click(function (ev) {
