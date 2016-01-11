@@ -68,8 +68,8 @@ APP.startPage = function () {
     "use strict";
     var layer = document.querySelectorAll(".layer"),
         layerText = document.querySelectorAll(".layer-text"),
-        startGirls = $('.start-girls'),
-        startBoys = $('.start-boys'),
+        startGirls = document.querySelectorAll(".start-girls"),
+        startBoys = document.querySelectorAll(".start-boys"),
         girls = $('#girls'),
         boys = $('#boys'),
         girlsLayerText = $('.layer-text__girls'),
@@ -82,7 +82,7 @@ APP.startPage = function () {
         $(layerText).remove();
 
         if (APP.category === "girls") {
-            APP.gifGirl_0.init(false, true);
+            APP.gifGirl_0.init(false, false);
             APP.gifGirl_1.init(false, false);
         }
         if (APP.category === "boys") {
@@ -96,43 +96,46 @@ APP.startPage = function () {
         APP.productSize();
     }
 
-    startGirls.hammer().bind("panright click", function () {
-        APP.doc.addClass('girls');
+    for (var i = 0; i <= startGirls.length - 1; i = i + 1) {
+        new Hammer(startGirls[i]).on("panright tap", function () {
+            APP.doc.addClass('girls');
 
-        girls.css('zIndex', 2);
-        boys.css('zIndex', 1);
+            girls.css('zIndex', 2);
+            boys.css('zIndex', 1);
 
-        TweenLite.to(startGirls, 1, {x: "50%", ease: animEase});
-        TweenLite.to(girlsLayerText, 0.7, {opacity: 0, ease: animEase});
+            TweenLite.to(startGirls, 1, {x: "50%", ease: animEase});
+            TweenLite.to(girlsLayerText, 0.7, {opacity: 0, ease: animEase});
 
-        TweenLite.to(startBoys, 1, {x: '50%', ease: animEase});
-        TweenLite.to(boysLayerText, 1, {x: "100%", opacity: 0, ease: animEase});
+            TweenLite.to(startBoys, 1, {x: '50%', ease: animEase});
+            TweenLite.to(boysLayerText, 1, {x: "100%", opacity: 0, ease: animEase});
 
-        TweenLite.to(girls, 0.5, {left: 0, ease: animEase});
-        TweenLite.to(girlsWrap, 0.5, {right: 0, ease: animEase, onComplete: onComplete});
+            TweenLite.to(girls, 0.5, {left: 0, ease: animEase});
+            TweenLite.to(girlsWrap, 0.5, {right: 0, ease: animEase, onComplete: onComplete});
 
-        APP.category = 'girls';
+            APP.category = 'girls';
+            APP.gifGirl_0 = new Gif('.gif0');
+            APP.gifGirl_1 = new Gif('.gif1');
+        });
+    }
 
-        APP.gifGirl_0 = new Gif('.gif0');
-        APP.gifGirl_1 = new Gif('.gif1');
-    });
+    for (var i = 0; i <= startBoys.length - 1; i = i + 1) {
+        new Hammer(startBoys[i]).on("panleft tap", function () {
+            APP.doc.addClass('boys');
+            boys.css('zIndex', 2);
+            girls.css('zIndex', 1);
 
-    startBoys.hammer().bind("panleft click", function () {
-        APP.doc.addClass('boys');
-        boys.css('zIndex', 2);
-        girls.css('zIndex', 1);
+            TweenLite.to(startBoys, 1, {x: "-50%", ease: animEase});
+            TweenLite.to(boysLayerText, 0.7, {opacity: 0, ease: animEase});
 
-        TweenLite.to(startBoys, 1, {x: "-50%", ease: animEase});
-        TweenLite.to(boysLayerText, 0.7, {opacity: 0, ease: animEase});
+            TweenLite.to(startGirls, 1, {x: '-50%', ease: animEase});
+            TweenLite.to(girlsLayerText, 1, {x: "-100%", opacity: 0, ease: animEase});
 
-        TweenLite.to(startGirls, 1, {x: '-50%', ease: animEase});
-        TweenLite.to(girlsLayerText, 1, {x: "-100%", opacity: 0, ease: animEase});
+            TweenLite.to(boys, 0.5, {right: 0, ease: animEase});
+            TweenLite.to(boysWrap, 0.5, {left: 0, ease: animEase, onComplete: onComplete});
 
-        TweenLite.to(boys, 0.5, {right: 0, ease: animEase});
-        TweenLite.to(boysWrap, 0.5, {left: 0, ease: animEase, onComplete: onComplete});
-
-        APP.category = 'boys';
-    });
+            APP.category = 'boys';
+        });
+    }
 };
 
 APP.slider = function () {
@@ -155,16 +158,8 @@ APP.slider = function () {
         }
     });
 
-    owlGirls.on('drag.owl.carousel', function (event) {
-        TweenLite.to($('.show-details'), 0.3, {opacity: 0, scale: 0.5});
-    });
-
-    owlGirls.on('dragged.owl.carousel', function (event) {
-        TweenLite.to($('.show-details'), 0.3, {opacity: 1, scale: 1});
-    });
-
-
     owlGirls.on('translate.owl.carousel', function (event) {
+        TweenLite.to($('.show-details'), 0.3, {opacity: 0, scale: 0});
         if (event.item.index === 0) {
             APP.gifGirl_0.tl.pause();
         }
@@ -174,17 +169,18 @@ APP.slider = function () {
     });
 
     owlGirls.on('translated.owl.carousel', function (event) {
+        TweenLite.to($('.show-details'), 0.3, {opacity: 1, scale: 1});
         APP.sliderIndex = event.item.index;
         console.log(APP.sliderIndex);
         if (APP.sliderIndex === 0) {
             //cena po obniżce
             prizeValue.text('39');
-            APP.gifGirl_0.tl.resume();
+            APP.gifGirl_0.tl.pause();
             APP.gifGirl_1.tl.pause();
         } else if (APP.sliderIndex === 1) {
             prizeValue.text('45');
             APP.gifGirl_0.tl.pause();
-            APP.gifGirl_1.tl.resume();
+            APP.gifGirl_1.tl.pause();
 
         } else if (APP.sliderIndex === 2) {
             prizeValue.text('90');
@@ -200,8 +196,6 @@ APP.slider = function () {
             TweenLite.to(footerText, 0.5, {opacity: 1});
             TweenLite.to(footerFadeElem, 0.5, {opacity: 0});
         }
-
-
     });
 
     var owlBoys = $("#boys-carousel");
@@ -259,10 +253,10 @@ APP.productSize = function () {
     $('.modal-close:not(".gallery-close")').click(function (e) {
         e.preventDefault();
         if (APP.sliderIndex === 0) {
-            APP.gifGirl_0.tl.resume();
+            APP.gifGirl_0.tl.pause();
         }
         if (APP.sliderIndex === 1) {
-            APP.gifGirl_1.tl.resume();
+            APP.gifGirl_1.tl.pause();
         }
     });
 
@@ -290,10 +284,10 @@ APP.productSize = function () {
 
         APP.doc.removeClass('modal-active modal-sizes modal-form');
         if (APP.sliderIndex === 0) {
-            APP.gifGirl_0.tl.resume();
+            APP.gifGirl_0.tl.pause();
         }
         if (APP.sliderIndex === 1) {
-            APP.gifGirl_1.tl.resume();
+            APP.gifGirl_1.tl.pause();
         }
     });
 };
@@ -356,12 +350,19 @@ APP.productDetails = function () {
 
 APP.productDetails.prototype.showContent = function (carousel, index) {
     "use strict";
-    $(carousel)
-        .find('.owl-item')
-        .eq(index)
-        .find('.product')
-        .clone()
-        .appendTo(APP.modalContent);
+
+    var products,
+        product,
+        idx = 0;
+
+    products = document.querySelectorAll(".product");
+    product = document.getElementById("product" + index);
+
+    for (idx; idx <= products.length - 1; idx = idx + 1) {
+        products[idx].style.display = "none";
+    }
+
+    product.style.display = "block";
 
     function onStartFn() {
         APP.doc.addClass('modal-active modal-description');
@@ -373,12 +374,12 @@ APP.productDetails.prototype.showContent = function (carousel, index) {
         APP.gifGirl_1.tl.pause();
     }
 
-    var slideLeftElem = $('.modal').find('.slide-left'),
-        modalFadeElem = $('.modal').find('.fade');
+    var slideLeftElem = document.querySelectorAll('.modal .slide-left'),
+        modalFadeElem = document.querySelectorAll('.modal .fade');
 
-    //TweenLite.set(slideLeftElem, {x: "-100%", y: 0, z: 0});
+    TweenLite.set(slideLeftElem, {x: "-100%", y: 0, z: 0});
 
-    TweenLite.to(slideLeftElem, 0.45, {x: '0', ease: animEase});
+    TweenLite.to(slideLeftElem, 0.45, {x: "0%", ease: animEase});
 
     TweenLite.fromTo(APP.modalOverlay, 0.45, {opacity: 0}, {opacity: 1, ease: animEase, onStart: onStartFn, onComplete: onCompleteFn});
     TweenLite.fromTo(modalFadeElem, 0.45, {opacity: 0}, {opacity: 1, ease: animEase});
@@ -388,7 +389,6 @@ APP.productDetails.prototype.hideContent = function () {
     "use strict";
 
     function onCompleteFn() {
-        $('#productModal').find('.product').remove();
         APP.doc.removeClass('modal-active modal-description');
         if (APP.sliderIndex === 0) {
             APP.gifGirl_0.tl.play();
@@ -423,10 +423,10 @@ APP.timer = function () {
 
 APP.form = function () {
     "use strict";
-    $('.form input:checkbox').checkbox({
+    $('.form input:checkbox, .form input:radio').checkbox({
         empty: media_url + 'img/empty.png'
     });
-    $('.form input:radio').checkbox({
+    $('').checkbox({
         empty: media_url + 'img/empty.png'
     });
     $('.btn--buy').click(function (ev) {
@@ -439,6 +439,8 @@ APP.form = function () {
 
 APP.gallery = function () {
     var galleryTrigger = $('.gallery-trigger');
+
+
 
     galleryTrigger.click(function (ev) {
         ev.preventDefault();
@@ -462,28 +464,57 @@ APP.gallery = function () {
     });
 
     var img,
-        left = 0,
-        top = 0;
+        marginLeft,
+        marginTop;
 
-    new Hammer( $(".pan")[0], {
-        domEvents: true
-    });
+    new Hammer( $( ".pan" )[ 0 ], {
+      domEvents: true
+    } );
+    $( ".pan" ).on( "panstart", function( e ) {
+      img = $( ".pan img" );
+      marginLeft = parseInt( img.css( "margin-left" ), 10 );
+      marginTop = parseInt( img.css( "margin-top" ), 10 );
+    } );
+    $( ".pan" ).on( "pan", function( e ) {
+      var deltaLeft = marginLeft + e.originalEvent.gesture.deltaX;
+      var deltaTop = marginTop + e.originalEvent.gesture.deltaY;
+      //if ( delta >= -1750 && delta <= -150 ) {
+         img.css( {
+        "margin-left": marginLeft + e.originalEvent.gesture.deltaX,
+        "margin-top": marginTop + e.originalEvent.gesture.deltaY
+      } );
+      //}
+    } );
 
-    //pokazanie szczegóły produktu
-    $(".pan").on("panstart", function (ev) {
-        img = $(".pan img");
-        left = parseInt( img.css( "left" ), 10 );
-        top = parseInt( img.css( "top" ), 10 );
-    });
+    // pinch
+    var ham = new Hammer($( ".pinch" )[0], {
+            domEvents: true
+        }),
+        width = 1200,
+        height = 1200,
+        left = 600,
+        top = 600;
 
+    ham.get('pinch').set({ enable: true });
 
-    $(".pan").on("pan", function (ev) {
-        img.css( {
-            "left": left + ev.originalEvent.gesture.deltaX,
-            "top": top + ev.originalEvent.gesture.deltaY,
-        });
+    $( ".pinch" ).on( "pinch", function( e ) {
+       console.log(e.originalEvent.gesture.scale);
+       $( this ).find( "img" ).css({
+            width: width * e.originalEvent.gesture.scale,
+            "margin-left": -left * e.originalEvent.gesture.scale,
+            height: height * e.originalEvent.gesture.scale,
+            "margin-top": -top * e.originalEvent.gesture.scale
+       });
+
+    } );
+    $( ".pinch" ).on( "pinchend", function( e ) {
+        width = width * e.originalEvent.gesture.scale;
+        height = height * e.originalEvent.gesture.scale;
+        left = left * e.originalEvent.gesture.scale;
+        top = top * e.originalEvent.gesture.scale;
     });
 }
+
 
 $(".modal-close").click(function (ev) {
     "use strict";
