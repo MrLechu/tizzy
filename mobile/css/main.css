@@ -1165,6 +1165,285 @@ button.swiper-pagination-bullet {
     transform: rotate(360deg);
   }
 }
+.modal {
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+  -webkit-transition: all 0.35s ease-in-out;
+  -o-transition: all 0.35s ease-in-out;
+  transition: all 0.35s ease-in-out;
+  -webkit-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+.modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+}
+.modal-content {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+.modal-content .product {
+  opacity: 1;
+  z-index: 1;
+  visibility: visible;
+}
+.modal-close {
+  opacity: 0;
+  z-index: -1;
+  -webkit-transition: all 0.35s ease-in-out;
+  -o-transition: all 0.35s ease-in-out;
+  transition: all 0.35s ease-in-out;
+}
+#defaultModal .modal-overlay {
+  background-color: #ff0028;
+  -webkit-background-size: 88% auto;
+  background-size: 88% auto;
+}
+#defaultModal .modal-content {
+  padding: 80px 6.8% 0;
+  text-align: center;
+}
+#defaultModal h2 {
+  text-transform: uppercase;
+  color: #fff;
+}
+#defaultModal p {
+  font-size: 18px;
+  line-height: 24px;
+  color: #fff;
+}
+#sizesModal img {
+  display: block;
+  margin: 130px auto 0;
+  max-width: 90%;
+  height: auto;
+}
+#sizesModal .modal-overlay {
+  background-color: #ff0028;
+  -webkit-background-size: 88% auto;
+  background-size: 88% auto;
+}
+#formModal .modal-overlay {
+  background-color: #fff;
+  -webkit-background-size: 88% auto;
+  background-size: 88% auto;
+}
+#formModal .modal-content {
+  padding-left: 6%;
+  padding-right: 6.8%;
+  padding-bottom: 22px;
+  overflow: auto;
+}
+#formModal .modal-close {
+  right: 6.8%;
+  top: 20px;
+  z-index: 1;
+  display: block;
+  width: 20px;
+  height: 20px;
+  opacity: 1;
+  background: url(../img/modal-close.png) no-repeat 0 0;
+  -webkit-background-size: 20px 20px;
+  background-size: 20px 20px;
+}
+#galleryModal .modal-overlay {
+  background-color: #fff;
+}
+.modal-active {
+  /*default*/
+}
+.modal-active .main-header {
+  z-index: 5;
+}
+.modal-active .logo-black {
+  z-index: 0;
+  opacity: 0;
+}
+.modal-active .logo-white {
+  z-index: 1;
+  opacity: 1;
+}
+.modal-active.modal-description #productModal {
+  z-index: 3;
+  opacity: 1;
+  visibility: visible;
+}
+.modal-active.modal-description .show-details {
+  opacity: 0;
+  visibility: hidden;
+}
+.modal-active.modal-description .shapes .shape {
+  opacity: 0;
+}
+.modal-active.modal-description .hamburger-icon span {
+  background-color: #fff;
+}
+.modal-active.modal-description .product__category {
+  color: #fff;
+}
+.modal-active.modal-sizes #sizesModal {
+  z-index: 2;
+  top: 0;
+  opacity: 1;
+  visibility: visible;
+}
+.modal-active.modal-sizes .modal-close {
+  right: 6.8%;
+  z-index: 1;
+  width: 20px;
+  height: 20px;
+  opacity: 1;
+  background: url(../img/modal-close.png) no-repeat 0 0;
+  -webkit-background-size: 20px 20px;
+  background-size: 20px 20px;
+}
+.modal-active.modal-sizes .mobilemenu-trigger {
+  opacity: 0;
+  visibility: hidden;
+}
+.modal-active.modal-form {
+  opacity: 1;
+  visibility: visible;
+}
+.modal-active.modal-form #formModal {
+  z-index: 6;
+  opacity: 1;
+  visibility: visible;
+}
+.modal-active.modal-form .purchase {
+  background-color: #ff0028;
+}
+.modal-active.modal-form h1 {
+  display: none;
+}
+.modal-active.modal-default #defaultModal {
+  z-index: 2;
+  top: 0;
+  opacity: 1;
+  visibility: visible;
+}
+.modal-active.modal-default .modal-close {
+  right: 6.8%;
+  z-index: 1;
+  width: 20px;
+  height: 20px;
+  opacity: 1;
+  background: url(../img/modal-close.png) no-repeat 0 0;
+  -webkit-background-size: 20px 20px;
+  background-size: 20px 20px;
+}
+.modal-active.modal-gallery #galleryModal {
+  z-index: 6;
+  opacity: 1;
+  visibility: visible;
+}
+.modal-active.modal-gallery .modal-close {
+  right: 4%;
+  top: 2.5%;
+  z-index: 2;
+  width: 50px;
+  height: 50px;
+  opacity: 1;
+  background: url(../img/modal-close.png) no-repeat 50% 50% #ff0028;
+  -webkit-background-size: 20px 20px;
+  background-size: 20px 20px;
+}
+.modal-active.modal-gallery .swiper-container {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 5%;
+  overflow: hidden;
+}
+.modal-active.modal-gallery .swiper-slide {
+  text-align: center;
+}
+.modal-active.modal-gallery .swiper-slide img {
+  display: inline-block;
+}
+.modal-active.modal-gallery .modal-content {
+  overflow: hidden;
+}
+.modal-active.modal-gallery .modal-content img {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  display: inline-block;
+  width: 1200px;
+  height: 1200px;
+  margin-left: -600px;
+  margin-top: -600px;
+  pointer-events: none;
+}
+.modal-active.modal-gallery .modal-content-inner {
+  width: 150%;
+  text-align: center;
+}
+/*
+ * HTML5 Boilerplate
+ *
+ * What follows is the result of much research on cross-browser styling.
+ * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
+ * Kroc Camen, and the H5BP dev community and team.
+ */
+/* ==========================================================================
+   Base styles: opinionated defaults
+   ========================================================================== */
+html,
+button,
+input,
+select,
+textarea {
+  color: #222;
+}
+body {
+  font-size: 1em;
+  line-height: 1.4;
+}
+/*
+ * Remove the gap between images and the bottom of their containers: h5bp.com/i/440
+ */
+img {
+  vertical-align: middle;
+}
+/*
+ * Remove default fieldset styles.
+ */
+fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+/*
+ * Allow only vertical resizing of textareas.
+ */
+textarea {
+  resize: vertical;
+}
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
 /*vars*/
 h1 {
   margin: 0;
@@ -1205,9 +1484,9 @@ h1 {
   display: block;
   max-width: 82px;
   height: auto;
-  -webkit-transition: all 0.35s;
-  -o-transition: all 0.35s;
-  transition: all 0.35s;
+  -webkit-transition: opacity 0.35s;
+  -o-transition: opacity 0.35s;
+  transition: opacity 0.35s;
 }
 .logo-black {
   opacity: 1;
@@ -1311,7 +1590,6 @@ h1 {
   position: absolute;
   left: 0;
   top: 0;
-  z-index: -1;
   opacity: 0;
   visibility: hidden;
   width: 100%;
@@ -1320,6 +1598,7 @@ h1 {
   padding-right: 6.8%;
   text-align: right;
   color: #fff;
+  display: none;
 }
 .product__footer {
   position: absolute;
@@ -1337,9 +1616,12 @@ h1 {
 }
 .product__category {
   display: inline-block;
+  padding: 1px 15px;
   vertical-align: middle;
-  font-size: 15px;
+  font-size: 12px;
   color: #ff0028;
+  border: 1px solid #ff0028;
+  text-decoration: none;
   text-transform: uppercase;
   -webkit-transition: all 0.35s;
   -o-transition: all 0.35s;
@@ -1442,13 +1724,13 @@ h1 {
 .sizer__trigger {
   display: block;
   padding-right: 12px;
-  color: #fff;
+  font-family: Roboto, sans-serif;
+  font-weight: 700;
   text-align: center;
   text-transform: uppercase;
   text-decoration: none;
+  color: #fff;
   background: url(../img/ico-arrow-bottom.png) no-repeat 80% 50% #ff0028;
-  font-family: Roboto, sans-serif;
-  font-weight: 700;
 }
 .sizer__trigger > span {
   display: block;
@@ -1615,61 +1897,6 @@ h1 {
   width: 20%;
   font-size: 23px;
 }
-/*
- * HTML5 Boilerplate
- *
- * What follows is the result of much research on cross-browser styling.
- * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
- * Kroc Camen, and the H5BP dev community and team.
- */
-/* ==========================================================================
-   Base styles: opinionated defaults
-   ========================================================================== */
-html,
-button,
-input,
-select,
-textarea {
-  color: #222;
-}
-body {
-  font-size: 1em;
-  line-height: 1.4;
-}
-/*a {
-    color: #00e;
-}
-
-a:visited {
-    color: #551a8b;
-}
-
-a:hover {
-    color: #06e;
-}*/
-/*
- * Remove the gap between images and the bottom of their containers: h5bp.com/i/440
- */
-img {
-  vertical-align: middle;
-}
-/*
- * Remove default fieldset styles.
- */
-fieldset {
-  border: 0;
-  margin: 0;
-  padding: 0;
-}
-/*
- * Allow only vertical resizing of textareas.
- */
-textarea {
-  resize: vertical;
-}
-/* ==========================================================================
-   Author's custom styles
-   ========================================================================== */
 *,
 *:before,
 *:after {
@@ -1752,9 +1979,6 @@ textarea {
   background-color: #000;
 }
 /**/
-html {
-  height: 100%;
-}
 body {
   padding: 0;
   overflow: hidden;
@@ -1880,47 +2104,6 @@ div[class^="owl"] {
   height: 100%;
   overflow: hidden;
 }
-.modal {
-  opacity: 0;
-  visibility: hidden;
-  position: absolute;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  overflow: hidden;
-  -webkit-transition: opacity 0.35s ease-in-out;
-  -o-transition: opacity 0.35s ease-in-out;
-  transition: opacity 0.35s ease-in-out;
-}
-.modal-overlay {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  z-index: 0;
-  width: 100%;
-  height: 100%;
-}
-.modal-content {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-}
-.modal-content .product {
-  opacity: 1;
-  z-index: 1;
-  visibility: visible;
-}
 .show-details,
 .hide-details,
 .modal-close {
@@ -1953,6 +2136,7 @@ div[class^="owl"] {
   transition: all 0.35s;
 }
 .show-details .ico {
+  pointer-events: none;
   background: url(../img/button-add.png) no-repeat 50%;
   -webkit-background-size: 32px;
   background-size: 32px;
@@ -1961,200 +2145,6 @@ div[class^="owl"] {
   background: url(../img/button-hide.png) no-repeat 50%;
   background-size: 32px;
   -webkit-background-size: 32px;
-}
-.modal-close {
-  opacity: 0;
-  z-index: -1;
-  -webkit-transition: all 0.35s;
-  -o-transition: all 0.35s;
-  transition: all 0.35s;
-}
-#defaultModal {
-  -webkit-transition: all 0.35s;
-  -o-transition: all 0.35s;
-  transition: all 0.35s;
-}
-#defaultModal .modal-overlay {
-  background-color: #ff0028;
-  -webkit-background-size: 88% auto;
-  background-size: 88% auto;
-}
-#defaultModal .modal-content {
-  padding: 80px 6.8% 0;
-  text-align: center;
-}
-#defaultModal h2 {
-  text-transform: uppercase;
-  color: #fff;
-}
-#defaultModal p {
-  font-size: 18px;
-  line-height: 24px;
-  color: #fff;
-}
-#sizesModal {
-  -webkit-transition: all 0.35s;
-  -o-transition: all 0.35s;
-  transition: all 0.35s;
-}
-#sizesModal img {
-  display: block;
-  margin: 130px auto 0;
-  max-width: 90%;
-  height: auto;
-}
-#sizesModal .modal-overlay {
-  background-color: #ff0028;
-  -webkit-background-size: 88% auto;
-  background-size: 88% auto;
-}
-#formModal {
-  -webkit-transition: all 0.35s ease-in-out;
-  -o-transition: all 0.35s ease-in-out;
-  transition: all 0.35s ease-in-out;
-}
-#formModal .modal-overlay {
-  background-color: #fff;
-  -webkit-background-size: 88% auto;
-  background-size: 88% auto;
-  -webkit-transition: all 0.35s ease-in-out;
-  -o-transition: all 0.35s ease-in-out;
-  transition: all 0.35s ease-in-out;
-}
-#formModal .modal-content {
-  padding-left: 6%;
-  padding-right: 6.8%;
-  padding-bottom: 22px;
-  overflow: auto;
-}
-#formModal .modal-close {
-  right: 6.8%;
-  top: 20px;
-  z-index: 1;
-  display: block;
-  width: 20px;
-  height: 20px;
-  opacity: 1;
-  background: url(../img/modal-close.png) no-repeat 0 0;
-  -webkit-background-size: 20px 20px;
-  background-size: 20px 20px;
-}
-#galleryModal .modal-overlay {
-  background-color: #fff;
-}
-.modal-active {
-  /*default*/
-}
-.modal-active .modal {
-  opacity: 1;
-  visibility: visible;
-}
-.modal-active .main-header {
-  z-index: 5;
-}
-.modal-active .logo-black {
-  z-index: 0;
-  opacity: 0;
-}
-.modal-active .logo-white {
-  z-index: 1;
-  opacity: 1;
-}
-.modal-active.modal-description #productModal {
-  z-index: 3;
-}
-.modal-active.modal-description .show-details {
-  opacity: 0;
-  visibility: hidden;
-}
-.modal-active.modal-description .shapes .shape {
-  opacity: 0;
-}
-.modal-active.modal-description .hamburger-icon span {
-  background-color: #fff;
-}
-.modal-active.modal-description .product__category {
-  color: #fff;
-}
-.modal-active.modal-sizes #sizesModal {
-  z-index: 2;
-  top: 0;
-}
-.modal-active.modal-sizes .modal-close {
-  right: 6.8%;
-  z-index: 1;
-  width: 20px;
-  height: 20px;
-  opacity: 1;
-  background: url(../img/modal-close.png) no-repeat 0 0;
-  -webkit-background-size: 20px 20px;
-  background-size: 20px 20px;
-}
-.modal-active.modal-sizes .mobilemenu-trigger {
-  opacity: 0;
-  visibility: hidden;
-}
-.modal-active.modal-form .purchase {
-  background-color: #ff0028;
-}
-.modal-active.modal-form h1 {
-  display: none;
-}
-.modal-active.modal-form #formModal {
-  z-index: 6;
-}
-.modal-active.modal-default #defaultModal {
-  z-index: 2;
-  top: 0;
-}
-.modal-active.modal-default .modal-close {
-  right: 6.8%;
-  z-index: 1;
-  width: 20px;
-  height: 20px;
-  opacity: 1;
-  background: url(../img/modal-close.png) no-repeat 0 0;
-  -webkit-background-size: 20px 20px;
-  background-size: 20px 20px;
-}
-.modal-active.modal-gallery #galleryModal {
-  z-index: 6;
-}
-.modal-active.modal-gallery .modal-close {
-  right: 4%;
-  top: 2.5%;
-  z-index: 2;
-  width: 50px;
-  height: 50px;
-  opacity: 1;
-  background: url(../img/modal-close.png) no-repeat 50% 50% #ff0028;
-  -webkit-background-size: 20px 20px;
-  background-size: 20px 20px;
-}
-.modal-active.modal-gallery .swiper-container {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 5%;
-}
-.modal-active.modal-gallery .swiper-slide {
-  text-align: center;
-}
-.modal-active.modal-gallery .swiper-slide img {
-  display: inline-block;
-}
-.modal-active.modal-gallery .modal-content {
-  overflow: hidden;
-}
-.modal-active.modal-gallery .modal-content img {
-  display: block;
-  position: absolute;
-  left: 0;
-  top: 0;
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
 }
 .form-group {
   margin-bottom: 20px;

@@ -1,0 +1,259 @@
+.modal {
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+  .transition(all 0.35s ease-in-out);
+  .translate(0,0,0);
+}
+.modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+}
+.modal-content {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  .product {
+    opacity: 1;
+    z-index: 1;
+    visibility: visible;
+  }
+}
+
+.modal-close {
+  opacity: 0;
+  z-index: -1;
+  .transition(all 0.35s ease-in-out);
+}
+
+//popup - default
+#defaultModal {
+  .modal-overlay {
+      background-color: @red;
+      -webkit-background-size: 88% auto;
+      background-size: 88% auto;
+  }
+  .modal-content {
+    padding: 80px 6.8% 0;
+    text-align: center;
+  }
+  h2 {
+    text-transform: uppercase;
+    color: #fff;
+  }
+  p {
+    font-size: 18px;
+    line-height: 24px;
+    color: #fff;
+  }
+}
+
+//popup - rozmiarowka
+#sizesModal {
+  img {
+    display: block;
+    margin: 130px auto 0;
+    max-width: 90%;
+    height: auto;
+  }
+  .modal-overlay {
+      background-color: @red;
+      -webkit-background-size: 88% auto;
+      background-size: 88% auto;
+  }
+}
+
+//popup - formularz
+#formModal {
+  .modal-overlay {
+      background-color: #fff;
+      -webkit-background-size: 88% auto;
+      background-size: 88% auto;
+  }
+  .modal-content {
+    padding-left: 6%;
+    padding-right: 6.8%;
+    padding-bottom: 22px;
+    overflow: auto;
+  }
+  //TODO: przenieść przycisk zamykająćy poza #formModal
+  .modal-close {
+    right: 6.8%;
+    top: 20px;
+    z-index: 1;
+    display: block;
+    width: 20px;
+    height: 20px;
+    opacity: 1;
+    background: url(../img/modal-close.png) no-repeat 0 0;
+    -webkit-background-size: 20px 20px;
+    background-size: 20px 20px;
+  }
+}
+
+//popup - galeria
+#galleryModal {
+  .modal-overlay {
+    background-color: #fff;
+  }
+  .modal-content {
+
+  }
+}
+
+.modal-active {
+  /*default*/
+  .main-header {
+    z-index: 5;
+  }
+  .logo-black {
+    z-index: 0;
+    opacity: 0;
+  }
+  .logo-white {
+    z-index: 1;
+    opacity: 1
+  }
+
+  &.modal-description {
+    #productModal {
+      z-index: 3;
+      opacity: 1;
+      visibility: visible;
+    }
+    .show-details {
+      opacity: 0;
+      visibility: hidden;
+    }
+    .shapes .shape {
+      opacity: 0;
+    }
+    .hamburger-icon span {
+      background-color: #fff;
+    }
+    .product__category {
+      color: #fff;
+    }
+  }
+  &.modal-sizes {
+    #sizesModal {
+      z-index: 2;
+      top: 0;
+      opacity: 1;
+      visibility: visible;
+    }
+    .modal-close {
+      right: 6.8%;
+      z-index: 1;
+      width: 20px;
+      height: 20px;
+      opacity: 1;
+      background: url(../img/modal-close.png) no-repeat 0 0;
+      -webkit-background-size: 20px 20px;
+      background-size: 20px 20px;
+    }
+    .mobilemenu-trigger {
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+  &.modal-form {
+    #formModal {
+      z-index: 6;
+      opacity: 1;
+      visibility: visible;
+    }
+    opacity: 1;
+    visibility: visible;
+    .purchase {
+      background-color: @red;
+    }
+    h1 {
+      display: none;
+    }
+  }
+  &.modal-default {
+   #defaultModal {
+      z-index: 2;
+      top: 0;
+      opacity: 1;
+      visibility: visible;
+    }
+    .modal-close {
+      right: 6.8%;
+      z-index: 1;
+      width: 20px;
+      height: 20px;
+      opacity: 1;
+      background: url(../img/modal-close.png) no-repeat 0 0;
+      -webkit-background-size: 20px 20px;
+      background-size: 20px 20px;
+    }
+  }
+  &.modal-gallery {
+    #galleryModal {
+      z-index: 6;
+      opacity: 1;
+      visibility: visible;
+    }
+    .modal-close {
+      right: 4%;
+      top: 2.5%;
+      z-index: 2;
+      width: 50px;
+      height: 50px;
+      opacity: 1;
+      background: url(../img/modal-close.png) no-repeat 50% 50% @red;
+      -webkit-background-size: 20px 20px;
+      background-size: 20px 20px;
+    }
+    .swiper-container {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 5%;
+      overflow: hidden;
+    }
+    .swiper-slide {
+      text-align: center;
+      img {
+        display: inline-block;
+      }
+    }
+    .modal-content {
+      overflow: hidden;
+      img {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        display: inline-block;
+        width: 1200px;
+        height: 1200px;
+        margin-left: -600px;
+        margin-top: -600px;
+        pointer-events: none;
+      }
+    }
+    .modal-content-inner {
+      width: 150%;
+      text-align: center;
+    }
+  }
+}

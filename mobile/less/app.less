@@ -1,33 +1,73 @@
-
 @import "normalize";
 @import "plugins/countdown";
 @import "plugins/owlcarousel";
 @import "plugins/checkbox";
 @import "plugins/swiper/swiper";
+@import "mixins";
+@import "modal";
 
+
+/*
+ * HTML5 Boilerplate
+ *
+ * What follows is the result of much research on cross-browser styling.
+ * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
+ * Kroc Camen, and the H5BP dev community and team.
+ */
+
+/* ==========================================================================
+   Base styles: opinionated defaults
+   ========================================================================== */
+
+html,
+button,
+input,
+select,
+textarea {
+    color: #222;
+}
+
+body {
+    font-size: 1em;
+    line-height: 1.4;
+}
+/*
+ * Remove the gap between images and the bottom of their containers: h5bp.com/i/440
+ */
+
+img {
+    vertical-align: middle;
+}
+
+/*
+ * Remove default fieldset styles.
+ */
+
+fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+/*
+ * Allow only vertical resizing of textareas.
+ */
+
+textarea {
+    resize: vertical;
+}
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
 /*vars*/
 @red: #ff0028;
-
+@full-width: 100vw;
 
 h1 {
   margin: 0;
   padding: 0;
 }
-
-.transition(@transition) {
-  -webkit-transition: @transition;
-  -o-transition: @transition;
-  transition: @transition;
-}
-
-.translate(@x, @y, @z) {
-  -webkit-transform: translate3d(@x, @y, @z);
-  -ms-transform: translate3d(@x, @y, @z);
-  -o-transform: translate3d(@x, @y, @z);
-  transform: translate3d(@x, @y, @z);
-}
-
-
 
 /**/
 .main-header {
@@ -62,7 +102,7 @@ h1 {
   display: block;
   max-width: 82px;
   height: auto;
-  .transition(all 0.35s);
+  .transition(opacity 0.35s);
 }
 .logo-black {
   opacity: 1;
@@ -166,7 +206,6 @@ h1 {
   position: absolute;
   left: 0;
   top: 0;
-  z-index: -1;
   opacity: 0;
   visibility: hidden;
   width: 100%;
@@ -175,6 +214,7 @@ h1 {
   padding-right: 6.8%;
   text-align: right;
   color: #fff;
+  display: none;
 }
 .product__footer {
   position: absolute;
@@ -193,9 +233,12 @@ h1 {
 
 .product__category {
   display: inline-block;
+  padding: 1px 15px;
   vertical-align: middle;
-  font-size: 15px;
+  font-size: 12px;
   color: @red;
+  border: 1px solid @red;
+  text-decoration: none;
   text-transform: uppercase;
   .transition(all 0.35s);
 }
@@ -250,7 +293,7 @@ h1 {
   }
 }
 
-@full-width: 100vw;
+
 
 .slide-left {
   position: relative;
@@ -293,20 +336,16 @@ h1 {
 }
 
 /*rozmiary produktów*/
-
-// .product__size {
-// }
 .sizer__trigger {
   display: block;
-  //padding-left: 10px;
   padding-right: 12px;
-  color: #fff;
+  font-family: Roboto, sans-serif;
+  font-weight: 700;
   text-align: center;
   text-transform: uppercase;
   text-decoration: none;
+  color: #fff;
   background: url(../img/ico-arrow-bottom.png) no-repeat 80% 50% @red;
-  font-family: Roboto, sans-serif;
-  font-weight: 700;
   > span {
     display: block;
     color: #fff;
@@ -346,9 +385,7 @@ h1 {
   color: #fff;
   cursor: pointer;
   border: 1px solid #fff;
-  -webkit-transition: background-color 0.35s;
-  -o-transition: background-color 0.35s;
-  transition: background-color 0.35s;
+  .transition(background-color 0.35s);
   &.active,
   &:active,
   &:hover,
@@ -361,15 +398,11 @@ h1 {
   }
 }
 
-
-
-
 .aloha-from-deer-logo {
   width: 49px;
   height: 49px;
   margin-top: 3px;
 }
-
 
 /*---------Procentowe obniżki---------------*/
 .shapes {
@@ -393,7 +426,6 @@ h1 {
 .is-countdown {
   display: block;
   float: left;
-  //margin-bottom: 4.8%;
   margin-left: 2.2%;
   margin-right: 2.2%;
   width: 55.6%;
@@ -482,80 +514,14 @@ h1 {
   width: 20%;
   font-size: 23px;
 }
-/*
- * HTML5 Boilerplate
- *
- * What follows is the result of much research on cross-browser styling.
- * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
- * Kroc Camen, and the H5BP dev community and team.
- */
 
-/* ==========================================================================
-   Base styles: opinionated defaults
-   ========================================================================== */
-
-html,
-button,
-input,
-select,
-textarea {
-    color: #222;
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
-
-body {
-    font-size: 1em;
-    line-height: 1.4;
-}
-
-/*a {
-    color: #00e;
-}
-
-a:visited {
-    color: #551a8b;
-}
-
-a:hover {
-    color: #06e;
-}*/
-
-/*
- * Remove the gap between images and the bottom of their containers: h5bp.com/i/440
- */
-
-img {
-    vertical-align: middle;
-}
-
-/*
- * Remove default fieldset styles.
- */
-
-fieldset {
-    border: 0;
-    margin: 0;
-    padding: 0;
-}
-
-/*
- * Allow only vertical resizing of textareas.
- */
-
-textarea {
-    resize: vertical;
-}
-
-/* ==========================================================================
-   Author's custom styles
-   ========================================================================== */
-  *,
-  *:before,
-  *:after {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-  }
-
 
 .ico, .shape {
   display: inline-block;
@@ -636,9 +602,6 @@ textarea {
   background-color: #000;
 }
 /**/
-html {
-  height: 100%;
-}
 body {
   padding: 0;
   overflow: hidden;
@@ -650,7 +613,6 @@ html {
 }
 .container {
   position: relative;
-
 }
 .main-body,
 div[class^="owl"] {
@@ -724,13 +686,6 @@ div[class^="owl"] {
   .translate(0,0,0);
 }
 
-
-
-
-
-
-
-
 .wrapper {
   position: relative;
   height: 100%;
@@ -770,46 +725,6 @@ div[class^="owl"] {
   overflow: hidden;
 }
 
-.modal {
-  opacity: 0;
-  visibility: hidden;
-  position: absolute;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  overflow: hidden;
-  .transition(opacity 0.35s ease-in-out);
-}
-.modal-overlay {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  z-index: 0;
-  width: 100%;
-  height: 100%;
-}
-.modal-content {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  .product {
-    opacity: 1;
-    z-index: 1;
-    visibility: visible;
-  }
-}
-
 .show-details,
 .hide-details,
 .modal-close {
@@ -836,12 +751,13 @@ div[class^="owl"] {
   }
 }
 .show-details {
-  .transition(all 0.35s);
   .ico {
+    pointer-events: none;
     background: url(../img/button-add.png) no-repeat 50%;
     -webkit-background-size: 32px;
     background-size: 32px;
   }
+  .transition(all 0.35s);
 }
 .hide-details {
   .ico {
@@ -850,231 +766,7 @@ div[class^="owl"] {
     -webkit-background-size: 32px;
   }
 }
-.modal-close {
-  opacity: 0;
-  z-index: -1;
-  .transition(all 0.35s);
-}
 
-//popup - default
-#defaultModal {
-  .transition(all 0.35s);
-  .modal-overlay {
-      background-color: @red;
-      -webkit-background-size: 88% auto;
-      background-size: 88% auto;
-  }
-  .modal-content {
-    padding: 80px 6.8% 0;
-    text-align: center;
-  }
-  h2 {
-    text-transform: uppercase;
-    color: #fff;
-  }
-  p {
-    font-size: 18px;
-    line-height: 24px;
-    color: #fff;
-  }
-}
-
-//popup - rozmiarowka
-#sizesModal {
-  .transition(all 0.35s);
-  img {
-    display: block;
-    margin: 130px auto 0;
-    max-width: 90%;
-    height: auto;
-  }
-  .modal-overlay {
-      background-color: @red;
-      -webkit-background-size: 88% auto;
-      background-size: 88% auto;
-  }
-}
-
-//popup - formularz
-#formModal {
-  -webkit-transition: all 0.35s ease-in-out;
-       -o-transition: all 0.35s ease-in-out;
-          transition: all 0.35s ease-in-out;
-  .modal-overlay {
-      background-color: #fff;
-      -webkit-background-size: 88% auto;
-      background-size: 88% auto;
-      -webkit-transition: all 0.35s ease-in-out;
-       -o-transition: all 0.35s ease-in-out;
-          transition: all 0.35s ease-in-out;
-  }
-  .modal-content {
-    padding-left: 6%;
-    padding-right: 6.8%;
-    padding-bottom: 22px;
-    overflow: auto;
-  }
-  //TODO: przenieść przycisk zamykająćy poza #formModal
-  .modal-close {
-    right: 6.8%;
-    top: 20px;
-    z-index: 1;
-    display: block;
-    width: 20px;
-    height: 20px;
-    opacity: 1;
-    background: url(../img/modal-close.png) no-repeat 0 0;
-    -webkit-background-size: 20px 20px;
-    background-size: 20px 20px;
-  }
-}
-
-//popup - galeria
-#galleryModal {
-  .modal-overlay {
-    background-color: #fff;
-  }
-  .modal-content {
-
-  }
-}
-
-.modal-active {
-  /*default*/
-  .modal {
-    opacity: 1;
-    visibility: visible;
-  }
-  .main-header {
-    z-index: 5;
-  }
-  .logo-black {
-    z-index: 0;
-    opacity: 0;
-  }
-  .logo-white {
-    z-index: 1;
-    opacity: 1
-  }
-
-  &.modal-description {
-    #productModal {
-      z-index: 3;
-    }
-    .show-details {
-      opacity: 0;
-      visibility: hidden;
-    }
-    .shapes .shape {
-      opacity: 0;
-    }
-    .hamburger-icon span {
-      background-color: #fff;
-    }
-    .product__category {
-      color: #fff;
-    }
-  }
-  &.modal-sizes {
-    #sizesModal {
-      z-index: 2;
-      top: 0;
-    }
-    .modal-close {
-      right: 6.8%;
-      z-index: 1;
-      width: 20px;
-      height: 20px;
-      opacity: 1;
-      background: url(../img/modal-close.png) no-repeat 0 0;
-      -webkit-background-size: 20px 20px;
-      background-size: 20px 20px;
-    }
-    .mobilemenu-trigger {
-      opacity: 0;
-      visibility: hidden;
-    }
-  }
-  &.modal-form {
-    .purchase {
-      background-color: @red;
-    }
-    h1 {
-      display: none;
-    }
-    #formModal {
-      z-index: 6;
-    }
-  }
-  &.modal-default {
-   #defaultModal {
-      z-index: 2;
-      top: 0;
-    }
-    .modal-close {
-      right: 6.8%;
-      z-index: 1;
-      width: 20px;
-      height: 20px;
-      opacity: 1;
-      background: url(../img/modal-close.png) no-repeat 0 0;
-      -webkit-background-size: 20px 20px;
-      background-size: 20px 20px;
-    }
-  }
-  &.modal-gallery {
-    #galleryModal {
-      z-index: 6;
-    }
-    .modal-close {
-      right: 4%;
-      top: 2.5%;
-      z-index: 2;
-      width: 50px;
-      height: 50px;
-      opacity: 1;
-      background: url(../img/modal-close.png) no-repeat 50% 50% @red;
-      -webkit-background-size: 20px 20px;
-      background-size: 20px 20px;
-    }
-    .swiper-container {
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 5%;
-    }
-    .swiper-slide {
-      text-align: center;
-      img {
-        display: inline-block;
-      }
-    }
-    .modal-content {
-      overflow: hidden;
-      img {
-        display: block;
-        position: absolute;
-        left: 0;
-        top: 0;
-        z-index: 1;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-      }
-      // img {
-      //   position: absolute;
-      //   left: 50%;
-      //   top: 50%;
-      //   width: 578px;
-      //   height: 640px;
-      //   pointer-events: none;
-      //   margin-top: -320px;
-      //   margin: -289px;
-      //   max-width: none;
-      // }
-    }
-  }
-}
 .form-group {
   margin-bottom: 20px;
 }
@@ -1224,8 +916,6 @@ div[class^="owl"] {
     }
   }
 }
-
-
 
 .purchase {
   position: absolute;
