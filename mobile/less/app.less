@@ -4,6 +4,7 @@
 @import "plugins/checkbox";
 @import "plugins/swiper/swiper";
 @import "mixins";
+@import "animation";
 @import "modal";
 
 
@@ -36,8 +37,9 @@ body {
  */
 
 img {
-    vertical-align: middle;
+    vertical-align: middle
 }
+
 
 /*
  * Remove default fieldset styles.
@@ -56,7 +58,6 @@ fieldset {
 textarea {
     resize: vertical;
 }
-
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
@@ -139,6 +140,9 @@ h1 {
   .menu {
     right: 0;
   }
+  .product__category {
+    border-color: #fff;
+  }
   .hamburger-icon span {
     background-color: #fff;
   }
@@ -201,7 +205,6 @@ h1 {
   color: #ee322d;
 }
 
-
 .product {
   position: absolute;
   left: 0;
@@ -214,7 +217,6 @@ h1 {
   padding-right: 6.8%;
   text-align: right;
   color: #fff;
-  display: none;
 }
 .product__footer {
   position: absolute;
@@ -243,29 +245,33 @@ h1 {
   .transition(all 0.35s);
 }
 
-.product__name h1 {
-  margin-bottom: 10px;
-  font-family: Roboto, sans-serif;
-  font-size: 28px;
-  line-height: 32px;
-  font-weight: 500;
-  text-transform: uppercase;
-  @media (max-width: 320px) {
-    font-size: 24px;
-    line-height: 28px;
-  }
-  span {
-    display: block;
-    font-size: 16px;
-    line-height: 22px;
-    font-weight: 400;
+.product__name {
+  .transition(all 0.35s);
+  h1 {
+    margin-bottom: 10px;
+    font-family: Roboto, sans-serif;
+    font-size: 28px;
+    line-height: 32px;
+    font-weight: 500;
+    text-transform: uppercase;
     @media (max-width: 320px) {
-      font-size: 14px;
-      line-height: 18px;
+      font-size: 24px;
+      line-height: 28px;
+    }
+    span {
+      display: block;
+      font-size: 16px;
+      line-height: 22px;
+      font-weight: 400;
+      @media (max-width: 320px) {
+        font-size: 14px;
+        line-height: 18px;
+      }
     }
   }
 }
 .product__description {
+  .transition(all 0.35s);
   padding-left: 100px;
   font-size: 14px;
   line-height: 18px;
@@ -273,27 +279,25 @@ h1 {
     padding-left: 80px;
   }
 
-  .gallery-trigger {
-    display: block;
-    font-family: Roboto, sans-serif;
-    font-weight: 500;
-    font-size: 14px;
-    text-decoration: none;
-    text-transform: uppercase;
-    color: #fff;
-    img {
-      margin-left: 15px;
-      border: 2px solid #fff;
-      border-radius: 50px;
-    }
-    span {
-      display: inline-block;
-      text-decoration: underline;
-    }
+}
+.gallery-trigger {
+  display: inline-block;
+  font-family: Roboto, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #fff;
+  img {
+    margin-left: 15px;
+    border: 2px solid #fff;
+    border-radius: 50px;
+  }
+  span {
+    display: inline-block;
+    text-decoration: underline;
   }
 }
-
-
 
 .slide-left {
   position: relative;
@@ -700,13 +704,11 @@ div[class^="owl"] {
 }
 #girls {
   left: -50%;
-  z-index: 1;
   .wrap {
     right: -50%;
   }
 }
 #boys {
-  z-index: 2;
   right: -50%;
   .wrap {
     left: -50%;
@@ -757,7 +759,6 @@ div[class^="owl"] {
     -webkit-background-size: 32px;
     background-size: 32px;
   }
-  .transition(all 0.35s);
 }
 .hide-details {
   .ico {
@@ -975,10 +976,10 @@ div[class^="owl"] {
   }
 }
 
-body.girls .modal-overlay {
+body.girls #productModal .modal-overlay {
   background-color: rgba(34, 2, 18, 0.8);
 }
-body.boys .modal-overlay {
+body.boys #productModal .modal-overlay {
   background-color: rgba(5, 10, 38, 0.8);
 }
 
@@ -1005,6 +1006,17 @@ body.boys .modal-overlay {
   }
 }
 
+.owl-carousel {
+    > div {
+      display: none;
+      float: left;
+      width: 100%;
+      &:first-child {
+        display: block;
+      }
+    }
+}
+
 .text-indent {
   text-indent: 50px;
 }
@@ -1017,7 +1029,6 @@ body.boys .modal-overlay {
   left: 0;
   top: auto;
   width: 100%;
-  bottom: 0;
 }
 .gif-set (@width; @height) {
   margin: auto;
