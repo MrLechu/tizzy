@@ -1213,9 +1213,6 @@ button.swiper-pagination-bullet {
   width: 100%;
   height: 100%;
   z-index: 1;
-  -webkit-transition: all 0.35s;
-  -o-transition: all 0.35s;
-  transition: all 0.35s;
 }
 .modal-content .product {
   opacity: 0;
@@ -1405,6 +1402,16 @@ button.swiper-pagination-bullet {
   right: 0;
   bottom: 5%;
   overflow: hidden;
+}
+.modal-active.modal-gallery .modal-close {
+  right: 4%;
+  top: 2.5%;
+  width: 50px;
+  height: 50px;
+  opacity: 1;
+  background: url(../img/modal-close.png) no-repeat 50% 50% #ff0028;
+  -webkit-background-size: 20px 20px;
+  background-size: 20px 20px;
 }
 .modal-active.modal-gallery .swiper-slide {
   text-align: center;
@@ -2382,12 +2389,25 @@ div[class^="owl"] {
 body.girls #productModal .modal-overlay {
   background-color: rgba(34, 2, 18, 0.8);
 }
+body.girls .menu__item--boys {
+  display: none;
+}
+body.girls .menu__item--girls {
+  display: block;
+}
 body.boys #productModal .modal-overlay {
   background-color: rgba(5, 10, 38, 0.8);
+}
+body.boys .menu__item--girls {
+  display: none;
+}
+body.boys .menu__item--boys {
+  display: block;
 }
 .text {
   position: absolute;
   top: -20px;
+  z-index: -1;
   width: 100%;
   height: 100%;
   padding-top: 10px;
@@ -2399,6 +2419,7 @@ body.boys #productModal .modal-overlay {
   text-transform: uppercase;
   color: #000;
   opacity: 0;
+  visibility: hidden;
 }
 .text h2 {
   font-weight: 700;

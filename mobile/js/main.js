@@ -17,6 +17,11 @@ APP = {
     sliderIndex: 0,
     modalContent: $('#productModal').find('.modal-content'),
     defaultPrize: 39,
+    boysWrap: $('#boys .wrap'),
+    girlsWrap: $('#girls .wrap'),
+    girls: $('#girls'),
+    boys: $('#boys'),
+    owl: null,
     page: {
         currentSex: null,
         currentCarousel: null,
@@ -34,13 +39,8 @@ APP.startPage = function () {
         layerText = document.querySelectorAll(".layer-text"),
         startGirls = document.querySelectorAll(".start-girls"),
         startBoys = document.querySelectorAll(".start-boys"),
-
-        girls = $('#girls'),
-        boys = $('#boys'),
         girlsLayerText = $('.layer-text__girls'),
-        boysLayerText = $('.layer-text__boys'),
-        boysWrap = boys.find('.wrap'),
-        girlsWrap = girls.find('.wrap');
+        boysLayerText = $('.layer-text__boys');
 
     $(".model").css({
         bottom: footer.height()
@@ -53,14 +53,25 @@ APP.startPage = function () {
 
         $(layer).remove();
         $(layerText).remove();
+
+        if (APP.page.currentSex === "girls") {
+            APP.boys.css({
+                right: "-100%"
+            });
+        }
+        if (APP.page.currentSex === "boys") {
+            APP.girls.css({
+                left: "-100%"
+            });
+        }
     }
 
     for (var i = 0; i <= startGirls.length - 1; i = i + 1) {
         new Hammer(startGirls[i]).on("panright tap", function () {
             APP.doc.addClass('girls');
 
-            girls.css('zIndex', 2);
-            boys.css('zIndex', 1);
+            APP.girls.css('zIndex', 2);
+            APP.boys.css('zIndex', 1);
 
             TweenLite.to(startGirls, 1, {x: "50%", ease: animEase});
             TweenLite.to(girlsLayerText, 0.7, {opacity: 0, ease: animEase});
@@ -68,16 +79,16 @@ APP.startPage = function () {
             TweenLite.to(startBoys, 1, {x: '50%', ease: animEase});
             TweenLite.to(boysLayerText, 1, {x: "100%", opacity: 0, ease: animEase});
 
-            TweenLite.to(girls, 0.5, {left: 0, ease: animEase});
-            TweenLite.to(girlsWrap, 0.5, {right: 0, ease: animEase, onComplete: onComplete});
-
+            TweenLite.to(APP.girls, 0.5, {left: 0, ease: animEase});
+            TweenLite.to(APP.girlsWrap, 0.5, {right: 0, ease: animEase, onComplete: onComplete});
 
             APP.page = {
                 currentSex: "girls",
                 currentCarousel: "#girls-carousel",
                 currentGif: {
-                    gif0: new Gif('.gif0'),
-                    gif1: new Gif('.gif1')
+                    gif0: new Gif('.girls .gif0'),
+                    gif1: new Gif('.girls .gif1'),
+                    gif2: new Gif('.girls .gif2'),
                 }
             }
 
@@ -90,8 +101,8 @@ APP.startPage = function () {
         new Hammer(startBoys[i]).on("panleft tap", function () {
             APP.doc.addClass('boys');
 
-            boys.css('zIndex', 2);
-            girls.css('zIndex', 1);
+            APP.boys.css('zIndex', 2);
+            APP.girls.css('zIndex', 1);
 
             TweenLite.to(startBoys, 1, {x: "-50%", ease: animEase});
             TweenLite.to(boysLayerText, 0.7, {opacity: 0, ease: animEase});
@@ -99,12 +110,17 @@ APP.startPage = function () {
             TweenLite.to(startGirls, 1, {x: '-50%', ease: animEase});
             TweenLite.to(girlsLayerText, 1, {x: "-100%", opacity: 0, ease: animEase});
 
-            TweenLite.to(boys, 0.5, {right: 0, ease: animEase});
-            TweenLite.to(boysWrap, 0.5, {left: 0, ease: animEase, onComplete: onComplete});
+            TweenLite.to(APP.boys, 0.5, {right: 0, ease: animEase});
+            TweenLite.to(APP.boysWrap, 0.5, {left: 0, ease: animEase, onComplete: onComplete});
 
             APP.page = {
                 currentSex: "boys",
-                currentCarousel: "#boys-carousel"
+                currentCarousel: "#boys-carousel",
+                currentGif: {
+                    gif0: new Gif('.boys .gif0'),
+                    gif1: new Gif('.boys .gif1'),
+                    gif1: new Gif('.boys .gif2')
+                }
             }
         });
     }
@@ -128,6 +144,7 @@ APP.init = function() {
     this.menu();
     this.form();
     this.gallery();
+    this.changeSection()
 }
 
 APP.buttons = {
@@ -195,17 +212,16 @@ Gif.prototype.pause = function () {
     this.tl.pause();
 }
 
-
 APP.slider = function () {
     "use strict";
-    var owl = $(APP.page.currentCarousel);
+    APP.owl = $(APP.page.currentCarousel);
 
-    owl.owlCarousel({
+    APP.owl.owlCarousel({
         items: 1,
         dots: false
     });
 
-    owl.on('translate.owl.carousel', function (event) {
+    APP.owl.on('translate.owl.carousel', function (event) {
         TweenLite.to($('.show-details'), 0.3, {opacity: 0, scale: 0});
         if (event.item.index === 0) {
             APP.page.currentGif.gif0.tl.pause();
@@ -215,7 +231,7 @@ APP.slider = function () {
         }
     });
 
-    owl.on('translated.owl.carousel', function (event) {
+    APP.owl.on('translated.owl.carousel', function (event) {
         TweenLite.to($('.show-details'), 0.3, {opacity: 1, scale: 1});
         APP.sliderIndex = event.item.index;
         if (APP.sliderIndex === 0) {
@@ -241,6 +257,65 @@ APP.slider = function () {
     });
 };
 
+APP.changeSection = function () {
+    var goToBoysSection = document.getElementById("goToBoysSection"),
+        goToGirlsSection = document.getElementById("goToGirlsSection");
+
+    /*
+        zmieniając grupę docelową na chłopców lub na dziewczęta należy jeśli to możliwe:
+        - owl carozelę
+        - zaktualizować obiekt page
+    */
+
+    goToBoysSection.addEventListener("click", function () {
+        APP.boys.css({
+            "z-index": 2,
+            "right": 0
+        });
+        APP.girls.css("z-index", 1);
+
+        APP.boysWrap.css("left", 0);
+
+        APP.doc.removeClass("girls").addClass("boys");
+
+        APP.page = {
+            currentSex: "boys",
+            currentCarousel: "#boys-carousel",
+            currentGif: {
+                gif0: new Gif('.boys .gif0'),
+                gif1: new Gif('.boys .gif1'),
+                gif2: new Gif('.boys .gif2')
+            }
+        }
+        APP.slider();
+    }, false);
+
+    goToGirlsSection.addEventListener("click", function () {
+        APP.girls.css({
+            "z-index": 2,
+            "left": 0
+        });
+        APP.boys.css("z-index", 1);
+
+        APP.girlsWrap.css("left", 0);
+
+        APP.doc.addClass("girls").removeClass("boys");
+
+        APP.slider();
+
+        APP.page = {
+            currentSex: "girls",
+            currentCarousel: "#girls-carousel",
+            currentGif: {
+                gif0: new Gif('.girls .gif0'),
+                gif1: new Gif('.girls .gif1'),
+                gif2: new Gif('.girls .gif2')
+            }
+        }
+        APP.slider();
+    }, false);
+}
+
 APP.productSize = function () {
     "use strict";
     var $sizeTrigger = $('.sizer__trigger'),
@@ -254,10 +329,10 @@ APP.productSize = function () {
 
         switch(APP.sliderIndex) {
             case 0:
-                APP.page.currentGif.gif0.tl.play();
+                APP.page.currentGif.gif0.pause();
                 break;
             case 1:
-                APP.page.currentGif.gif1.tl.play();
+                APP.page.currentGif.gif1.pause();
                 break;
         }
     });
@@ -266,10 +341,10 @@ APP.productSize = function () {
         e.preventDefault();
         switch(APP.sliderIndex) {
             case 0:
-                APP.page.currentGif.gif0.tl.play();
+                APP.page.currentGif.gif0.play();
                 break;
             case 1:
-                APP.page.currentGif.gif1.tl.play();
+                APP.page.currentGif.gif1.play();
                 break;
         }
     });
@@ -299,10 +374,10 @@ APP.productSize = function () {
         APP.doc.removeClass('modal-active modal-sizes modal-form');
         switch(APP.sliderIndex) {
             case 0:
-                APP.page.currentGif.gif0.tl.pause();
+                APP.page.currentGif.gif0.pause();
                 break;
             case 1:
-                APP.page.currentGif.gif1.tl.pause();
+                APP.page.currentGif.gif1.pause();
                 break;
         }
     });
@@ -385,8 +460,8 @@ APP.productDetails.prototype.showContent = function (carousel, index) {
     }
 
     function onCompleteFn() {
-        APP.page.currentGif.gif0.tl.pause();
-        APP.page.currentGif.gif1.tl.pause();
+        APP.page.currentGif.gif0.pause();
+        APP.page.currentGif.gif1.pause();
     }
 
     var slideLeftElem = document.querySelectorAll('.modal .slide-left'),
@@ -412,13 +487,12 @@ APP.productDetails.prototype.hideContent = function () {
 
         switch(APP.sliderIndex) {
             case 0:
-                APP.page.currentGif.gif0.tl.play();
+                APP.page.currentGif.gif0.play();
                 break;
             case 1:
-                APP.page.currentGif.gif1.tl.play();
+                APP.page.currentGif.gif1.play();
                 break;
         }
-
     }
 
     function onStart() {
@@ -428,17 +502,42 @@ APP.productDetails.prototype.hideContent = function () {
         }
     }
 
-
-
     TweenLite.to(modalFadeElem, 0.35, {opacity: 0, ease: animEase});
     TweenLite.to(APP.modalOverlay, 0.35, {opacity: '0', ease: animEase, onStart: onStart, onComplete: onCompleteFn});
 };
 
 APP.menu = function () {
     "use strict";
-    $('.mobilemenu-trigger').click(function () {
+    $('.mobilemenu-trigger').on("click", function () {
+
         $('.menu').toggleClass('is-active');
         $("body").toggleClass('menu-active');
+
+        if ($(".menu").hasClass("is-active")) {
+            switch(APP.sliderIndex) {
+                case 0:
+                    APP.page.currentGif.gif0.pause();
+                    break;
+                case 1:
+                    APP.page.currentGif.gif1.pause();
+                    break;
+            }
+        } else {
+            switch(APP.sliderIndex) {
+                case 0:
+                    APP.page.currentGif.gif0.play();
+                    break;
+                case 1:
+                    APP.page.currentGif.gif1.play();
+                    break;
+            }
+        }
+    });
+
+    $(".menu__item a").on("click", function (ev) {
+        ev.preventDefault();
+        $('.menu').removeClass('is-active');
+        $("body").removeClass('menu-active');
     });
 };
 
@@ -460,8 +559,8 @@ APP.form = function () {
     $('.btn--buy').click(function (ev) {
         ev.preventDefault();
         APP.doc.addClass('modal-active modal-form');
-        APP.gifGirl_0.tl.pause();
-        APP.gifGirl_1.tl.pause();
+        APP.page.currentGif.gif0.play();
+        APP.page.currentGif.gif1.pause();
     });
 };
 
@@ -477,8 +576,6 @@ APP.gallery = function () {
     APP.buttons.showGalleryModalButton.on("click", function () {
         APP.doc.addClass('modal-active modal-gallery on-gif');
     });
-
-
 
     var mySwiper = new Swiper ('.swiper-container', {
         // Optional parameters
@@ -580,7 +677,6 @@ APP.debug = function () {
     $("#girls .wrap").css('right', 0);
     $("#boys").css('right', '100%');
 };
-
 
 $(function () {
     "use strict";
