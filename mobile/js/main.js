@@ -37,8 +37,8 @@ APP.startPage = function () {
     "use strict";
     var layer = document.querySelectorAll(".layer"),
         layerText = document.querySelectorAll(".layer-text"),
-        startGirls = document.querySelectorAll(".start-girls"),
-        startBoys = document.querySelectorAll(".start-boys"),
+        girlsLayer = $(".layer-girls"),
+        boysLayer = $(".layer-boys"),
         girlsLayerText = $('.layer-text__girls'),
         boysLayerText = $('.layer-text__boys');
 
@@ -46,84 +46,85 @@ APP.startPage = function () {
         bottom: footer.height()
     });
 
-    function onComplete() {
-        TweenLite.fromTo(layer, 0.7, {opacity: 1}, {opacity: 0, ease: animEase});
+    APP.doc.addClass("slide0");
+
+    function onGirlsComplete() {
+        APP.boys.css({
+            right: "-100%"
+        });
+        APP.page = {
+            currentSex: "girls",
+            currentCarousel: "#girls-carousel",
+            currentGif: {
+                gif0: new Gif('.girls .gif0'),
+                gif1: new Gif('.girls .gif1'),
+                gif2: new Gif('.girls .gif2')
+            }
+        }
+        APP.page.currentGif.gif0.init(false, true);
+        APP.page.currentGif.gif1.init(false, false);
 
         APP.init();
-
         $(layer).remove();
         $(layerText).remove();
-
-        if (APP.page.currentSex === "girls") {
-            APP.boys.css({
-                right: "-100%"
-            });
-        }
-        if (APP.page.currentSex === "boys") {
-            APP.girls.css({
-                left: "-100%"
-            });
-        }
     }
 
-    for (var i = 0; i <= startGirls.length - 1; i = i + 1) {
-        new Hammer(startGirls[i]).on("panright tap", function () {
-            APP.doc.addClass('girls');
-
-            APP.girls.css('zIndex', 2);
-            APP.boys.css('zIndex', 1);
-
-            TweenLite.to(startGirls, 1, {x: "50%", ease: animEase});
-            TweenLite.to(girlsLayerText, 0.7, {opacity: 0, ease: animEase});
-
-            TweenLite.to(startBoys, 1, {x: '50%', ease: animEase});
-            TweenLite.to(boysLayerText, 1, {x: "100%", opacity: 0, ease: animEase});
-
-            TweenLite.to(APP.girls, 0.5, {left: 0, ease: animEase});
-            TweenLite.to(APP.girlsWrap, 0.5, {right: 0, ease: animEase, onComplete: onComplete});
-
-            APP.page = {
-                currentSex: "girls",
-                currentCarousel: "#girls-carousel",
-                currentGif: {
-                    gif0: new Gif('.girls .gif0'),
-                    gif1: new Gif('.girls .gif1'),
-                    gif2: new Gif('.girls .gif2'),
-                }
-            }
-
-            APP.page.currentGif.gif0.init(false, true);
-            APP.page.currentGif.gif1.init(false, false);
+    function onBoysComplete(){
+        APP.girls.css({
+            left: "-100%"
         });
+        APP.page = {
+            currentSex: "boys",
+            currentCarousel: "#boys-carousel",
+            // currentGif: {
+            //     gif0: new Gif('.boys .gif0'),
+            //     gif1: new Gif('.boys .gif1'),
+            //     gif2: new Gif('.boys .gif2')
+            // }
+        }
+        APP.init();
+        $(layer).remove();
+        $(layerText).remove();
     }
+    new Hammer(girlsLayerText[0]).on("panright tap", function () {
 
-    for (var i = 0; i <= startBoys.length - 1; i = i + 1) {
-        new Hammer(startBoys[i]).on("panleft tap", function () {
-            APP.doc.addClass('boys');
+        APP.doc.addClass('girls');
+        $(".girls").find("#product0").addClass("active");
 
-            APP.boys.css('zIndex', 2);
-            APP.girls.css('zIndex', 1);
+        APP.girls.css('zIndex', 2);
+        APP.boys.css('zIndex', 1);
 
-            TweenLite.to(startBoys, 1, {x: "-50%", ease: animEase});
-            TweenLite.to(boysLayerText, 0.7, {opacity: 0, ease: animEase});
+        /*layer*/
+        TweenLite.to(girlsLayer, 1, {x: "50%", opacity: 0, ease: animEase, onComplete: onGirlsComplete});
+        TweenLite.to(boysLayer, 1, {x: "50%", opacity: 0, ease: animEase});
 
-            TweenLite.to(startGirls, 1, {x: '-50%', ease: animEase});
-            TweenLite.to(girlsLayerText, 1, {x: "-100%", opacity: 0, ease: animEase});
+        TweenLite.to(girlsLayerText, 0.7, {x: "10%", opacity: 0, ease: animEase});
+        TweenLite.to(boysLayerText, 0.7, {x: "50%", opacity: 0, ease: animEase});
 
-            TweenLite.to(APP.boys, 0.5, {right: 0, ease: animEase});
-            TweenLite.to(APP.boysWrap, 0.5, {left: 0, ease: animEase, onComplete: onComplete});
+        /*main-body*/
+        TweenLite.to(APP.girls, 0.5, {x: "50%", ease: animEase});
+        TweenLite.to(APP.girlsWrap, 0.5, {x: "-50%", ease: animEase});
 
-            APP.page = {
-                currentSex: "boys",
-                currentCarousel: "#boys-carousel",
-                currentGif: {
-                    gif0: new Gif('.boys .gif0'),
-                    gif1: new Gif('.boys .gif1'),
-                    gif1: new Gif('.boys .gif2')
-                }
-            }
-        });
-    }
+    });
+
+    new Hammer(boysLayerText[0]).on("panleft tap", function () {
+        APP.doc.addClass('boys');
+        $(".boys").find("#product0").addClass("active");
+
+        APP.boys.css('zIndex', 2);
+        APP.girls.css('zIndex', 1);
+
+        /*layer*/
+        TweenLite.to(boysLayer, 1, {x: "-50%", opacity: 0, ease: animEase, onComplete: onBoysComplete});
+        TweenLite.to(girlsLayer, 1, {x: "-50%", opacity: 0, ease: animEase});
+
+        TweenLite.to(boysLayerText, 0.7, {x: "-10%", opacity: 0, ease: animEase});
+        TweenLite.to(girlsLayerText, 0.7, {x: "-50%", opacity: 0, ease: animEase});
+
+        /*main-body*/
+        TweenLite.to(APP.boysWrap, 0.5, {x: "50%", ease: animEase});
+        TweenLite.to(APP.boys, 0.5, {x: "-50%", ease: animEase});
+    });
 };
 
 
@@ -144,31 +145,88 @@ APP.init = function() {
     this.menu();
     this.form();
     this.gallery();
-    this.changeSection()
+    this.changeSection();
 }
 
-APP.buttons = {
+APP.triggers = {
     showDefaultModalButton: $(".Button_showDefaultModal"),
     hideProductDescriptionButton: $(".Button_hideProductDescription"),
-    showGalleryModalButton: $(".Button_showGalleryModal, .gif"),
-    showProductDescriptionButton: $(".Button_showProductDescription"),
+    showGallery: $(".gif, .gallery-trigger"),
+    showProductDescriptionButton: $(".show-details"),
     hideDetailsButton: $('.hide-details'),
     showModalDefault1: $('.aloha-from-deer-logo, .product__footer'),
     showModalDefault2: $('.timer, .shape-star-red, .discount'),
-    showModalDefault3: $('.product__category')
+    showModalDefault3: $('.product__category'),
+    showSizes: $(".sizer__trigger")
 }
 
-APP.buttons.showModalDefault1.on("click", function () {
-    APP.doc.addClass('modal-active modal-default modal-default-1');
+
+APP.modals = {
+    showModal: function (modalClassName) {
+        //modalClassName = string
+        APP.doc.addClass("modal-active " + modalClassName);
+    },
+    hideModal: function () {
+        if (APP.doc.hasClass("source-description")) {
+            APP.doc.removeClass("modal-gallery modal-default modal-default-3 source-description source-logo")
+        } else if (APP.doc.hasClass("source-logo")) {
+            APP.doc.removeClass("modal-default modal-default-1 source-description source-logo")
+        } else {
+            APP.doc.removeClass("modal-active modal-default modal-default-1 modal-default-2 modal-default-3 modal-sizes modal-gallery modal-form source-description source-logo");
+        }
+    }
+}
+
+$(".modal-close").click(function (ev) {
+    ev.preventDefault();
+    var that = $(this);
+    APP.modals.hideModal();
 });
 
-APP.buttons.showModalDefault2.on("click", function () {
-    APP.doc.addClass('modal-active modal-default modal-default-2');
+
+APP.triggers.showModalDefault1.on("click", function () {
+    var that = $(this);
+    if (that.hasClass("product__footer")) {
+        APP.modals.showModal("modal-default modal-default-1 source-logo");
+    } else {
+        APP.modals.showModal("modal-default modal-default-1");
+    }
 });
 
-APP.buttons.showModalDefault3.on("click", function () {
-    APP.doc.addClass('modal-active modal-default modal-default-3');
+APP.triggers.showModalDefault2.on("click", function () {
+    APP.modals.showModal("modal-default modal-default-2");
 });
+
+APP.triggers.showModalDefault3.on("click", function () {
+    if (APP.doc.hasClass("modal-description")) {
+        APP.modals.showModal("modal-default modal-default-3 source-description");
+    } else {
+        APP.modals.showModal("modal-default modal-default-3");
+    }
+
+});
+APP.triggers.showGallery.on("click", function () {
+    var that = $(this);
+    if (that.hasClass("gallery-trigger")) {
+        APP.modals.showModal("modal-gallery source-description");
+    } else {
+        APP.modals.showModal("modal-gallery");
+    }
+});
+
+APP.triggers.hideDetailsButton.on('click', function () {
+    APP.productDetails.prototype.hideContent();
+});
+
+APP.triggers.hideProductDescriptionButton.on("click", function () {
+    APP.productDetails.prototype.hideContent();
+});
+
+APP.triggers.showProductDescriptionButton.on("click", function () {
+    APP.productDetails.prototype.showContent(APP.page.currentCarousel, APP.sliderIndex);
+});
+
+
 
 function Gif(what) {
     "use strict";
@@ -221,8 +279,15 @@ APP.slider = function () {
         dots: false
     });
 
-    APP.owl.on('translate.owl.carousel', function (event) {
+    APP.owl.on('drag.owl.carousel', function (event) {
         TweenLite.to($('.show-details'), 0.3, {opacity: 0, scale: 0});
+    });
+
+    APP.owl.on('dragged.owl.carousel', function (event) {
+        TweenLite.to($('.show-details'), 0.3, {opacity: 1, scale: 1});
+    });
+
+    APP.owl.on('translate.owl.carousel', function (event) {
         if (event.item.index === 0) {
             APP.page.currentGif.gif0.tl.pause();
         }
@@ -234,24 +299,38 @@ APP.slider = function () {
     APP.owl.on('translated.owl.carousel', function (event) {
         TweenLite.to($('.show-details'), 0.3, {opacity: 1, scale: 1});
         APP.sliderIndex = event.item.index;
+
+        $(".gallery").css({
+            opacity: 0,
+            visibility: "hidden"
+        });
+        $("#gallery" + APP.sliderIndex).css({
+            opacity: 1,
+            visibility: "visible"
+        });
+
+        APP.doc.removeClass("slide0 slide1 slide2");
+        APP.doc.addClass("slide" + APP.sliderIndex);
+
         if (APP.sliderIndex === 0) {
             //cena po obniżce
             prizeValue.text(APP.defaultPrize);
             APP.page.currentGif.gif0.tl.play();
             APP.page.currentGif.gif1.tl.pause();
-            TweenLite.to(footerText, 0.5, {opacity: 0});
+            TweenLite.to(footerText, 0.5, {opacity: 0, visibility: "hidden"});
             TweenLite.to(footerFadeElem, 0.5, {opacity: 1});
+
         } else if (APP.sliderIndex === 1) {
             prizeValue.text('45');
             APP.page.currentGif.gif0.tl.pause();
             APP.page.currentGif.gif1.tl.play();
-            TweenLite.to(footerText, 0.5, {opacity: 1});
+            TweenLite.to(footerText, 0.5, {opacity: 1, visibility: "visible"});
             TweenLite.to(footerFadeElem, 0.5, {opacity: 0});
         } else if (APP.sliderIndex === 2) {
             prizeValue.text('90');
             APP.page.currentGif.gif0.tl.pause();
             APP.page.currentGif.gif1.tl.pause();
-            TweenLite.to(footerText, 0.5, {opacity: 1});
+            TweenLite.to(footerText, 0.5, {opacity: 1, visibility: "visible"});
             TweenLite.to(footerFadeElem, 0.5, {opacity: 0});
         }
     });
@@ -318,35 +397,12 @@ APP.changeSection = function () {
 
 APP.productSize = function () {
     "use strict";
-    var $sizeTrigger = $('.sizer__trigger'),
-        size = $(".sizer__trigger > span").text();
+    var size = $(".sizer__trigger > span").text();
 
-    $sizeTrigger.click(function (event) {
-        event.preventDefault();
-        APP.doc.addClass('modal-active modal-sizes');
-
-        History.pushState(null, "size", "?rozmiar=" + size);
-
-        switch(APP.sliderIndex) {
-            case 0:
-                APP.page.currentGif.gif0.pause();
-                break;
-            case 1:
-                APP.page.currentGif.gif1.pause();
-                break;
-        }
-    });
-
-    $('.modal-close:not(".gallery-close")').click(function (e) {
+    APP.triggers.showSizes.click(function (e) {
         e.preventDefault();
-        switch(APP.sliderIndex) {
-            case 0:
-                APP.page.currentGif.gif0.play();
-                break;
-            case 1:
-                APP.page.currentGif.gif1.play();
-                break;
-        }
+        APP.modals.showModal("modal-sizes");
+        History.pushState(null, "size", "?rozmiar=" + size);
     });
 
     $('.sizer__size').click(function (e) {
@@ -385,17 +441,7 @@ APP.productSize = function () {
 
 APP.productDetails = function () {
     "use strict";
-    APP.buttons.hideDetailsButton.on('click', function () {
-        APP.productDetails.prototype.hideContent();
-    });
 
-    APP.buttons.hideProductDescriptionButton.on("click", function () {
-        APP.productDetails.prototype.hideContent();
-    });
-
-    APP.buttons.showProductDescriptionButton.on("click", function () {
-        APP.productDetails.prototype.showContent(APP.page.currentCarousel, APP.sliderIndex);
-    });
 
     //gesty mobile
 
@@ -413,6 +459,7 @@ APP.productDetails = function () {
     //ukrycie szczegółów produktu
     swipeDown.on("panend", function (ev) {
         if (ev.direction === Hammer.DIRECTION_DOWN) {
+            TweenLite.to($('.show-details'), 0.3, {opacity: 1, scale: 1});
             APP.productDetails.prototype.hideContent();
         }
     });
@@ -443,20 +490,15 @@ APP.productDetails.prototype.showContent = function (carousel, index) {
         product,
         idx = 0;
 
-    products = document.querySelectorAll(".product");
-    product = document.getElementById("product" + index);
+    products = $(".product");
+    product = $("#product" + index);
 
-    for (idx; idx <= products.length - 1; idx = idx + 1) {
-        products[idx].style.opacity = 0;
-        products[idx].style.visibility = "hidden";
-    }
+    products.removeClass("active");
 
-    product.style.opacity = 1;
-    product.style.visibility = "visible";
+    product.addClass("active")
 
     function onStartFn() {
-        APP.doc.addClass('modal-active modal-description');
-
+        APP.modals.showModal("modal-description");
     }
 
     function onCompleteFn() {
@@ -464,12 +506,7 @@ APP.productDetails.prototype.showContent = function (carousel, index) {
         APP.page.currentGif.gif1.pause();
     }
 
-    var slideLeftElem = document.querySelectorAll('.modal .slide-left'),
-        modalFadeElem = document.querySelectorAll('.modal .fade');
-
-    TweenLite.set(slideLeftElem, {x: "-100%", y: 0, z: 0});
-
-    TweenLite.to(slideLeftElem, 0.45, {x: "0%", ease: animEase});
+    var modalFadeElem = document.querySelectorAll('.modal .fade');
 
     TweenLite.fromTo(APP.modalOverlay, 0.45, {opacity: 0}, {opacity: 1, ease: animEase, onStart: onStartFn, onComplete: onCompleteFn});
     TweenLite.fromTo(modalFadeElem, 0.45, {opacity: 0}, {opacity: 1, ease: animEase});
@@ -478,7 +515,7 @@ APP.productDetails.prototype.showContent = function (carousel, index) {
 APP.productDetails.prototype.hideContent = function () {
     "use strict";
 
-    var products = document.querySelectorAll(".product"),
+    var products = $(".product"),
         modalFadeElem = $('.modal').find('.fade'),
         idx = 0;
 
@@ -496,10 +533,7 @@ APP.productDetails.prototype.hideContent = function () {
     }
 
     function onStart() {
-        for (idx; idx <= products.length - 1; idx = idx + 1) {
-            products[idx].style.opacity = 0;
-            products[idx].style.visibility = "hidden";
-        }
+        products.removeClass("active");
     }
 
     TweenLite.to(modalFadeElem, 0.35, {opacity: 0, ease: animEase});
@@ -558,27 +592,14 @@ APP.form = function () {
     });
     $('.btn--buy').click(function (ev) {
         ev.preventDefault();
-        APP.doc.addClass('modal-active modal-form');
+        APP.modals.showModal("modal-form");
         APP.page.currentGif.gif0.play();
         APP.page.currentGif.gif1.pause();
     });
 };
 
 APP.gallery = function () {
-    var galleryTrigger = $('.gallery-trigger');
-
-
-    galleryTrigger.click(function (ev) {
-        ev.preventDefault();
-        APP.doc.addClass('modal-gallery');
-    });
-
-    APP.buttons.showGalleryModalButton.on("click", function () {
-        APP.doc.addClass('modal-active modal-gallery on-gif');
-    });
-
-    var mySwiper = new Swiper ('.swiper-container', {
-        // Optional parameters
+    var mySwiperParam = {
         direction: 'horizontal',
         loop: false,
         setWrapperSize: true,
@@ -591,6 +612,12 @@ APP.gallery = function () {
               slidesPerView: 5
             }
         }
+    },
+    mySwiper = new Swiper ('.swiper-container', mySwiperParam);
+
+    $(".swiper-slide").on("click", function () {
+        var image = $(this).find("img").data("image");
+        $("#galleryModal .modal-content img").attr("src", media_url + "img/product/" + image);
     });
 
     var img,
@@ -647,27 +674,6 @@ APP.gallery = function () {
         top = top * e.originalEvent.gesture.scale;
     });
 }
-
-
-$(".modal-close").click(function (ev) {
-    "use strict";
-    ev.preventDefault();
-    var self = $(this);
-
-    if (self.hasClass("gallery-close")) {
-        //zamykanie gallerii wywołanej po kliknięciu link w opisie
-        APP.doc.removeClass('modal-gallery');
-    } else {
-        //pozostałe modale
-        APP.doc.removeClass('modal-active modal-default modal-default-2 modal-default-3 modal-sizes modal-form');
-    }
-
-    if (APP.doc.hasClass("on-gif")) {
-        //zamykanie gallerii wywołanej po kliknięciu na gif
-        APP.doc.removeClass("modal-active modal-gallery on-gif");
-    }
-});
-
 
 APP.debug = function () {
     "use strict";

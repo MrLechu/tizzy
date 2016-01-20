@@ -73,11 +73,12 @@ h1 {
 /**/
 .main-header {
   position: absolute;
-  top: 4.6%;
+  //top: 4.6%;
   left: 0;
   z-index: 4;
   width: 100%;
-  height: 48px;
+  height: 10%;
+  padding-top: 26px;
   &:after {
     content: "";
     position: absolute;
@@ -208,15 +209,26 @@ h1 {
 .product {
   position: absolute;
   left: 0;
-  top: 0;
   opacity: 0;
   visibility: hidden;
   width: 100%;
   height: 100%;
-  padding-top: 20%;
   padding-right: 6.8%;
   text-align: right;
   color: #fff;
+  .transition(all 0.30s);
+  &.active {
+    opacity: 1;
+    visibility: visible;
+  }
+  > .t {
+    position: relative;
+    top: 10%;
+    height: 60.5%;
+    .transition(all 0.30s ease-in-out);
+    .translate(0,0,0);
+    left: -100%;
+  }
 }
 .product__footer {
   position: absolute;
@@ -246,7 +258,6 @@ h1 {
 }
 
 .product__name {
-  .transition(all 0.35s);
   h1 {
     margin-bottom: 10px;
     font-family: Roboto, sans-serif;
@@ -271,7 +282,6 @@ h1 {
   }
 }
 .product__description {
-  .transition(all 0.35s);
   padding-left: 100px;
   font-size: 14px;
   line-height: 18px;
@@ -653,42 +663,51 @@ div[class^="owl"] {
   width: 100%;
   height: 100%;
   overflow: hidden;
+  .translate(0,0,0);
+  &-girls {
+    left: -50%;
+    background-color: rgba(34, 2, 18, 0.8);
+  }
+  &-boys {
+    right: -50%;
+    background-color: rgba(5, 10, 38, 0.8);
+  }
 }
 
 .layer-text {
   position: fixed;
   top: 0;
   z-index: 999999;
-  width: 50%;
+  width: 100%;
   height: 100%;
   font-family: Roboto, sans-serif;
   font-size: 50px;
   font-weight: 900;
   color: #fff;
-  text-align: center;
   line-height: 100vh;
+  span {
+    display: block;
+    width: 50%;
+    text-align: center;
+    pointer-events: none;
+  }
   .translate(0,0,0);
   &__girls {
-    left: 0;
+    left: -50%;
+    text-align: right;
+    span {
+      float: right;
+    }
   }
   &__boys {
-    right: 0;
+    right: -50%;
+    text-align: left;
+    span {
+      float: left;
+    }
   }
 }
 
-.layer-girls {
-  left: -50%;
-  text-align: right;
-  background-color: rgba(34, 2, 18, 0.8);
-  .translate(0,0,0);
-}
-
-.layer-boys {
-  right: -50%;
-  text-align: left;
-  background-color: rgba(5, 10, 38, 0.8);
-  .translate(0,0,0);
-}
 
 .wrapper {
   position: relative;
@@ -993,7 +1012,7 @@ body.boys {
 
 .text {
   position: absolute;
-  top: -20px;
+  top: -10px;
   z-index: -1;
   width: 100%;
   height: 100%;
