@@ -61,8 +61,15 @@ APP.startPage = function () {
                 gif2: new Gif('.girls .gif2')
             }
         }
+
+        TweenLite.set(APP.girls, {left: 0, x: "0%"});
+        TweenLite.set(APP.girlsWrap, {right: 0, x: "0%"});
+        TweenLite.set(APP.boys, {right: 0});
+        TweenLite.set(APP.boysWrap, {left: 0});
+
         APP.page.currentGif.gif0.init(false, true);
         APP.page.currentGif.gif1.init(false, false);
+        APP.page.currentGif.gif2.init(false, false);
 
         APP.init();
         $(layer).remove();
@@ -76,15 +83,27 @@ APP.startPage = function () {
         APP.page = {
             currentSex: "boys",
             currentCarousel: "#boys-carousel",
-            // currentGif: {
-            //     gif0: new Gif('.boys .gif0'),
-            //     gif1: new Gif('.boys .gif1'),
-            //     gif2: new Gif('.boys .gif2')
-            // }
+            currentGif: {
+                gif0: new Gif('.boys .gif0'),
+                gif1: new Gif('.boys .gif1'),
+                gif2: new Gif('.boys .gif2')
+            }
         }
+
+        APP.page.currentGif.gif0.init(false, true);
+        APP.page.currentGif.gif1.init(false, false);
+        APP.page.currentGif.gif2.init(false, false);
+
+        TweenLite.set(APP.boys, {right: 0, x: "0%"});
+        TweenLite.set(APP.boysWrap, {left: 0, x: "0%"});
+        TweenLite.set(APP.girls, {left: 0});
+        TweenLite.set(APP.girlsWrap, {right: 0});
+
         APP.init();
         $(layer).remove();
         $(layerText).remove();
+
+
     }
     new Hammer(girlsLayerText[0]).on("panright tap", function () {
 
@@ -155,16 +174,16 @@ APP.triggers = {
     showProductDescriptionButton: $(".show-details"),
     hideDetailsButton: $('.hide-details'),
     showModalDefault1: $('.aloha-from-deer-logo, .product__footer'),
-    showModalDefault2: $('.timer, .shape-star-red, .discount'),
-    showModalDefault3: $('.product__category'),
+    showModalDefault2: $('.timer, .shape-star-red, .discount, .product__category'),
+    showModalDefault3: $(''),
     showSizes: $(".sizer__trigger")
 }
-
 
 APP.modals = {
     showModal: function (modalClassName) {
         //modalClassName = string
         APP.doc.addClass("modal-active " + modalClassName);
+        History.pushState(null, "modal", "?modal=1");
     },
     hideModal: function () {
         if (APP.doc.hasClass("source-description")) {
@@ -182,7 +201,6 @@ $(".modal-close").click(function (ev) {
     var that = $(this);
     APP.modals.hideModal();
 });
-
 
 APP.triggers.showModalDefault1.on("click", function () {
     var that = $(this);
@@ -225,8 +243,6 @@ APP.triggers.hideProductDescriptionButton.on("click", function () {
 APP.triggers.showProductDescriptionButton.on("click", function () {
     APP.productDetails.prototype.showContent(APP.page.currentCarousel, APP.sliderIndex);
 });
-
-
 
 function Gif(what) {
     "use strict";
@@ -347,15 +363,15 @@ APP.changeSection = function () {
     */
 
     goToBoysSection.addEventListener("click", function () {
-        APP.boys.css({
-            "z-index": 2,
-            "right": 0
-        });
-        APP.girls.css("z-index", 1);
-
-        APP.boysWrap.css("left", 0);
-
         APP.doc.removeClass("girls").addClass("boys");
+
+        TweenLite.set(APP.girls, {zIndex: 1});
+        TweenLite.set(APP.boys, {zIndex: 2});
+
+        APP.page.currentGif.gif0.tl.kill();
+        APP.page.currentGif.gif1.tl.kill();
+        APP.page.currentGif.gif2.tl.kill();
+
 
         APP.page = {
             currentSex: "boys",
@@ -366,21 +382,33 @@ APP.changeSection = function () {
                 gif2: new Gif('.boys .gif2')
             }
         }
+
+        APP.page.currentGif.gif0.init(false, false);
+        APP.page.currentGif.gif1.init(false, false);
+        APP.page.currentGif.gif2.init(false, false);
+
+        if (APP.sliderIndex === 0) {
+            APP.page.currentGif.gif0.tl.play();
+        }
+        if (APP.sliderIndex === 1) {
+            APP.page.currentGif.gif1.tl.play();
+        }
+        if (APP.sliderIndex === 2) {
+            APP.page.currentGif.gif2.tl.play();
+        }
+
         APP.slider();
     }, false);
 
     goToGirlsSection.addEventListener("click", function () {
-        APP.girls.css({
-            "z-index": 2,
-            "left": 0
-        });
-        APP.boys.css("z-index", 1);
-
-        APP.girlsWrap.css("left", 0);
-
         APP.doc.addClass("girls").removeClass("boys");
 
-        APP.slider();
+        TweenLite.set(APP.girls, {zIndex: 2});
+        TweenLite.set(APP.boys, {zIndex: 1});
+
+        APP.page.currentGif.gif0.tl.kill();
+        APP.page.currentGif.gif1.tl.kill();
+        APP.page.currentGif.gif2.tl.kill();
 
         APP.page = {
             currentSex: "girls",
@@ -391,6 +419,21 @@ APP.changeSection = function () {
                 gif2: new Gif('.girls .gif2')
             }
         }
+
+        APP.page.currentGif.gif0.init(false, false);
+        APP.page.currentGif.gif1.init(false, false);
+        APP.page.currentGif.gif2.init(false, false);
+
+        if (APP.sliderIndex === 0) {
+            APP.page.currentGif.gif0.tl.play();
+        }
+        if (APP.sliderIndex === 1) {
+            APP.page.currentGif.gif1.tl.play();
+        }
+        if (APP.sliderIndex === 2) {
+            APP.page.currentGif.gif2.tl.play();
+        }
+
         APP.slider();
     }, false);
 }
@@ -402,7 +445,7 @@ APP.productSize = function () {
     APP.triggers.showSizes.click(function (e) {
         e.preventDefault();
         APP.modals.showModal("modal-sizes");
-        History.pushState(null, "size", "?rozmiar=" + size);
+        //History.pushState(null, "size", "?rozmiar=" + size);
     });
 
     $('.sizer__size').click(function (e) {
@@ -417,9 +460,8 @@ APP.productSize = function () {
         $(".sizer__trigger span").text("");
         $(".sizer__trigger span").text(size);
 
-        History.replaceState(null, "size", "?rozmiar=" + size);
+        //History.replaceState(null, "size", "?rozmiar=" + size);
 
-        //APP.doc.removeClass('modal-active modal-sizes modal-form');
         $(".sizer__size").removeClass("active");
         thatSize.addClass('active');
     });
