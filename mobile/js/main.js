@@ -176,6 +176,9 @@ APP.triggers = {
     showModalDefault1: $('.aloha-from-deer-logo, .product__footer'),
     showModalDefault2: $('.timer, .shape-star-red, .discount, .product__category'),
     showModalDefault3: $(''),
+    showFaq: $('#faq'),
+    showRegulations: $('#regulations'),
+    showContact: $('#contact'),
     showSizes: $(".sizer__trigger")
 }
 
@@ -191,7 +194,7 @@ APP.modals = {
         } else if (APP.doc.hasClass("source-logo")) {
             APP.doc.removeClass("modal-default modal-default-1 source-description source-logo")
         } else {
-            APP.doc.removeClass("modal-active modal-default modal-default-1 modal-default-2 modal-default-3 modal-sizes modal-gallery modal-form source-description source-logo");
+            APP.doc.removeClass("modal-faq modal-regulations modal-contact modal-active modal-default modal-default-1 modal-default-2 modal-default-3 modal-sizes modal-gallery modal-form source-description source-logo");
         }
     }
 }
@@ -201,6 +204,20 @@ $(".modal-close").click(function (ev) {
     var that = $(this);
     APP.modals.hideModal();
 });
+
+
+APP.triggers.showFaq.on("click", function () {
+    APP.modals.showModal("modal-default modal-faq");
+});
+
+APP.triggers.showRegulations.on("click", function () {
+    APP.modals.showModal("modal-default modal-regulations");
+});
+
+APP.triggers.showContact.on("click", function () {
+    APP.modals.showModal("modal-default modal-contact");
+});
+
 
 APP.triggers.showModalDefault1.on("click", function () {
     var that = $(this);

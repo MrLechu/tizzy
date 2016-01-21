@@ -1321,26 +1321,38 @@ button.swiper-pagination-bullet {
 }
 #defaultModal_1 .modal-content,
 #defaultModal_2 .modal-content,
-#defaultModal_3 .modal-content {
+#defaultModal_3 .modal-content,
+#faqModal .modal-content,
+#regulationsModal .modal-content,
+#contactModal .modal-content {
   padding: 80px 6.8% 0;
   text-align: center;
 }
 #defaultModal_1 .modal-overlay,
 #defaultModal_2 .modal-overlay,
-#defaultModal_3 .modal-overlay {
+#defaultModal_3 .modal-overlay,
+#faqModal .modal-overlay,
+#regulationsModal .modal-overlay,
+#contactModal .modal-overlay {
   background-color: #ff0028;
   -webkit-background-size: 88% auto;
   background-size: 88% auto;
 }
 #defaultModal_1 h2,
 #defaultModal_2 h2,
-#defaultModal_3 h2 {
+#defaultModal_3 h2,
+#faqModal h2,
+#regulationsModal h2,
+#contactModal h2 {
   text-transform: uppercase;
   color: #fff;
 }
 #defaultModal_1 p,
 #defaultModal_2 p,
-#defaultModal_3 p {
+#defaultModal_3 p,
+#faqModal p,
+#regulationsModal p,
+#contactModal p {
   font-size: 18px;
   line-height: 24px;
   color: #fff;
@@ -1362,6 +1374,18 @@ button.swiper-pagination-bullet {
 .modal-active .product__category {
   color: #fff;
   border-color: #fff;
+}
+.modal-active.modal-faq #faqModal {
+  opacity: 1;
+  left: 0;
+}
+.modal-active.modal-regulations #regulationsModal {
+  opacity: 1;
+  left: 0;
+}
+.modal-active.modal-contact #contactModal {
+  opacity: 1;
+  left: 0;
 }
 .modal-active.modal-description #productModal {
   opacity: 1;
