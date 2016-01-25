@@ -7,6 +7,23 @@ var APP,
     animEase = Power0.easeNone,
     footer = $('.main-footer');
 
+
+var prefix = (function () {
+  var styles = window.getComputedStyle(document.documentElement, ''),
+    pre = (Array.prototype.slice
+      .call(styles)
+      .join('')
+      .match(/-(moz|webkit|ms)-/) || (styles.OLink === '' && ['', 'o'])
+    )[1],
+    dom = ('WebKit|Moz|MS|O').match(new RegExp('(' + pre + ')', 'i'))[1];
+  return {
+    dom: dom,
+    lowercase: pre,
+    css: '-' + pre + '-',
+    js: pre[0].toUpperCase() + pre.substr(1)
+  };
+})();
+
 APP = APP || {};
 
 APP = {
@@ -46,7 +63,9 @@ APP.startPage = function () {
         bottom: footer.height()
     });
 
+    History.pushState({page: "start"}, "Tizzy Ninja", "?page=start");
     APP.doc.addClass("slide0");
+
 
     function onGirlsComplete() {
         APP.boys.css({
@@ -102,8 +121,6 @@ APP.startPage = function () {
         APP.init();
         $(layer).remove();
         $(layerText).remove();
-
-
     }
     new Hammer(girlsLayerText[0]).on("panright tap", function () {
 
@@ -186,7 +203,7 @@ APP.modals = {
     showModal: function (modalClassName) {
         //modalClassName = string
         APP.doc.addClass("modal-active " + modalClassName);
-        History.pushState(null, "modal", "?modal=1");
+        History.pushState({page: "modal"}, "Tizzy Ninja", "?page=modal");
     },
     hideModal: function () {
         if (APP.doc.hasClass("source-description")) {
@@ -203,6 +220,13 @@ $(".modal-close").click(function (ev) {
     ev.preventDefault();
     var that = $(this);
     APP.modals.hideModal();
+    History.back();
+});
+History.Adapter.bind(window,'statechange', function() { // Note: We are using statechange instead of popstate
+    var State = History.getState(); // Note: We are using History.getState() instead of event.state
+    if (State.data.page === "start") {
+        APP.modals.hideModal();
+    }
 });
 
 
@@ -485,6 +509,7 @@ APP.productSize = function () {
 
     $('.sizer .btn').click(function (e) {
         e.preventDefault();
+        History.back();
 
         APP.doc.removeClass('modal-active modal-sizes modal-form');
         switch(APP.sliderIndex) {
@@ -694,9 +719,9 @@ APP.gallery = function () {
     });
 
     $(".pan").on("pan", function(e) {
-        var deltaLeft = marginLeft + e.originalEvent.gesture.deltaX,
-            deltaTop = marginTop + e.originalEvent.gesture.deltaY;
-      //if ( delta >= -1750 && delta <= -150 ) {
+      //   var deltaLeft = marginLeft + e.originalEvent.gesture.deltaX,
+      //       deltaTop = marginTop + e.originalEvent.gesture.deltaY;
+      // //if ( delta >= -1750 && delta <= -150 ) {
         img.css({
             "margin-left": marginLeft + e.originalEvent.gesture.deltaX,
             "margin-top": marginTop + e.originalEvent.gesture.deltaY
@@ -710,28 +735,113 @@ APP.gallery = function () {
         }),
         width = 1200,
         height = 1200,
-        left = 600,
-        top = 600;
+        left = marginLeft,
+        top = marginTop;
+
+
 
     ham.get('pinch').set({enable: true});
 
-    $(".pinch").on("pinch", function(e) {
-       $(this).find("img").css({
-            "-webkit-transform": "scale(" + e.originalEvent.gesture.scale + ")",
-            "-ms-transform": "scale(" + e.originalEvent.gesture.scale + ")",
-            "transform": "scale(" + e.originalEvent.gesture.scale + ")",
-            // width: width * e.originalEvent.gesture.scale,
-            // "margin-left": -left * e.originalEvent.gesture.scale,
-            // height: height * e.originalEvent.gesture.scale,
-            // "margin-top": -top * e.originalEvent.gesture.scale
-       });
+
+    APP.midpoint = null;
+    APP.scale = 1;
+    APP.lastScale = 1;
+
+    $(".pinch").on("pinchstart", function(e) {
+        APP.coords = [];
+        APP.distance = [];
+        APP.midpoint = [];
+
+        for (var i = 0, finger; finger = e.originalEvent.gesture.pointers[i]; i ++) {
+            APP.coords.push(finger.pageX, finger.pageY);
+        }
+
+        APP.distance = distance(APP.coords);
+        APP.midpoint = midpoint(APP.coords);
     });
+
+    $(".pinch").on("pinchmove", function(e) {
+        APP.coords = [];
+        for (var i = 0, finger; finger = e.originalEvent.gesture.pointers[i]; i ++) {
+            APP.coords.push(finger.pageX, finger.pageY);
+        }
+
+        var dist = distance(APP.coords);
+        var mid = midpoint(APP.coords);
+
+        e.scale = dist / APP.distance * APP.scale;
+        e.x = mid.x;
+        e.y = mid.y;
+
+        APP.lastScale = e.scale;
+        var img = $(this).find("img");
+        scaleAtOrigin(e.x, e.y, e.scale, img);
+    });
+
     $(".pinch").on("pinchend", function(e) {
-        width = width * e.originalEvent.gesture.scale;
-        height = height * e.originalEvent.gesture.scale;
-        left = left * e.originalEvent.gesture.scale;
-        top = top * e.originalEvent.gesture.scale;
+        // var touches = e.touches;
+        // if (!touches || touches.length == 2 || !this.pinching) return this;
+        APP.scale = APP.lastScale;
     });
+
+    function scaleAtOrigin(x, y, scale, el) {
+      var rect = (el).getBoundingClientRect();
+
+      // find cursor offset within the element
+      x -= rect.left;
+      y -= rect.top;
+
+      // find the final position of the coordinate after scaling
+      var xf = x * s / this.scale;
+      var yf = y * s / this.scale;
+
+      // find the difference between the initial and final position
+      // and add the difference to the current position.
+      var dx = this.x + x - xf;
+      var dy = this.y + y - yf;
+
+      // apply the transform
+      this.transform(dx, dy, s);
+
+    };
+
+    /**
+     * Get the distance between two points
+     */
+
+    function distance(arr) {
+      var x = Math.pow(arr[0] - arr[2], 2);
+      var y = Math.pow(arr[1] - arr[3], 2);
+      return Math.sqrt(x + y);
+    }
+
+    /**
+     * Get the midpoint
+     */
+
+    function midpoint(arr) {
+      var coords = {};
+      coords.x = (arr[0] + arr[2]) / 2;
+      coords.y = (arr[1] + arr[3]) / 2;
+      return coords;
+    }
+
+    // $(".pinch").on("pinch", function(e) {
+    //     if ( width * e.originalEvent.gesture.scale > 320 && width * e.originalEvent.gesture.scale < 1200) {
+    //         $(this).find("img").css({
+    //             // width: width * e.originalEvent.gesture.scale,
+    //             // "margin-left": -left * e.originalEvent.gesture.scale,
+    //             // height: height * e.originalEvent.gesture.scale,
+    //             // "margin-top": -top * e.originalEvent.gesture.scale
+    //         });
+    //     }
+    // });
+    // $(".pinch").on("pinchend", function(e) {
+    //     // width = width * e.originalEvent.gesture.scale;
+    //     // height = height * e.originalEvent.gesture.scale;
+    //     // left = left * e.originalEvent.gesture.scale;
+    //     // top = top * e.originalEvent.gesture.scale;
+    // });
 }
 
 APP.debug = function () {
